@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>NANOHUMANO LABS · Tienda de componentes</title>
+<meta name="description" content="Los componentes que uso en mis proyectos de electrónica DIY: ESP32, pantallas, LoRa, servos, sensores y más.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0b0f0e; --panel:#121916; --line:#1f2b26; --text:#e6efe9; --muted:#8ea39a;
+    --accent:#39ff9c; --accent-dim:#1c7a4c; --amazon:#ff9f1c; --ali:#ff4d3d;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--text);font-family:'Space Grotesk',system-ui,sans-serif;line-height:1.5;
+    background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
+    background-size:40px 40px;background-attachment:fixed}
+  a{color:inherit}
+  .wrap{max-width:1150px;margin:0 auto;padding:0 20px}
+  header{position:sticky;top:0;z-index:10;background:rgba(11,15,14,.9);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  header .wrap{display:flex;align-items:center;justify-content:space-between;height:64px;gap:16px}
+  .logo{font-family:'JetBrains Mono',monospace;font-weight:600;letter-spacing:.08em;text-decoration:none;display:flex;align-items:center;gap:10px}
+  .logo span{color:var(--accent)}
+  .dot{width:10px;height:10px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px var(--accent)}
+  nav a{text-decoration:none;color:var(--muted);margin-left:22px;font-size:15px}
+  nav a:hover{color:var(--accent)}
+  .hero{padding:80px 0 50px}
+  .tag{font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:13px;letter-spacing:.15em}
+  h1{font-size:clamp(34px,6vw,62px);line-height:1.05;margin:14px 0 18px;max-width:800px}
+  h1 em{font-style:normal;color:var(--accent)}
+  .hero p{color:var(--muted);font-size:18px;max-width:620px}
+  .cta{display:flex;gap:12px;margin-top:28px;flex-wrap:wrap}
+  .btn{display:inline-block;padding:12px 20px;border-radius:8px;text-decoration:none;font-weight:500;border:1px solid var(--line);transition:.15s}
+  .btn.primary{background:var(--accent);color:#04140c;border-color:var(--accent)}
+  .btn:hover{transform:translateY(-2px)}
+  section{padding:40px 0}
+  h2{font-size:28px;margin-bottom:8px}
+  .sub{color:var(--muted);margin-bottom:24px}
+  .filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px}
+  .filters button{font-family:inherit;background:var(--panel);color:var(--muted);border:1px solid var(--line);padding:8px 14px;border-radius:999px;cursor:pointer;font-size:14px}
+  .filters button.on{color:#04140c;background:var(--accent);border-color:var(--accent)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px;display:flex;flex-direction:column;transition:.15s}
+  .card:hover{border-color:var(--accent-dim);transform:translateY(-3px)}
+  .icon{position:relative;height:190px;border-radius:10px;background:#0d1411;border:1px dashed var(--line);display:flex;align-items:center;justify-content:center;margin-bottom:16px;overflow:hidden}
+  .icon img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#fff}
+  .icon svg{width:64px;height:64px;stroke:var(--accent);fill:none;stroke-width:1.5}
+  .cat{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent);letter-spacing:.12em;text-transform:uppercase}
+  .card h3{font-size:18px;margin:6px 0 8px}
+  .card p{color:var(--muted);font-size:14px;flex:1}
+  .used{font-size:12px;color:var(--text);margin:12px 0;font-family:'JetBrains Mono',monospace}
+  .used b{color:var(--accent);font-weight:600}
+  .buy{display:flex;gap:8px}
+  .buy a{flex:1;text-align:center;padding:9px 6px;border-radius:8px;text-decoration:none;font-size:14px;font-weight:500}
+  .amz{background:var(--amazon);color:#1a0f00}
+  .ali{background:var(--ali);color:#fff}
+  .buy a.off{opacity:.35;pointer-events:none}
+  .projects{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px}
+  .proj{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px}
+  .proj .code{font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:13px}
+  .proj h3{margin:6px 0}
+  .proj p{color:var(--muted);font-size:14px}
+  .disc{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:18px 20px;color:var(--muted);font-size:14px}
+  footer{border-top:1px solid var(--line);padding:30px 0;margin-top:40px;color:var(--muted);font-size:14px}
+  footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px}
+  footer a{color:var(--accent);text-decoration:none;margin-right:16px}
+  @media (max-width:640px){nav{display:none}.hero{padding:50px 0 30px}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="logo" href="#inicio"><div class="dot"></div>NANOHUMANO <span>LABS</span></a>
+    <nav>
+      <a href="#tienda">Tienda</a>
+      <a href="#proyectos">Proyectos</a>
+      <a href="#aviso">Aviso</a>
+      <a href="https://www.youtube.com/@Nanohumano">YouTube</a>
+      <a href="https://www.printables.com/@JoseIsmaelRo_5144964">Printables</a>
+      <a href="https://github.com/Nanohumano">GitHub</a>
+    </nav>
+  </div>
+</header>
+
+<main id="inicio">
+  <div class="wrap hero">
+    <div class="tag">// ELECTRÓNICA DIY DESDE MALLORCA</div>
+    <h1>Los componentes que <em>de verdad uso</em> en mis proyectos</h1>
+    <p>ESP32, pantallas, LoRa, servos y sensores probados en los montajes del canal. Si compras desde aquí, apoyas el canal sin pagar nada extra.</p>
+    <div class="cta">
+      <a class="btn primary" href="#tienda">Ver componentes</a>
+      <a class="btn" href="https://www.youtube.com/@Nanohumano">▶ YouTube</a>
+      <a class="btn" href="https://www.printables.com/@JoseIsmaelRo_5144964">⬡ Printables</a>
+      <a class="btn" href="https://github.com/Nanohumano">&lt;/&gt; GitHub</a>
+    </div>
+  </div>
+
+  <section id="tienda">
+    <div class="wrap">
+      <h2>Tienda</h2>
+      <p class="sub">Elige dónde comprar: Amazon (envío rápido) o AliExpress (más barato, tarda más).</p>
+      <div class="filters" id="filters"></div>
+      <div class="grid" id="grid"></div>
+    </div>
+  </section>
+
+  <section id="proyectos">
+    <div class="wrap">
+      <h2>Proyectos</h2>
+      <p class="sub">Cada proyecto tiene su vídeo, el código en GitHub y la caja en Printables.</p>
+      <div class="projects">
+        <div class="proj"><div class="code">NH-01</div><h3>Reloj estación meteorológica</h3><p>Reloj con datos del tiempo y LEDs. Próximamente.</p></div>
+        <div class="proj"><div class="code">NH-04</div><h3>Chapa de nombre digital</h3><p>LILYGO T-Display S3 controlada desde el móvil, caja en PLA negro.</p></div>
+        <div class="proj"><div class="code">EN CURSO</div><h3>Robot de escritorio</h3><p>ESP32, servos, LEDs y pantalla pequeña, con IA.</p></div>
+        <div class="proj"><div class="code">EN CURSO</div><h3>Asistente IA con caras</h3><p>Pantalla táctil ESP32-S3 de 2,8" con emoticonos y la API de Gemini.</p></div>
+      </div>
+      <div class="cta">
+        <a class="btn" href="https://www.youtube.com/@Nanohumano">Vídeos en YouTube</a>
+        <a class="btn" href="https://www.printables.com/@JoseIsmaelRo_5144964">Cajas y STL en Printables</a>
+        <a class="btn" href="https://github.com/Nanohumano">Código en GitHub</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="aviso">
+    <div class="wrap">
+      <div class="disc">
+        <strong style="color:var(--text)">Aviso de afiliados.</strong>
+        Como Afiliado de Amazon, obtengo ingresos por las compras adscritas que cumplen los requisitos aplicables.
+        Esta web también contiene enlaces de afiliado de AliExpress. El precio para ti es el mismo; yo recibo una pequeña comisión que ayuda a mantener el canal.
+        La compra, el pago y el envío los gestiona directamente Amazon o AliExpress.
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>© 2026 NANOHUMANO LABS</div>
+    <div>
+      <a href="https://www.youtube.com/@Nanohumano">YouTube</a>
+      <a href="https://www.printables.com/@JoseIsmaelRo_5144964">Printables</a>
+      <a href="https://github.com/Nanohumano">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ============================================================
+   PRODUCTOS — edita solo esta lista.
+   amazon: enlace con tu etiqueta (?tag=nanohumanolab-21).
+   ali:    pega aquí el enlace generado en AliExpress Portals
+           (s.click.aliexpress.com/...). Si está vacío, el botón sale apagado.
+   ============================================================ */
+const TAG = 'nanohumanolab-21';
+const amz = q => 'https://www.amazon.es/s?k=' + encodeURIComponent(q) + '&tag=' + TAG;
+
+const PRODUCTOS = [
+  {cat:'Placas', icon:'screen', nombre:'ESP32-S3 con pantalla táctil 2,8″', desc:'Placa todo en uno con pantalla TFT táctil. Perfecta para interfaces y asistentes.', usado:'Asistente IA', amazon:amz('ESP32-S3 2.8 pantalla tactil'), ali:'https://s.click.aliexpress.com/e/_c4O3b1ZV', img:'https://ae-pic-a1.aliexpress-media.com/kf/Saab09b03131943ebab538805ef8a7027d.jpg_350x350.jpg'},
+  {cat:'Placas', icon:'screen', nombre:'LILYGO T-Display S3', desc:'ESP32-S3 con LCD de 1,9" en formato muy compacto.', usado:'NH-04 Chapa', amazon:amz('LILYGO T-Display S3'), ali:'https://s.click.aliexpress.com/e/_c3YhP3er', img:'https://ae-pic-a1.aliexpress-media.com/kf/S8a2f2a7fa3d645e39eeef03edcb16ab4f.jpg_350x350.jpg'},
+  {cat:'Placas', icon:'chip', nombre:'ESP32 DevKit (pack)', desc:'La placa básica para empezar cualquier proyecto con WiFi y Bluetooth.', usado:'Robot de escritorio', amazon:amz('ESP32 devkit pack'), ali:'https://s.click.aliexpress.com/e/_c4MFfPaR', img:'https://ae-pic-a1.aliexpress-media.com/kf/S4a862b054dca474d94e5f5fbd82e5928p.jpg_350x350.jpg'},
+  {cat:'LoRa', icon:'radio', nombre:'Placa LoRa para Meshtastic', desc:'ESP32 con radio LoRa para montar tu propia red mesh sin internet.', usado:'Red Meshtastic', amazon:amz('Heltec LoRa 32 V3 868'), ali:'https://s.click.aliexpress.com/e/_c4XkWeyP', img:'https://ae-pic-a1.aliexpress-media.com/kf/Sa1fbec8d1db24fef9514d57432035258c.jpg_350x350.jpg'},
+  {cat:'Motores', icon:'servo', nombre:'Servos SG90 (pack)', desc:'Microservos baratos para mover brazos, cabezas y mecanismos.', usado:'Robot de escritorio', amazon:amz('servo SG90 pack'), ali:'https://s.click.aliexpress.com/e/_c3UsEc7d', img:'https://ae-pic-a1.aliexpress-media.com/kf/S72ae80db4e6a4d18b73f994565df4607Y.jpg_350x350.jpg'},
+  {cat:'Luces', icon:'led', nombre:'LEDs WS2812B direccionables', desc:'Tiras y anillos RGB controlables uno a uno desde el ESP32.', usado:'NH-01 Reloj', amazon:amz('WS2812B led'), ali:'https://s.click.aliexpress.com/e/_c4lAWqB5', img:'https://ae-pic-a1.aliexpress-media.com/kf/S43e81824f1384c48b5b1d6cfa70c7b9ew.jpg_350x350.jpg'},
+  {cat:'Sensores', icon:'temp', nombre:'Sensor BME280', desc:'Temperatura, humedad y presión en un solo módulo I2C.', usado:'NH-01 Reloj', amazon:amz('BME280 sensor'), ali:'https://s.click.aliexpress.com/e/_c4XBwUvp', img:'https://ae-pic-a1.aliexpress-media.com/kf/Sc3c779a605d74f44b90a218b85d84e3ct.png_350x350.jpg'},
+  {cat:'Energía', icon:'battery', nombre:'Batería LiPo 3,7 V (800–1200 mAh)', desc:'Baterías planas para proyectos portátiles.', usado:'NH-04 Chapa', amazon:amz('bateria lipo 3.7v 1200mah'), ali:'https://s.click.aliexpress.com/e/_c43w5eCn', img:'https://ae-pic-a1.aliexpress-media.com/kf/Sef8616ce76044f8ba35872c3db7beac7D.jpg_350x350.jpg'},
+  {cat:'Impresión 3D', icon:'cube', nombre:'Filamento PLA negro 1 kg', desc:'El filamento con el que imprimo las cajas de los proyectos.', usado:'Todas las cajas', amazon:amz('filamento PLA negro 1kg'), ali:'https://s.click.aliexpress.com/e/_c37RJqMJ', img:'https://ae-pic-a1.aliexpress-media.com/kf/S65c76259597642c39f90ec3578b742deM.png_350x350.jpg'},
+];
+
+const ICONS = {
+  screen:'<rect x="8" y="12" width="48" height="34" rx="3"/><rect x="14" y="18" width="36" height="22"/><path d="M24 54h16M32 46v8"/>',
+  chip:'<rect x="18" y="18" width="28" height="28" rx="2"/><path d="M24 18v-6M32 18v-6M40 18v-6M24 52v-6M32 52v-6M40 52v-6M18 24h-6M18 32h-6M18 40h-6M52 24h-6M52 32h-6M52 40h-6"/>',
+  radio:'<path d="M32 36v20"/><circle cx="32" cy="32" r="4"/><path d="M22 22a14 14 0 0 0 0 20M42 22a14 14 0 0 1 0 20M14 14a26 26 0 0 0 0 36M50 14a26 26 0 0 1 0 36"/>',
+  servo:'<rect x="12" y="22" width="40" height="24" rx="3"/><circle cx="24" cy="34" r="6"/><path d="M24 28V12h18"/>',
+  led:'<path d="M24 40V24a8 8 0 0 1 16 0v16z"/><path d="M20 40h24M28 40v14M36 40v10M32 6v6M18 12l4 4M46 12l-4 4"/>',
+  temp:'<path d="M28 38V12a4 4 0 0 1 8 0v26a9 9 0 1 1-8 0z"/><path d="M32 22v20"/>',
+  battery:'<rect x="10" y="20" width="40" height="24" rx="3"/><path d="M50 28h4v8h-4M22 32h10M27 27v10"/>',
+  cube:'<path d="M32 8l20 11v24L32 54 12 43V19z"/><path d="M12 19l20 11 20-11M32 30v24"/>'
+};
+
+const cats = ['Todo', ...new Set(PRODUCTOS.map(p => p.cat))];
+let actual = 'Todo';
+
+function pintar(){
+  document.getElementById('filters').innerHTML = cats.map(c =>
+    '<button class="' + (c===actual?'on':'') + '" data-c="' + c + '">' + c + '</button>').join('');
+  document.getElementById('grid').innerHTML = PRODUCTOS
+    .filter(p => actual==='Todo' || p.cat===actual)
+    .map(p =>
+      '<div class="card">' +
+        '<div class="icon"><svg viewBox="0 0 64 64">' + ICONS[p.icon] + '</svg>' +
+          (p.img ? '<img src="' + p.img + '" alt="' + p.nombre + '" loading="lazy" onerror="this.remove()">' : '') + '</div>' +
+        '<div class="cat">' + p.cat + '</div>' +
+        '<h3>' + p.nombre + '</h3>' +
+        '<p>' + p.desc + '</p>' +
+        '<div class="used">Lo uso en: <b>' + p.usado + '</b></div>' +
+        '<div class="buy">' +
+          '<a class="amz ' + (p.amazon?'':'off') + '" href="' + (p.amazon||'#') + '" target="_blank" rel="sponsored noopener">Amazon</a>' +
+          '<a class="ali ' + (p.ali?'':'off') + '" href="' + (p.ali||'#') + '" target="_blank" rel="sponsored noopener">AliExpress</a>' +
+        '</div>' +
+      '</div>').join('');
+}
+document.getElementById('filters').addEventListener('click', e => {
+  if (e.target.dataset.c){ actual = e.target.dataset.c; pintar(); }
+});
+pintar();
+</script>
+</body>
+</html>
