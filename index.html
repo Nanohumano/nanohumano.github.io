@@ -213,6 +213,12 @@
           <p>Pantalla táctil ESP32-S3 de 2,8″ que pone caras y habla con la API de Gemini.</p>
           <div class="links"><button data-p="Asistente">Ver sus piezas</button></div>
         </li>
+        <li class="proy">
+          <span class="cod">Tutorial</span>
+          <h3>Minero de lotería de Bitcoin</h3>
+          <p>Bitaxe Gamma 601 configurado en 5 minutos desde el móvil, con BlueWallet y Public Pool.</p>
+          <div class="links"><button data-p="Bitaxe">Ver sus piezas</button><a href="https://youtu.be/bbM1UbBROtg">Ver el vídeo</a></div>
+        </li>
       </ul>
     </div>
   </section>
@@ -262,6 +268,7 @@ const PRODUCTOS = [
   {cat:'Montaje', icon:'cube', nombre:'Protoboard y cables Dupont', desc:'Para probar el circuito antes de soldarlo.', usado:'Todos los proyectos', amazon:amz('protoboard 830 puntos cables dupont kit'), ali:'https://s.click.aliexpress.com/e/_c4LbRfhp', img:'https://ae-pic-a1.aliexpress-media.com/kf/Sd7a403edcd0d4ff98712f787fb0b4a05O.jpg'},
   {cat:'Montaje', icon:'cube', nombre:'Placas perforadas y pines hembra', desc:'Para pasar el montaje a una placa fija con el ESP32 y la pantalla desmontables.', usado:'NH-01 METEO', amazon:amz('placa perforada PCB prototipos tira pines hembra 2.54'), ali:'https://s.click.aliexpress.com/e/_c3EHZKRp', img:'https://ae-pic-a1.aliexpress-media.com/kf/S2460150fea294582ac3b08ca26fe75a8w.jpg'},
   {cat:'Impresión 3D', icon:'cube', nombre:'Filamento PLA negro 1 kg', desc:'El filamento con el que imprimo las cajas de los proyectos.', usado:'Todas las cajas', amazon:amz('filamento PLA negro 1kg'), ali:'https://s.click.aliexpress.com/e/_c37RJqMJ', img:'https://ae-pic-a1.aliexpress-media.com/kf/S65c76259597642c39f90ec3578b742deM.png_350x350.jpg'},
+  {cat:'Bitcoin', icon:'chip', nombre:'Bitaxe Gamma 601 (minero de lotería)', desc:'Minero de Bitcoin en solitario: unos 1,2 TH/s gastando solo unos 17–21 W. Se configura desde el móvil.', usado:'Bitaxe', amazon:amz('Bitaxe Gamma 601'), ali:'https://es.aliexpress.com/item/1005010554182728.html', img:'https://ae-pic-a1.aliexpress-media.com/kf/Sb04248be607b4f069a991f6790ec0f61O.jpg_350x350.jpg'},
 ];
 
 const ICONS = {
@@ -277,7 +284,7 @@ const ICONS = {
 
 /* Piezas que valen para cualquier proyecto */
 const COMUNES = ['Todos los proyectos','Todas las cajas'];
-const NOMBRE_PROY = {'NH-01':'NH-01 · Reloj meteo','NH-04':'NH-04 · Chapa','Robot':'Robot de escritorio','Asistente':'Asistente IA'};
+const NOMBRE_PROY = {'NH-01':'NH-01 · Reloj meteo','NH-04':'NH-04 · Chapa','Robot':'Robot de escritorio','Asistente':'Asistente IA','Bitaxe':'Minero Bitaxe'};
 
 const cats = ['Todo', ...new Set(PRODUCTOS.map(p => p.cat))];
 let cat = 'Todo', proy = null;
