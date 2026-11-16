@@ -71,8 +71,8 @@
   .piezas{list-style:none;background:var(--papel);border:1px solid var(--linea);border-radius:12px;overflow:hidden}
   .pieza{display:grid;grid-template-columns:132px 1fr 210px;gap:22px;align-items:center;padding:18px 22px;border-top:1px solid var(--linea)}
   .pieza:first-child{border-top:0}
-  .foto{width:132px;height:132px;border-radius:8px;background:#fff;border:1px solid var(--linea);display:grid;place-items:center;overflow:hidden}
-  .foto img{width:100%;height:100%;object-fit:contain}
+  .foto{position:relative;width:132px;height:132px;border-radius:8px;background:#fff;border:1px solid var(--linea);display:grid;place-items:center;overflow:hidden}
+  .foto img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#fff}
   .foto svg{width:52px;height:52px;fill:none;stroke:var(--pista);stroke-width:1.6}
   .pieza .cat{font-size:14px;color:var(--gris)}
   .pieza h3{font-size:24px;font-weight:600;margin:2px 0 6px}
@@ -297,7 +297,8 @@ function pintar(){
     .filter(p => proy ? usaProyecto(p, proy) : (cat==='Todo' || p.cat===cat))
     .map(p =>
       '<li class="pieza">' +
-        '<div class="foto"><svg viewBox="0 0 64 64" aria-hidden="true">' + ICONS[p.icon] + '</svg></div>' +
+        '<div class="foto"><svg viewBox="0 0 64 64" aria-hidden="true">' + ICONS[p.icon] + '</svg>' +
+          (p.img ? '<img src="' + p.img + '" alt="' + p.nombre + '" loading="lazy" onerror="this.remove()">' : '') + '</div>' +
         '<div>' +
           '<div class="cat">' + p.cat + '</div>' +
           '<h3>' + p.nombre + '</h3>' +
@@ -310,15 +311,6 @@ function pintar(){
         '</div>' +
       '</li>').join('');
 
-  /* Fotos: si no cargan, se queda el icono */
-  document.querySelectorAll('#lista .pieza').forEach((li, i) => {
-    const lista = PRODUCTOS.filter(p => proy ? usaProyecto(p, proy) : (cat==='Todo' || p.cat===cat));
-    const p = lista[i];
-    if (!p.img) return;
-    const img = new Image();
-    img.alt = p.nombre; img.loading = 'lazy'; img.src = p.img;
-    img.onload = () => { const f = li.querySelector('.foto'); f.innerHTML = ''; f.appendChild(img); };
-  });
 }
 
 document.getElementById('filtros').addEventListener('click', e => {
