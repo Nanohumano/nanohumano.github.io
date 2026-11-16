@@ -5,107 +5,118 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>NANOHUMANO LABS · Las piezas de mis proyectos</title>
 <meta name="description" content="Los componentes que uso en mis proyectos de electrónica DIY: ESP32, pantallas, LoRa, servos, sensores y más.">
-<meta name="theme-color" content="#0F4A33">
+<meta name="theme-color" content="#0B0F14">
+<link rel="icon" href="logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  /* ============ Colores: placa de circuito ============
-     mascara  = verde de la máscara de soldadura
-     serigrafia = blanco de los textos impresos en la placa
-     oro      = pads dorados
-     tinta    = texto principal
-  ===================================================== */
+  /* ============ Estilo NANOHUMANO LABS: laboratorio de noche ============
+     negro  = fondo de todo
+     cian   = color principal (titulos, codigos NH-XX, brillos)
+     naranja= para destacar (botones de compra, avisos)
+     placa  = cajas y tarjetas
+  ======================================================================= */
   :root{
-    --mascara:#0F4A33; --mascara-2:#0B3B28; --pista:#1C6A4A;
-    --serigrafia:#EEF3EE; --oro:#D9A93E; --oro-osc:#A97D1F;
-    --tinta:#14261D; --gris:#5D6D64; --linea:#DCE3DE; --papel:#FFFFFF; --fondo:#F2F5F3;
+    --negro:#0B0F14; --placa:#1C2530; --placa-2:#141B23; --linea:#2A3644;
+    --cian:#00E5FF; --cian-osc:#00A9BD; --naranja:#FF7A00;
+    --blanco:#FFFFFF; --texto:#C9D3DD; --gris:#8A97A6;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
-  body{background:var(--fondo);color:var(--tinta);font-family:'Barlow',system-ui,sans-serif;font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  body{background:var(--negro);color:var(--texto);font-family:'Inter',system-ui,sans-serif;font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
   a{color:inherit}
-  :focus-visible{outline:3px solid var(--oro);outline-offset:2px;border-radius:4px}
+  :focus-visible{outline:3px solid var(--cian);outline-offset:2px;border-radius:4px}
   .wrap{max-width:1080px;margin:0 auto;padding:0 20px}
-  h1,h2,h3,.marca{font-family:'Barlow Condensed',sans-serif;line-height:1.05}
+  h1,h2,h3,.marca,.cod{font-family:'Orbitron',sans-serif;line-height:1.1;color:var(--blanco)}
+  h1,h2{text-transform:uppercase;letter-spacing:.02em}
 
   /* ---------- Cabecera ---------- */
-  .top{background:var(--mascara-2);color:var(--serigrafia)}
-  .top .wrap{display:flex;align-items:center;justify-content:space-between;height:60px;gap:16px}
-  .marca{font-size:22px;font-weight:700;letter-spacing:.04em;text-decoration:none;display:flex;align-items:center;gap:10px}
-  .marca i{width:14px;height:14px;border-radius:50%;background:var(--oro);box-shadow:inset 0 0 0 4px var(--mascara-2),0 0 0 1px var(--oro)}
-  .top nav{display:flex;gap:20px;font-size:15px}
-  .top nav a{text-decoration:none;opacity:.8}
-  .top nav a:hover{opacity:1;text-decoration:underline;text-underline-offset:4px}
+  .top{background:rgba(11,15,20,.92);border-bottom:1px solid var(--linea);position:sticky;top:0;z-index:5;backdrop-filter:blur(6px)}
+  .top .wrap{display:flex;align-items:center;justify-content:space-between;height:64px;gap:16px}
+  .marca{font-size:18px;font-weight:800;letter-spacing:.06em;text-decoration:none;display:flex;align-items:center;gap:10px}
+  .marca img{height:44px;width:44px;border-radius:50%;object-fit:cover}
+  .marca b{color:var(--cian);font-weight:800}
+  .top nav{display:flex;gap:22px;font-size:15px}
+  .top nav a{text-decoration:none;color:var(--texto)}
+  .top nav a:hover{color:var(--cian)}
 
-  /* ---------- Portada: la placa ---------- */
-  .placa{position:relative;background:var(--mascara);color:var(--serigrafia);overflow:hidden;
-    background-image:radial-gradient(circle at 1px 1px,rgba(255,255,255,.05) 1px,transparent 0);background-size:6px 6px}
+  /* ---------- Portada ---------- */
+  .placa{position:relative;background:radial-gradient(ellipse at 75% 40%,rgba(0,229,255,.16),transparent 60%),var(--negro);overflow:hidden;border-bottom:1px solid var(--linea)}
   .placa svg.pistas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
-  .pistas path{fill:none;stroke:var(--pista);stroke-width:7;stroke-linecap:round;stroke-linejoin:round}
-  .pistas .pad{fill:var(--oro)}
-  .pistas .via{fill:var(--mascara);stroke:var(--oro);stroke-width:3}
-  .placa .wrap{position:relative;padding-top:72px;padding-bottom:80px}
-  .contorno{position:relative;display:inline-block;padding:40px 30px 30px;border:2px solid var(--serigrafia);max-width:720px;background:var(--mascara)}
-  .contorno::before{content:"";position:absolute;left:10px;top:10px;width:9px;height:9px;border-radius:50%;background:var(--serigrafia)}
-  h1{font-size:clamp(44px,8vw,86px);font-weight:700;letter-spacing:-.005em}
-  .placa p{font-size:19px;max-width:34em;margin-top:18px;opacity:.92}
+  .pistas path{fill:none;stroke:var(--cian);stroke-width:3;stroke-linecap:round;stroke-linejoin:round;opacity:.55;filter:drop-shadow(0 0 6px var(--cian))}
+  .pistas .pad{fill:var(--naranja);filter:drop-shadow(0 0 8px var(--naranja))}
+  .pistas .via{fill:var(--negro);stroke:var(--cian);stroke-width:3}
+  .placa .wrap{position:relative;padding-top:80px;padding-bottom:88px}
+  .contorno{position:relative;display:inline-block;padding:40px 32px 32px;border:1px solid var(--cian);border-radius:14px;max-width:720px;background:rgba(11,15,20,.85);box-shadow:0 0 40px rgba(0,229,255,.15)}
+  .etiqueta{display:inline-block;font-family:'Orbitron',sans-serif;font-size:13px;font-weight:700;letter-spacing:.12em;color:var(--cian);margin-bottom:14px}
+  h1{font-size:clamp(36px,6.5vw,68px);font-weight:900}
+  h1 em{font-style:normal;color:var(--cian);text-shadow:0 0 18px rgba(0,229,255,.6)}
+  .placa p{font-size:19px;max-width:34em;margin-top:18px}
   .acciones{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
-  .pad-btn{display:inline-flex;align-items:center;gap:10px;padding:12px 20px;border-radius:999px;font-weight:600;text-decoration:none;font-size:16px;border:2px solid var(--oro);color:var(--serigrafia)}
-  .pad-btn.lleno{background:var(--oro);color:var(--tinta)}
-  .pad-btn:hover{background:var(--oro);color:var(--tinta)}
+  .pad-btn{display:inline-flex;align-items:center;gap:10px;padding:12px 22px;border-radius:999px;font-weight:700;text-decoration:none;font-size:16px;border:2px solid var(--cian);color:var(--cian)}
+  .pad-btn.lleno{background:var(--naranja);border-color:var(--naranja);color:var(--negro)}
+  .pad-btn:hover{box-shadow:0 0 18px rgba(0,229,255,.45)}
+  .pad-btn.lleno:hover{box-shadow:0 0 18px rgba(255,122,0,.55)}
 
   /* ---------- Secciones ---------- */
-  section{padding:64px 0}
-  h2{font-size:clamp(34px,5vw,48px);font-weight:700}
-  .intro{color:var(--gris);max-width:36em;margin:10px 0 28px}
+  section{padding:72px 0}
+  h2{font-size:clamp(28px,4.5vw,42px);font-weight:800}
+  h2::after{content:"";display:block;width:64px;height:3px;background:var(--cian);margin-top:12px;box-shadow:0 0 10px var(--cian)}
+  .intro{color:var(--gris);max-width:36em;margin:14px 0 28px}
 
   /* Filtros */
   .filtros{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}
-  .filtros button{font:inherit;font-size:15px;font-weight:500;padding:7px 15px;border-radius:999px;border:1.5px solid var(--linea);background:var(--papel);color:var(--tinta);cursor:pointer}
-  .filtros button[aria-pressed="true"]{background:var(--mascara);border-color:var(--mascara);color:var(--serigrafia)}
+  .filtros button{font:inherit;font-size:15px;font-weight:500;padding:7px 15px;border-radius:999px;border:1px solid var(--linea);background:var(--placa);color:var(--texto);cursor:pointer}
+  .filtros button:hover{border-color:var(--cian)}
+  .filtros button[aria-pressed="true"]{background:var(--cian);border-color:var(--cian);color:var(--negro);font-weight:700}
   .aviso-filtro{min-height:28px;font-size:15px;color:var(--gris);margin-bottom:12px}
-  .aviso-filtro button{font:inherit;color:var(--mascara);font-weight:600;background:none;border:0;text-decoration:underline;cursor:pointer;margin-left:6px;padding:0}
+  .aviso-filtro strong{color:var(--blanco)}
+  .aviso-filtro button{font:inherit;color:var(--cian);font-weight:600;background:none;border:0;text-decoration:underline;cursor:pointer;margin-left:6px;padding:0}
 
   /* Lista de piezas */
-  .piezas{list-style:none;background:var(--papel);border:1px solid var(--linea);border-radius:12px;overflow:hidden}
-  .pieza{display:grid;grid-template-columns:132px 1fr 210px;gap:22px;align-items:center;padding:18px 22px;border-top:1px solid var(--linea)}
-  .pieza:first-child{border-top:0}
-  .foto{position:relative;width:132px;height:132px;border-radius:8px;background:#fff;border:1px solid var(--linea);display:grid;place-items:center;overflow:hidden}
+  .piezas{list-style:none;display:grid;gap:12px}
+  .pieza{display:grid;grid-template-columns:132px 1fr 210px;gap:22px;align-items:center;padding:18px 22px;background:var(--placa);border:1px solid var(--linea);border-radius:14px;transition:border-color .2s,box-shadow .2s}
+  .pieza:hover{border-color:var(--cian-osc);box-shadow:0 0 22px rgba(0,229,255,.12)}
+  .foto{position:relative;width:132px;height:132px;border-radius:10px;background:#fff;display:grid;place-items:center;overflow:hidden}
   .foto img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#fff}
-  .foto svg{width:52px;height:52px;fill:none;stroke:var(--pista);stroke-width:1.6}
-  .pieza .cat{font-size:14px;color:var(--gris)}
-  .pieza h3{font-size:24px;font-weight:600;margin:2px 0 6px}
-  .pieza p{font-size:16px;color:var(--gris);max-width:40em}
+  .foto svg{width:52px;height:52px;fill:none;stroke:var(--cian-osc);stroke-width:1.6}
+  .pieza .cat{font-size:13px;font-weight:600;color:var(--cian);text-transform:uppercase;letter-spacing:.08em}
+  .pieza h3{font-size:19px;font-weight:700;margin:4px 0 6px}
+  .pieza p{font-size:15.5px;color:var(--gris);max-width:40em}
   .uso{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
-  .uso span{font-size:13px;font-weight:600;padding:2px 9px;border-radius:4px;background:#E6EFE9;color:var(--mascara)}
+  .uso span{font-size:12.5px;font-weight:600;padding:2px 9px;border-radius:4px;background:rgba(0,229,255,.1);color:var(--cian);border:1px solid rgba(0,229,255,.25)}
   .comprar{display:flex;flex-direction:column;gap:8px}
-  .comprar a{display:flex;justify-content:space-between;align-items:baseline;gap:8px;padding:10px 14px;border-radius:8px;text-decoration:none;font-weight:600;font-size:16px}
-  .comprar a small{font-weight:400;font-size:13px;opacity:.75}
-  .comprar .amz{background:var(--tinta);color:#fff}
-  .comprar .ali{border:1.5px solid var(--tinta)}
-  .comprar a:hover{outline:2px solid var(--oro);outline-offset:1px}
-  .comprar a.off{opacity:.35;pointer-events:none}
+  .comprar a{display:flex;justify-content:space-between;align-items:baseline;gap:8px;padding:10px 14px;border-radius:10px;text-decoration:none;font-weight:700;font-size:16px}
+  .comprar a small{font-weight:400;font-size:13px;opacity:.8}
+  .comprar .amz{background:var(--naranja);color:var(--negro)}
+  .comprar .ali{border:1.5px solid var(--cian);color:var(--cian)}
+  .comprar a:hover{box-shadow:0 0 16px rgba(255,122,0,.4)}
+  .comprar .ali:hover{box-shadow:0 0 16px rgba(0,229,255,.4)}
+  .comprar a.off{opacity:.3;pointer-events:none}
 
   /* Proyectos */
-  .proyectos{background:var(--mascara-2);color:var(--serigrafia)}
-  .proyectos .intro{color:var(--serigrafia);opacity:.75}
-  .lista-proy{list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:2px;background:var(--pista);border:2px solid var(--pista);border-radius:12px;overflow:hidden}
-  .proy{background:var(--mascara-2);padding:24px;display:flex;flex-direction:column;gap:8px}
-  .proy .cod{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:18px;color:var(--oro)}
-  .proy h3{font-size:26px;font-weight:600}
-  .proy p{font-size:15.5px;opacity:.8;flex:1}
+  .proyectos{background:var(--placa-2);border-top:1px solid var(--linea);border-bottom:1px solid var(--linea)}
+  .lista-proy{list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+  .proy{background:var(--placa);border:1px solid var(--linea);border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:8px;transition:border-color .2s,box-shadow .2s}
+  .proy:hover{border-color:var(--cian);box-shadow:0 0 26px rgba(0,229,255,.18)}
+  .proy .cod{font-weight:800;font-size:22px;color:var(--cian);text-shadow:0 0 12px rgba(0,229,255,.5)}
+  .proy .cod.otro{font-size:15px;color:var(--naranja);text-shadow:none;letter-spacing:.08em;text-transform:uppercase}
+  .proy h3{font-size:19px;font-weight:700}
+  .proy p{font-size:15.5px;color:var(--gris);flex:1}
   .proy .links{display:flex;flex-wrap:wrap;gap:8px 16px;font-size:15px;font-weight:600;margin-top:6px}
-  .proy .links a,.proy .links button{font:inherit;color:var(--serigrafia);background:none;border:0;cursor:pointer;text-decoration:underline;text-underline-offset:4px;text-decoration-color:var(--oro)}
+  .proy .links a,.proy .links button{font:inherit;color:var(--blanco);background:none;border:0;cursor:pointer;text-decoration:underline;text-underline-offset:4px;text-decoration-color:var(--cian)}
+  .proy .links a:hover,.proy .links button:hover{color:var(--cian)}
 
   /* Pie */
-  footer{background:var(--fondo);padding:40px 0 48px;font-size:15px;color:var(--gris)}
+  footer{background:var(--negro);padding:44px 0 52px;font-size:15px;color:var(--gris)}
   footer .afiliados{max-width:46em;margin-bottom:22px}
-  footer .afiliados strong{color:var(--tinta)}
+  footer .afiliados strong{color:var(--blanco)}
   footer .fila{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;border-top:1px solid var(--linea);padding-top:18px}
-  footer .fila a{margin-right:18px;color:var(--tinta);font-weight:600}
+  footer .fila a{margin-right:18px;color:var(--blanco);font-weight:600;text-decoration:none}
+  footer .fila a:hover{color:var(--cian)}
 
-  /* Animación: las pistas se dibujan una vez al cargar */
+  /* Animacion: las pistas se dibujan una vez al cargar */
   .pistas path{stroke-dasharray:var(--l);stroke-dashoffset:var(--l);animation:trazar 1.6s cubic-bezier(.6,0,.2,1) forwards}
   .pistas .pad,.pistas .via{opacity:0;animation:aparecer .3s ease-out forwards;animation-delay:1.3s}
   @keyframes trazar{to{stroke-dashoffset:0}}
@@ -124,11 +135,10 @@
   }
   @media (max-width:640px){
     .top nav{display:none}
-    .placa .wrap{padding-top:44px;padding-bottom:52px}
-    .contorno{padding:22px 20px 24px}
+    .placa .wrap{padding-top:48px;padding-bottom:56px}
+    .contorno{padding:24px 20px 26px}
     .placa p{font-size:17px}
-    section{padding:48px 0}
-    .pieza h3{font-size:21px}
+    section{padding:52px 0}
   }
 </style>
 </head>
@@ -136,7 +146,7 @@
 
 <header class="top">
   <div class="wrap">
-    <a class="marca" href="#inicio"><i aria-hidden="true"></i>NANOHUMANO LABS</a>
+    <a class="marca" href="#inicio"><img src="logo.png" alt="" onerror="this.remove()">NANOHUMANO <b>LABS</b></a>
     <nav aria-label="Principal">
       <a href="#piezas">Piezas</a>
       <a href="#proyectos">Proyectos</a>
@@ -164,7 +174,8 @@
     </svg>
     <div class="wrap">
       <div class="contorno">
-        <h1>Las piezas de mis proyectos</h1>
+        <span class="etiqueta">NANOHUMANO LABS</span>
+        <h1>Las piezas de <em>mis proyectos</em></h1>
         <p>Cada placa, pantalla y sensor de esta lista lo he montado en un proyecto del canal. Si lo compras desde aquí, el canal se lleva una pequeña comisión y a ti te cuesta lo mismo.</p>
         <div class="acciones">
           <a class="pad-btn lleno" href="#piezas">Ver las piezas</a>
@@ -202,19 +213,19 @@
           <div class="links"><button data-p="NH-04">Ver sus piezas</button></div>
         </li>
         <li class="proy">
-          <span class="cod">En curso</span>
+          <span class="cod otro">En curso</span>
           <h3>Robot de escritorio</h3>
           <p>ESP32, servos, LEDs y una pantalla pequeña, con IA.</p>
           <div class="links"><button data-p="Robot">Ver sus piezas</button></div>
         </li>
         <li class="proy">
-          <span class="cod">En curso</span>
+          <span class="cod otro">En curso</span>
           <h3>Asistente IA con caras</h3>
           <p>Pantalla táctil ESP32-S3 de 2,8″ que pone caras y habla con la API de Gemini.</p>
           <div class="links"><button data-p="Asistente">Ver sus piezas</button></div>
         </li>
         <li class="proy">
-          <span class="cod">Tutorial</span>
+          <span class="cod otro">Tutorial</span>
           <h3>Minero de lotería de Bitcoin</h3>
           <p>Bitaxe Gamma 601 configurado en 5 minutos desde el móvil, con BlueWallet y Public Pool.</p>
           <div class="links"><button data-p="Bitaxe">Ver sus piezas</button><a href="https://youtu.be/bbM1UbBROtg">Ver el vídeo</a></div>
