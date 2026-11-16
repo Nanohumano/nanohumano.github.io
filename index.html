@@ -3,80 +3,143 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>NANOHUMANO LABS · Tienda de componentes</title>
+<title>NANOHUMANO LABS · Las piezas de mis proyectos</title>
 <meta name="description" content="Los componentes que uso en mis proyectos de electrónica DIY: ESP32, pantallas, LoRa, servos, sensores y más.">
+<meta name="theme-color" content="#0F4A33">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
+  /* ============ Colores: placa de circuito ============
+     mascara  = verde de la máscara de soldadura
+     serigrafia = blanco de los textos impresos en la placa
+     oro      = pads dorados
+     tinta    = texto principal
+  ===================================================== */
   :root{
-    --bg:#0b0f0e; --panel:#121916; --line:#1f2b26; --text:#e6efe9; --muted:#8ea39a;
-    --accent:#39ff9c; --accent-dim:#1c7a4c; --amazon:#ff9f1c; --ali:#ff4d3d;
+    --mascara:#0F4A33; --mascara-2:#0B3B28; --pista:#1C6A4A;
+    --serigrafia:#EEF3EE; --oro:#D9A93E; --oro-osc:#A97D1F;
+    --tinta:#14261D; --gris:#5D6D64; --linea:#DCE3DE; --papel:#FFFFFF; --fondo:#F2F5F3;
   }
   *{box-sizing:border-box;margin:0;padding:0}
-  body{background:var(--bg);color:var(--text);font-family:'Space Grotesk',system-ui,sans-serif;line-height:1.5;
-    background-image:linear-gradient(var(--line) 1px,transparent 1px),linear-gradient(90deg,var(--line) 1px,transparent 1px);
-    background-size:40px 40px;background-attachment:fixed}
+  html{scroll-behavior:smooth}
+  body{background:var(--fondo);color:var(--tinta);font-family:'Barlow',system-ui,sans-serif;font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
   a{color:inherit}
-  .wrap{max-width:1150px;margin:0 auto;padding:0 20px}
-  header{position:sticky;top:0;z-index:10;background:rgba(11,15,14,.9);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
-  header .wrap{display:flex;align-items:center;justify-content:space-between;height:64px;gap:16px}
-  .logo{font-family:'JetBrains Mono',monospace;font-weight:600;letter-spacing:.08em;text-decoration:none;display:flex;align-items:center;gap:10px}
-  .logo span{color:var(--accent)}
-  .dot{width:10px;height:10px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px var(--accent)}
-  nav a{text-decoration:none;color:var(--muted);margin-left:22px;font-size:15px}
-  nav a:hover{color:var(--accent)}
-  .hero{padding:80px 0 50px}
-  .tag{font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:13px;letter-spacing:.15em}
-  h1{font-size:clamp(34px,6vw,62px);line-height:1.05;margin:14px 0 18px;max-width:800px}
-  h1 em{font-style:normal;color:var(--accent)}
-  .hero p{color:var(--muted);font-size:18px;max-width:620px}
-  .cta{display:flex;gap:12px;margin-top:28px;flex-wrap:wrap}
-  .btn{display:inline-block;padding:12px 20px;border-radius:8px;text-decoration:none;font-weight:500;border:1px solid var(--line);transition:.15s}
-  .btn.primary{background:var(--accent);color:#04140c;border-color:var(--accent)}
-  .btn:hover{transform:translateY(-2px)}
-  section{padding:40px 0}
-  h2{font-size:28px;margin-bottom:8px}
-  .sub{color:var(--muted);margin-bottom:24px}
-  .filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px}
-  .filters button{font-family:inherit;background:var(--panel);color:var(--muted);border:1px solid var(--line);padding:8px 14px;border-radius:999px;cursor:pointer;font-size:14px}
-  .filters button.on{color:#04140c;background:var(--accent);border-color:var(--accent)}
-  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px}
-  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:20px;display:flex;flex-direction:column;transition:.15s}
-  .card:hover{border-color:var(--accent-dim);transform:translateY(-3px)}
-  .icon{position:relative;height:190px;border-radius:10px;background:#0d1411;border:1px dashed var(--line);display:flex;align-items:center;justify-content:center;margin-bottom:16px;overflow:hidden}
-  .icon img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#fff}
-  .icon svg{width:64px;height:64px;stroke:var(--accent);fill:none;stroke-width:1.5}
-  .cat{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent);letter-spacing:.12em;text-transform:uppercase}
-  .card h3{font-size:18px;margin:6px 0 8px}
-  .card p{color:var(--muted);font-size:14px;flex:1}
-  .used{font-size:12px;color:var(--text);margin:12px 0;font-family:'JetBrains Mono',monospace}
-  .used b{color:var(--accent);font-weight:600}
-  .buy{display:flex;gap:8px}
-  .buy a{flex:1;text-align:center;padding:9px 6px;border-radius:8px;text-decoration:none;font-size:14px;font-weight:500}
-  .amz{background:var(--amazon);color:#1a0f00}
-  .ali{background:var(--ali);color:#fff}
-  .buy a.off{opacity:.35;pointer-events:none}
-  .projects{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:18px}
-  .proj{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px}
-  .proj .code{font-family:'JetBrains Mono',monospace;color:var(--accent);font-size:13px}
-  .proj h3{margin:6px 0}
-  .proj p{color:var(--muted);font-size:14px}
-  .disc{background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:10px;padding:18px 20px;color:var(--muted);font-size:14px}
-  footer{border-top:1px solid var(--line);padding:30px 0;margin-top:40px;color:var(--muted);font-size:14px}
-  footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px}
-  footer a{color:var(--accent);text-decoration:none;margin-right:16px}
-  @media (max-width:640px){nav{display:none}.hero{padding:50px 0 30px}}
+  :focus-visible{outline:3px solid var(--oro);outline-offset:2px;border-radius:4px}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+  h1,h2,h3,.marca{font-family:'Barlow Condensed',sans-serif;line-height:1.05}
+
+  /* ---------- Cabecera ---------- */
+  .top{background:var(--mascara-2);color:var(--serigrafia)}
+  .top .wrap{display:flex;align-items:center;justify-content:space-between;height:60px;gap:16px}
+  .marca{font-size:22px;font-weight:700;letter-spacing:.04em;text-decoration:none;display:flex;align-items:center;gap:10px}
+  .marca i{width:14px;height:14px;border-radius:50%;background:var(--oro);box-shadow:inset 0 0 0 4px var(--mascara-2),0 0 0 1px var(--oro)}
+  .top nav{display:flex;gap:20px;font-size:15px}
+  .top nav a{text-decoration:none;opacity:.8}
+  .top nav a:hover{opacity:1;text-decoration:underline;text-underline-offset:4px}
+
+  /* ---------- Portada: la placa ---------- */
+  .placa{position:relative;background:var(--mascara);color:var(--serigrafia);overflow:hidden;
+    background-image:radial-gradient(circle at 1px 1px,rgba(255,255,255,.05) 1px,transparent 0);background-size:6px 6px}
+  .placa svg.pistas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+  .pistas path{fill:none;stroke:var(--pista);stroke-width:7;stroke-linecap:round;stroke-linejoin:round}
+  .pistas .pad{fill:var(--oro)}
+  .pistas .via{fill:var(--mascara);stroke:var(--oro);stroke-width:3}
+  .placa .wrap{position:relative;padding-top:72px;padding-bottom:80px}
+  .contorno{position:relative;display:inline-block;padding:40px 30px 30px;border:2px solid var(--serigrafia);max-width:720px;background:var(--mascara)}
+  .contorno::before{content:"";position:absolute;left:10px;top:10px;width:9px;height:9px;border-radius:50%;background:var(--serigrafia)}
+  h1{font-size:clamp(44px,8vw,86px);font-weight:700;letter-spacing:-.005em}
+  .placa p{font-size:19px;max-width:34em;margin-top:18px;opacity:.92}
+  .acciones{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+  .pad-btn{display:inline-flex;align-items:center;gap:10px;padding:12px 20px;border-radius:999px;font-weight:600;text-decoration:none;font-size:16px;border:2px solid var(--oro);color:var(--serigrafia)}
+  .pad-btn.lleno{background:var(--oro);color:var(--tinta)}
+  .pad-btn:hover{background:var(--oro);color:var(--tinta)}
+
+  /* ---------- Secciones ---------- */
+  section{padding:64px 0}
+  h2{font-size:clamp(34px,5vw,48px);font-weight:700}
+  .intro{color:var(--gris);max-width:36em;margin:10px 0 28px}
+
+  /* Filtros */
+  .filtros{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:10px}
+  .filtros button{font:inherit;font-size:15px;font-weight:500;padding:7px 15px;border-radius:999px;border:1.5px solid var(--linea);background:var(--papel);color:var(--tinta);cursor:pointer}
+  .filtros button[aria-pressed="true"]{background:var(--mascara);border-color:var(--mascara);color:var(--serigrafia)}
+  .aviso-filtro{min-height:28px;font-size:15px;color:var(--gris);margin-bottom:12px}
+  .aviso-filtro button{font:inherit;color:var(--mascara);font-weight:600;background:none;border:0;text-decoration:underline;cursor:pointer;margin-left:6px;padding:0}
+
+  /* Lista de piezas */
+  .piezas{list-style:none;background:var(--papel);border:1px solid var(--linea);border-radius:12px;overflow:hidden}
+  .pieza{display:grid;grid-template-columns:132px 1fr 210px;gap:22px;align-items:center;padding:18px 22px;border-top:1px solid var(--linea)}
+  .pieza:first-child{border-top:0}
+  .foto{width:132px;height:132px;border-radius:8px;background:#fff;border:1px solid var(--linea);display:grid;place-items:center;overflow:hidden}
+  .foto img{width:100%;height:100%;object-fit:contain}
+  .foto svg{width:52px;height:52px;fill:none;stroke:var(--pista);stroke-width:1.6}
+  .pieza .cat{font-size:14px;color:var(--gris)}
+  .pieza h3{font-size:24px;font-weight:600;margin:2px 0 6px}
+  .pieza p{font-size:16px;color:var(--gris);max-width:40em}
+  .uso{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+  .uso span{font-size:13px;font-weight:600;padding:2px 9px;border-radius:4px;background:#E6EFE9;color:var(--mascara)}
+  .comprar{display:flex;flex-direction:column;gap:8px}
+  .comprar a{display:flex;justify-content:space-between;align-items:baseline;gap:8px;padding:10px 14px;border-radius:8px;text-decoration:none;font-weight:600;font-size:16px}
+  .comprar a small{font-weight:400;font-size:13px;opacity:.75}
+  .comprar .amz{background:var(--tinta);color:#fff}
+  .comprar .ali{border:1.5px solid var(--tinta)}
+  .comprar a:hover{outline:2px solid var(--oro);outline-offset:1px}
+  .comprar a.off{opacity:.35;pointer-events:none}
+
+  /* Proyectos */
+  .proyectos{background:var(--mascara-2);color:var(--serigrafia)}
+  .proyectos .intro{color:var(--serigrafia);opacity:.75}
+  .lista-proy{list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:2px;background:var(--pista);border:2px solid var(--pista);border-radius:12px;overflow:hidden}
+  .proy{background:var(--mascara-2);padding:24px;display:flex;flex-direction:column;gap:8px}
+  .proy .cod{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:18px;color:var(--oro)}
+  .proy h3{font-size:26px;font-weight:600}
+  .proy p{font-size:15.5px;opacity:.8;flex:1}
+  .proy .links{display:flex;flex-wrap:wrap;gap:8px 16px;font-size:15px;font-weight:600;margin-top:6px}
+  .proy .links a,.proy .links button{font:inherit;color:var(--serigrafia);background:none;border:0;cursor:pointer;text-decoration:underline;text-underline-offset:4px;text-decoration-color:var(--oro)}
+
+  /* Pie */
+  footer{background:var(--fondo);padding:40px 0 48px;font-size:15px;color:var(--gris)}
+  footer .afiliados{max-width:46em;margin-bottom:22px}
+  footer .afiliados strong{color:var(--tinta)}
+  footer .fila{display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;border-top:1px solid var(--linea);padding-top:18px}
+  footer .fila a{margin-right:18px;color:var(--tinta);font-weight:600}
+
+  /* Animación: las pistas se dibujan una vez al cargar */
+  .pistas path{stroke-dasharray:var(--l);stroke-dashoffset:var(--l);animation:trazar 1.6s cubic-bezier(.6,0,.2,1) forwards}
+  .pistas .pad,.pistas .via{opacity:0;animation:aparecer .3s ease-out forwards;animation-delay:1.3s}
+  @keyframes trazar{to{stroke-dashoffset:0}}
+  @keyframes aparecer{to{opacity:1}}
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto}
+    .pistas path{animation:none;stroke-dashoffset:0}
+    .pistas .pad,.pistas .via{animation:none;opacity:1}
+  }
+
+  @media (max-width:820px){
+    .pieza{grid-template-columns:96px 1fr;gap:16px;padding:16px}
+    .foto{width:96px;height:96px}
+    .comprar{grid-column:1 / -1;flex-direction:row}
+    .comprar a{flex:1;flex-direction:column;align-items:flex-start;gap:0}
+  }
+  @media (max-width:640px){
+    .top nav{display:none}
+    .placa .wrap{padding-top:44px;padding-bottom:52px}
+    .contorno{padding:22px 20px 24px}
+    .placa p{font-size:17px}
+    section{padding:48px 0}
+    .pieza h3{font-size:21px}
+  }
 </style>
 </head>
 <body>
 
-<header>
+<header class="top">
   <div class="wrap">
-    <a class="logo" href="#inicio"><div class="dot"></div>NANOHUMANO <span>LABS</span></a>
-    <nav>
-      <a href="#tienda">Tienda</a>
+    <a class="marca" href="#inicio"><i aria-hidden="true"></i>NANOHUMANO LABS</a>
+    <nav aria-label="Principal">
+      <a href="#piezas">Piezas</a>
       <a href="#proyectos">Proyectos</a>
-      <a href="#aviso">Aviso</a>
       <a href="https://www.youtube.com/@Nanohumano">YouTube</a>
       <a href="https://www.printables.com/@JoseIsmaelRo_5144964">Printables</a>
       <a href="https://github.com/Nanohumano">GitHub</a>
@@ -85,64 +148,86 @@
 </header>
 
 <main id="inicio">
-  <div class="wrap hero">
-    <div class="tag">// ELECTRÓNICA DIY</div>
-    <h1>Los componentes que <em>de verdad uso</em> en mis proyectos</h1>
-    <p>ESP32, pantallas, LoRa, servos y sensores probados en los montajes del canal. Si compras desde aquí, apoyas el canal sin pagar nada extra.</p>
-    <div class="cta">
-      <a class="btn primary" href="#tienda">Ver componentes</a>
-      <a class="btn" href="https://www.youtube.com/@Nanohumano">▶ YouTube</a>
-      <a class="btn" href="https://www.printables.com/@JoseIsmaelRo_5144964">⬡ Printables</a>
-      <a class="btn" href="https://github.com/Nanohumano">&lt;/&gt; GitHub</a>
+  <div class="placa">
+    <svg class="pistas" viewBox="0 0 1200 560" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <path style="--l:900" d="M-20 470 H300 L360 410 H620 L680 470 H1220"/>
+      <path style="--l:900" d="M820 -20 V120 L880 180 V330 L940 390 H1220"/>
+      <path style="--l:700" d="M1000 -20 V90 L1060 150 H1220"/>
+      <path style="--l:600" d="M-20 80 H120 L170 30 H420"/>
+      <path style="--l:700" d="M760 600 V520 L820 460 H980 L1040 400"/>
+      <circle class="pad" cx="1040" cy="400" r="14"/>
+      <circle class="pad" cx="420" cy="30" r="12"/>
+      <circle class="via" cx="880" cy="250" r="9"/>
+      <circle class="via" cx="1060" cy="150" r="9"/>
+      <circle class="via" cx="360" cy="410" r="9"/>
+      <circle class="via" cx="620" cy="410" r="9"/>
+    </svg>
+    <div class="wrap">
+      <div class="contorno">
+        <h1>Las piezas de mis proyectos</h1>
+        <p>Cada placa, pantalla y sensor de esta lista lo he montado en un proyecto del canal. Si lo compras desde aquí, el canal se lleva una pequeña comisión y a ti te cuesta lo mismo.</p>
+        <div class="acciones">
+          <a class="pad-btn lleno" href="#piezas">Ver las piezas</a>
+          <a class="pad-btn" href="#proyectos">Ver los proyectos</a>
+        </div>
+      </div>
     </div>
   </div>
 
-  <section id="tienda">
+  <section id="piezas">
     <div class="wrap">
-      <h2>Tienda</h2>
-      <p class="sub">Elige dónde comprar: Amazon (envío rápido) o AliExpress (más barato, tarda más).</p>
-      <div class="filters" id="filters"></div>
-      <div class="grid" id="grid"></div>
+      <h2>Piezas</h2>
+      <p class="intro">Amazon llega antes. AliExpress suele ser más barato, pero tarda más en llegar.</p>
+      <div class="filtros" id="filtros" role="group" aria-label="Filtrar por tipo"></div>
+      <div class="aviso-filtro" id="aviso-filtro" aria-live="polite"></div>
+      <ul class="piezas" id="lista"></ul>
     </div>
   </section>
 
-  <section id="proyectos">
+  <section id="proyectos" class="proyectos">
     <div class="wrap">
       <h2>Proyectos</h2>
-      <p class="sub">Cada proyecto tiene su vídeo, el código en GitHub y la caja en Printables.</p>
-      <div class="projects">
-        <div class="proj"><div class="code">NH-01 METEO</div><h3>Reloj y estación meteorológica</h3><p>ESP32 con pantalla táctil de 4″: previsión, mar, calidad del aire y LED que cambia de color según el tiempo. <a href="https://github.com/Nanohumano/NH-01-METEO" style="color:var(--accent)">Código en GitHub</a>.</p></div>
-        <div class="proj"><div class="code">NH-04</div><h3>Chapa de nombre digital</h3><p>LILYGO T-Display S3 controlada desde el móvil, caja en PLA negro.</p></div>
-        <div class="proj"><div class="code">EN CURSO</div><h3>Robot de escritorio</h3><p>ESP32, servos, LEDs y pantalla pequeña, con IA.</p></div>
-        <div class="proj"><div class="code">EN CURSO</div><h3>Asistente IA con caras</h3><p>Pantalla táctil ESP32-S3 de 2,8" con emoticonos y la API de Gemini.</p></div>
-      </div>
-      <div class="cta">
-        <a class="btn" href="https://www.youtube.com/@Nanohumano">Vídeos en YouTube</a>
-        <a class="btn" href="https://www.printables.com/@JoseIsmaelRo_5144964">Cajas y STL en Printables</a>
-        <a class="btn" href="https://github.com/Nanohumano">Código en GitHub</a>
-      </div>
-    </div>
-  </section>
-
-  <section id="aviso">
-    <div class="wrap">
-      <div class="disc">
-        <strong style="color:var(--text)">Aviso de afiliados.</strong>
-        Como Afiliado de Amazon, obtengo ingresos por las compras adscritas que cumplen los requisitos aplicables.
-        Esta web también contiene enlaces de afiliado de AliExpress. El precio para ti es el mismo; yo recibo una pequeña comisión que ayuda a mantener el canal.
-        La compra, el pago y el envío los gestiona directamente Amazon o AliExpress.
-      </div>
+      <p class="intro">Elige un proyecto para ver solo las piezas que lleva.</p>
+      <ul class="lista-proy">
+        <li class="proy">
+          <span class="cod">NH-01</span>
+          <h3>Reloj y estación meteorológica</h3>
+          <p>ESP32 con pantalla táctil de 4″: previsión, mar, calidad del aire y un LED que cambia de color según el tiempo.</p>
+          <div class="links"><button data-p="NH-01">Ver sus piezas</button><a href="https://github.com/Nanohumano/NH-01-METEO">Código en GitHub</a></div>
+        </li>
+        <li class="proy">
+          <span class="cod">NH-04</span>
+          <h3>Chapa de nombre digital</h3>
+          <p>LILYGO T-Display S3 controlada desde el móvil, con caja en PLA negro.</p>
+          <div class="links"><button data-p="NH-04">Ver sus piezas</button></div>
+        </li>
+        <li class="proy">
+          <span class="cod">En curso</span>
+          <h3>Robot de escritorio</h3>
+          <p>ESP32, servos, LEDs y una pantalla pequeña, con IA.</p>
+          <div class="links"><button data-p="Robot">Ver sus piezas</button></div>
+        </li>
+        <li class="proy">
+          <span class="cod">En curso</span>
+          <h3>Asistente IA con caras</h3>
+          <p>Pantalla táctil ESP32-S3 de 2,8″ que pone caras y habla con la API de Gemini.</p>
+          <div class="links"><button data-p="Asistente">Ver sus piezas</button></div>
+        </li>
+      </ul>
     </div>
   </section>
 </main>
 
-<footer>
+<footer id="aviso">
   <div class="wrap">
-    <div>© 2026 NANOHUMANO LABS</div>
-    <div>
-      <a href="https://www.youtube.com/@Nanohumano">YouTube</a>
-      <a href="https://www.printables.com/@JoseIsmaelRo_5144964">Printables</a>
-      <a href="https://github.com/Nanohumano">GitHub</a>
+    <p class="afiliados"><strong>Enlaces de afiliado.</strong> Como Afiliado de Amazon, obtengo ingresos por las compras adscritas que cumplen los requisitos aplicables. Esta web también tiene enlaces de afiliado de AliExpress. El precio para ti es el mismo. La compra, el pago y el envío los gestiona directamente Amazon o AliExpress.</p>
+    <div class="fila">
+      <span>© 2026 NANOHUMANO LABS</span>
+      <span>
+        <a href="https://www.youtube.com/@Nanohumano">YouTube</a>
+        <a href="https://www.printables.com/@JoseIsmaelRo_5144964">Printables</a>
+        <a href="https://github.com/Nanohumano">GitHub</a>
+      </span>
     </div>
   </div>
 </footer>
@@ -153,6 +238,8 @@
    amazon: enlace con tu etiqueta (?tag=nanohumanolab-21).
    ali:    pega aquí el enlace generado en AliExpress Portals
            (s.click.aliexpress.com/...). Si está vacío, el botón sale apagado.
+   usado:  proyectos separados por " · ". Escribe "NH-01", "NH-04",
+           "Robot" o "Asistente" para que el botón "Ver sus piezas" lo encuentre.
    ============================================================ */
 const TAG = 'nanohumanolab-21';
 const amz = q => 'https://www.amazon.es/s?k=' + encodeURIComponent(q) + '&tag=' + TAG;
@@ -188,31 +275,63 @@ const ICONS = {
   cube:'<path d="M32 8l20 11v24L32 54 12 43V19z"/><path d="M12 19l20 11 20-11M32 30v24"/>'
 };
 
+/* Piezas que valen para cualquier proyecto */
+const COMUNES = ['Todos los proyectos','Todas las cajas'];
+const NOMBRE_PROY = {'NH-01':'NH-01 · Reloj meteo','NH-04':'NH-04 · Chapa','Robot':'Robot de escritorio','Asistente':'Asistente IA'};
+
 const cats = ['Todo', ...new Set(PRODUCTOS.map(p => p.cat))];
-let actual = 'Todo';
+let cat = 'Todo', proy = null;
+
+function usaProyecto(p, clave){
+  return p.usado.includes(clave) || COMUNES.some(c => p.usado.includes(c));
+}
 
 function pintar(){
-  document.getElementById('filters').innerHTML = cats.map(c =>
-    '<button class="' + (c===actual?'on':'') + '" data-c="' + c + '">' + c + '</button>').join('');
-  document.getElementById('grid').innerHTML = PRODUCTOS
-    .filter(p => actual==='Todo' || p.cat===actual)
+  document.getElementById('filtros').innerHTML = cats.map(c =>
+    '<button type="button" data-c="' + c + '" aria-pressed="' + (c===cat && !proy) + '">' + c + '</button>').join('');
+
+  const aviso = document.getElementById('aviso-filtro');
+  aviso.innerHTML = proy ? 'Mostrando las piezas de <strong>' + NOMBRE_PROY[proy] + '</strong>.<button type="button" id="quitar">Ver todas</button>' : '';
+
+  document.getElementById('lista').innerHTML = PRODUCTOS
+    .filter(p => proy ? usaProyecto(p, proy) : (cat==='Todo' || p.cat===cat))
     .map(p =>
-      '<div class="card">' +
-        '<div class="icon"><svg viewBox="0 0 64 64">' + ICONS[p.icon] + '</svg>' +
-          (p.img ? '<img src="' + p.img + '" alt="' + p.nombre + '" loading="lazy" onerror="this.remove()">' : '') + '</div>' +
-        '<div class="cat">' + p.cat + '</div>' +
-        '<h3>' + p.nombre + '</h3>' +
-        '<p>' + p.desc + '</p>' +
-        '<div class="used">Lo uso en: <b>' + p.usado + '</b></div>' +
-        '<div class="buy">' +
-          '<a class="amz ' + (p.amazon?'':'off') + '" href="' + (p.amazon||'#') + '" target="_blank" rel="sponsored noopener">Amazon</a>' +
-          '<a class="ali ' + (p.ali?'':'off') + '" href="' + (p.ali||'#') + '" target="_blank" rel="sponsored noopener">AliExpress</a>' +
+      '<li class="pieza">' +
+        '<div class="foto"><svg viewBox="0 0 64 64" aria-hidden="true">' + ICONS[p.icon] + '</svg></div>' +
+        '<div>' +
+          '<div class="cat">' + p.cat + '</div>' +
+          '<h3>' + p.nombre + '</h3>' +
+          '<p>' + p.desc + '</p>' +
+          '<div class="uso" aria-label="Lo uso en">' + p.usado.split(' · ').map(u => '<span>' + u + '</span>').join('') + '</div>' +
         '</div>' +
-      '</div>').join('');
+        '<div class="comprar">' +
+          '<a class="amz ' + (p.amazon?'':'off') + '" href="' + (p.amazon||'#') + '" target="_blank" rel="sponsored noopener">Amazon <small>llega antes</small></a>' +
+          '<a class="ali ' + (p.ali?'':'off') + '" href="' + (p.ali||'#') + '" target="_blank" rel="sponsored noopener">AliExpress <small>más barato</small></a>' +
+        '</div>' +
+      '</li>').join('');
+
+  /* Fotos: si no cargan, se queda el icono */
+  document.querySelectorAll('#lista .pieza').forEach((li, i) => {
+    const lista = PRODUCTOS.filter(p => proy ? usaProyecto(p, proy) : (cat==='Todo' || p.cat===cat));
+    const p = lista[i];
+    if (!p.img) return;
+    const img = new Image();
+    img.alt = p.nombre; img.loading = 'lazy'; img.src = p.img;
+    img.onload = () => { const f = li.querySelector('.foto'); f.innerHTML = ''; f.appendChild(img); };
+  });
 }
-document.getElementById('filters').addEventListener('click', e => {
-  if (e.target.dataset.c){ actual = e.target.dataset.c; pintar(); }
+
+document.getElementById('filtros').addEventListener('click', e => {
+  const c = e.target.dataset.c; if (!c) return;
+  cat = c; proy = null; pintar();
 });
+document.getElementById('aviso-filtro').addEventListener('click', e => {
+  if (e.target.id === 'quitar'){ proy = null; cat = 'Todo'; pintar(); }
+});
+document.querySelectorAll('[data-p]').forEach(b => b.addEventListener('click', () => {
+  proy = b.dataset.p; cat = 'Todo'; pintar();
+  document.getElementById('piezas').scrollIntoView();
+}));
 pintar();
 </script>
 </body>
