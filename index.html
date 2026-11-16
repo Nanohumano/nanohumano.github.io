@@ -7,6 +7,13 @@
 <meta name="description" content="Los componentes que uso en mis proyectos de electrónica DIY: ESP32, pantallas, LoRa, servos, sensores y más.">
 <meta name="theme-color" content="#0B0F14">
 <link rel="icon" href="logo.png">
+<!-- App (PWA) -->
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="iconos/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="NH LABS">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -116,6 +123,19 @@
   footer .fila a{margin-right:18px;color:var(--blanco);font-weight:600;text-decoration:none}
   footer .fila a:hover{color:var(--cian)}
 
+  /* ---------- App: botón Instalar y ayuda para iPhone ---------- */
+  .instalar{display:none;align-items:center;gap:8px;font:inherit;font-size:14px;font-weight:700;padding:8px 16px;border-radius:999px;border:0;background:var(--naranja);color:var(--negro);cursor:pointer;white-space:nowrap}
+  .instalar.ver{display:inline-flex}
+  .instalar:hover{box-shadow:0 0 16px rgba(255,122,0,.55)}
+  .instalar svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+  .ayuda-ios{position:fixed;left:12px;right:12px;bottom:max(12px,env(safe-area-inset-bottom));z-index:20;display:none;gap:14px;align-items:flex-start;padding:16px 18px;background:var(--placa);border:1px solid var(--cian);border-radius:14px;box-shadow:0 0 30px rgba(0,229,255,.25);font-size:15.5px;color:var(--texto)}
+  .ayuda-ios.ver{display:flex}
+  .ayuda-ios img{width:44px;height:44px;border-radius:50%}
+  .ayuda-ios strong{color:var(--blanco)}
+  .ayuda-ios .cerrar{margin-left:auto;font:inherit;font-size:22px;line-height:1;background:none;border:0;color:var(--gris);cursor:pointer;padding:0 4px}
+  /* Dentro de la app: respeta la muesca del móvil */
+  @media (display-mode:standalone){ .top{padding-top:env(safe-area-inset-top)} }
+
   /* Animacion: las pistas se dibujan una vez al cargar */
   .pistas path{stroke-dasharray:var(--l);stroke-dashoffset:var(--l);animation:trazar 1.6s cubic-bezier(.6,0,.2,1) forwards}
   .pistas .pad,.pistas .via{opacity:0;animation:aparecer .3s ease-out forwards;animation-delay:1.3s}
@@ -135,6 +155,12 @@
   }
   @media (max-width:640px){
     .top nav{display:none}
+    .marca{font-size:14px;gap:8px;white-space:nowrap;min-width:0}
+    .marca img{height:36px;width:36px}
+    .instalar{font-size:13px;padding:7px 12px;gap:6px}
+    .instalar svg{width:16px;height:16px}
+    .instalar .largo{display:none}
+    .instalar{text-transform:uppercase;letter-spacing:.04em}
     .placa .wrap{padding-top:48px;padding-bottom:56px}
     .contorno{padding:24px 20px 26px}
     .placa p{font-size:17px}
@@ -154,8 +180,17 @@
       <a href="https://www.printables.com/@JoseIsmaelRo_5144964">Printables</a>
       <a href="https://github.com/Nanohumano">GitHub</a>
     </nav>
+    <button type="button" class="instalar" id="instalar" aria-label="Instalar la app de NANOHUMANO LABS">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg><span class="largo">Instalar </span>app
+    </button>
   </div>
 </header>
+
+<div class="ayuda-ios" id="ayuda-ios" role="dialog" aria-label="Cómo instalar la app en iPhone">
+  <img src="iconos/apple-touch-icon.png" alt="">
+  <div><strong>Instala la app en tu iPhone</strong><br>Pulsa el botón <strong>Compartir</strong> (el cuadrado con la flecha hacia arriba) y luego <strong>«Añadir a pantalla de inicio»</strong>.</div>
+  <button type="button" class="cerrar" id="cerrar-ios" aria-label="Cerrar">×</button>
+</div>
 
 <main id="inicio">
   <div class="placa">
@@ -343,6 +378,36 @@ document.querySelectorAll('[data-p]').forEach(b => b.addEventListener('click', (
   document.getElementById('piezas').scrollIntoView();
 }));
 pintar();
+
+/* ============================================================
+   APP (PWA): registro y botón "Instalar app"
+   ============================================================ */
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => navigator.serviceWorker.register('/sw.js').catch(() => {}));
+}
+(function(){
+  const boton = document.getElementById('instalar');
+  const ayuda = document.getElementById('ayuda-ios');
+  const yaEsApp = matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
+  if (yaEsApp) return;
+
+  // Android, Chrome y Edge: el navegador nos deja mostrar su ventana de instalar
+  let aviso = null;
+  window.addEventListener('beforeinstallprompt', e => {
+    e.preventDefault(); aviso = e; boton.classList.add('ver');
+  });
+  window.addEventListener('appinstalled', () => { boton.classList.remove('ver'); aviso = null; });
+
+  // iPhone y iPad (Safari): no hay ventana automática, se explica cómo hacerlo
+  const esIOS = /iphone|ipad|ipod/i.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  if (esIOS) boton.classList.add('ver');
+
+  boton.addEventListener('click', async () => {
+    if (aviso) { aviso.prompt(); await aviso.userChoice; aviso = null; boton.classList.remove('ver'); }
+    else if (esIOS) { ayuda.classList.add('ver'); }
+  });
+  document.getElementById('cerrar-ios').addEventListener('click', () => ayuda.classList.remove('ver'));
+})();
 </script>
 </body>
 </html>
