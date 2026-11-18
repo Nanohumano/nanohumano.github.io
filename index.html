@@ -182,6 +182,18 @@
   .pie-bot img{width:56px}
   @media (max-width:820px){.nanobot-hero{display:none}}
   @media (prefers-reduced-motion:reduce){.nanobot-hero img{animation:none}}
+
+  /* Juego NanoBot */
+  .juego .lista-juego{list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+  .jcard{background:var(--placa-2);border:1px solid var(--linea);border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:10px;transition:border-color .2s,box-shadow .2s}
+  .jcard:hover{border-color:var(--cian);box-shadow:0 0 26px rgba(0,229,255,.18)}
+  .jcard .cod{font-weight:800;font-size:22px;color:var(--cian);text-shadow:0 0 12px rgba(0,229,255,.5)}
+  .jcard h3{font-size:19px;font-weight:700}
+  .jcard p{font-size:15.5px;color:var(--gris);flex:1}
+  .jcard .pad-btn{align-self:flex-start}
+  .juego-cab{display:flex;align-items:center;gap:18px;margin-bottom:18px}
+  .juego-cab img{width:84px;height:auto}
+  .juego .nota{font-size:14px;color:var(--gris);margin-top:16px}
 </style>
 </head>
 <body>
@@ -192,6 +204,7 @@
     <nav aria-label="Principal">
       <a href="#piezas">Piezas</a>
       <a href="#proyectos">Proyectos</a>
+      <a href="#juego">Juego</a>
       <a href="https://www.youtube.com/@Nanohumano">YouTube</a>
       <a href="https://www.printables.com/@JoseIsmaelRo_5144964">Printables</a>
       <a href="https://github.com/Nanohumano">GitHub</a>
@@ -286,6 +299,27 @@
           <div class="links"><button type="button">Ver sus piezas</button><a class="yt" href="https://youtu.be/TeprZhAeN-s" target="_blank" rel="noopener">Vídeo en YouTube</a></div>
         </li>
       </ul>
+    </div>
+  </section>
+  <section id="juego" class="juego">
+    <div class="wrap">
+      <div class="juego-cab"><img src="marca/nanobot/contento.png" alt="NanoBot"><div><h2>El juego de NanoBot</h2>
+      <p class="intro">Ayuda a NanoBot a escapar del taller corrigiendo bugs. Temporada 1: 10 niveles, un jefe final, música original y partida guardada.</p></div></div>
+      <ul class="lista-juego">
+        <li class="jcard">
+          <span class="cod">2D</span>
+          <h3>Versión clásica</h3>
+          <p>Plataformas pixel art. Va fluida en casi cualquier móvil u ordenador.</p>
+          <a class="pad-btn lleno" href="juego/2d/">▶ Jugar 2D</a>
+        </li>
+        <li class="jcard">
+          <span class="cod">2.5D</span>
+          <h3>Versión 3D</h3>
+          <p>Gráficos 3D con jugabilidad lateral. Mejor en ordenador o en un móvil potente.</p>
+          <a class="pad-btn lleno" href="juego/25d/">▶ Jugar 2.5D</a>
+        </li>
+      </ul>
+      <p class="nota">Se juega con teclado (flechas y espacio), mando o pantalla táctil. Pulsa M para quitar o poner la música.</p>
     </div>
   </section>
 </main>
