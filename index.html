@@ -220,6 +220,9 @@
   @media (prefers-reduced-motion:reduce){.juego-badge,.pad-btn.juego-btn,.juego-banner,.juego-bot,.flota-juego,.nav-juego .nuevo{animation:none}}
   .juego-video{margin-top:22px;border-radius:16px;overflow:hidden;border:1px solid var(--linea);box-shadow:0 0 30px rgba(0,229,255,.15);aspect-ratio:16/9;background:#000}
   .juego-video iframe{width:100%;height:100%;border:0;display:block}
+  .juego-contador{display:flex;gap:18px;flex-wrap:wrap;align-items:center;font-weight:800;font-size:15px;color:var(--blanco)}
+  .juego-contador b{font-size:24px;color:var(--cian);text-shadow:0 0 12px rgba(0,229,255,.5);margin-right:5px;font-variant-numeric:tabular-nums}
+  .juego-contador[hidden]{display:none}
 </style>
 </head>
 <body>
@@ -289,6 +292,7 @@
           <h2>El juego de <span>NanoBot</span></h2>
           <p>Los bugs se han escapado del ordenador. Ayuda a NanoBot a corregirlos todos antes de que el maker se despierte.</p>
           <ul class="juego-datos"><li>10 niveles</li><li>Jefe final</li><li>Música original</li><li>Se guarda solo</li><li>Móvil y PC</li></ul>
+          <div class="juego-contador" id="juego-contador" hidden><span>👾 <b id="cnt-jug">–</b>jugadores</span><span>🎮 <b id="cnt-par">–</b>partidas</span></div>
           <div><a class="pad-btn juego-btn" href="juego/25d/">▶ JUGAR AHORA</a></div>
         </div>
         <img class="juego-bot" src="marca/nanobot/contento.png" alt="">
@@ -495,6 +499,12 @@ if ('serviceWorker' in navigator) {
 <a class="flota-juego" id="flota-juego" href="#juego"><img src="marca/nanobot/saludo.png" alt="">¡Juega a NanoBot!</a>
 <script>
 (()=>{const f=document.getElementById('flota-juego'),j=document.getElementById('juego');if(!f||!j||!('IntersectionObserver' in window))return;new IntersectionObserver(e=>f.classList.toggle('oculta',e[0].isIntersecting),{threshold:.15}).observe(j);})();
+</script>
+<script>
+(()=>{const A='https://abacus.jasoncameron.dev/get/nanohumano.github.io/nanobot-',box=document.getElementById('juego-contador');if(!box)return;
+const f=n=>new Intl.NumberFormat('es-ES').format(n);
+const anim=(el,v)=>{const t0=performance.now(),d=1200;const st=t=>{const k=Math.min(1,(t-t0)/d);el.textContent=f(Math.round(v*(1-Math.pow(1-k,3))));if(k<1)requestAnimationFrame(st);};requestAnimationFrame(st);};
+Promise.all(['jugadores','partidas'].map(k=>fetch(A+k).then(r=>r.ok?r.json():{value:0}).then(j=>j.value||0))).then(([j,p])=>{if(j<1)return;box.hidden=false;anim(document.getElementById('cnt-jug'),j);anim(document.getElementById('cnt-par'),p);}).catch(()=>{});})();
 </script>
 </body>
 </html>
