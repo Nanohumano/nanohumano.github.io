@@ -292,7 +292,7 @@
           <h2>El juego de <span>NanoBot</span></h2>
           <p>Los bugs se han escapado del ordenador. Ayuda a NanoBot a corregirlos todos antes de que el maker se despierte.</p>
           <ul class="juego-datos"><li>10 niveles</li><li>Jefe final</li><li>Música original</li><li>Se guarda solo</li><li>Móvil y PC</li></ul>
-          <div class="juego-contador" id="juego-contador" hidden><span>👾 <b id="cnt-jug">–</b>jugadores</span><span>🎮 <b id="cnt-par">–</b>partidas</span></div>
+          <div class="juego-contador" id="juego-contador"><span>👾 <b id="cnt-jug">–</b>jugadores</span><span>🎮 <b id="cnt-par">–</b>partidas</span></div>
           <div><a class="pad-btn juego-btn" href="juego/25d/">▶ JUGAR AHORA</a></div>
         </div>
         <img class="juego-bot" src="marca/nanobot/contento.png" alt="">
@@ -504,7 +504,7 @@ if ('serviceWorker' in navigator) {
 (()=>{const A='https://abacus.jasoncameron.dev/get/nanohumano.github.io/nanobot-',box=document.getElementById('juego-contador');if(!box)return;
 const f=n=>new Intl.NumberFormat('es-ES').format(n);
 const anim=(el,v)=>{const t0=performance.now(),d=1200;const st=t=>{const k=Math.min(1,(t-t0)/d);el.textContent=f(Math.round(v*(1-Math.pow(1-k,3))));if(k<1)requestAnimationFrame(st);};requestAnimationFrame(st);};
-Promise.all(['jugadores','partidas'].map(k=>fetch(A+k).then(r=>r.ok?r.json():{value:0}).then(j=>j.value||0))).then(([j,p])=>{if(j<1)return;box.hidden=false;anim(document.getElementById('cnt-jug'),j);anim(document.getElementById('cnt-par'),p);}).catch(()=>{});})();
+Promise.all(['jugadores','partidas'].map(k=>fetch(A+k).then(r=>r.ok?r.json():{value:0}).then(j=>j.value||0))).then(([j,p])=>{box.hidden=false;if(j<1){box.innerHTML='<span>👾 ¡Sé el primero en jugar!</span>';return;}anim(document.getElementById('cnt-jug'),j);anim(document.getElementById('cnt-par'),p);}).catch(()=>{});})();
 </script>
 </body>
 </html>
