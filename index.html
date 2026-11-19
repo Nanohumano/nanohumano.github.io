@@ -503,7 +503,7 @@ if ('serviceWorker' in navigator) {
 <script>
 (()=>{const A='https://abacus.jasoncameron.dev/get/nanohumano.github.io/nanobot-',box=document.getElementById('juego-contador');if(!box)return;
 const f=n=>new Intl.NumberFormat('es-ES').format(n);
-const anim=(el,v)=>{const t0=performance.now(),d=1200;const st=t=>{const k=Math.min(1,(t-t0)/d);el.textContent=f(Math.round(v*(1-Math.pow(1-k,3))));if(k<1)requestAnimationFrame(st);};requestAnimationFrame(st);};
+const anim=(el,v)=>{el.textContent=f(v);if(document.hidden)return;let i=0;const n=24,id=setInterval(()=>{i++;el.textContent=f(Math.round(v*(1-Math.pow(1-i/n,3))));if(i>=n){clearInterval(id);el.textContent=f(v);}},50);};
 Promise.all(['jugadores','partidas'].map(k=>fetch(A+k).then(r=>r.ok?r.json():{value:0}).then(j=>j.value||0))).then(([j,p])=>{box.hidden=false;if(j<1){box.innerHTML='<span>👾 ¡Sé el primero en jugar!</span>';return;}anim(document.getElementById('cnt-jug'),j);anim(document.getElementById('cnt-par'),p);}).catch(()=>{});})();
 </script>
 </body>
