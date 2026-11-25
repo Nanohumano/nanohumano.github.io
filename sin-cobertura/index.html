@@ -83,7 +83,9 @@
   .paises{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;margin-top:34px}
   .pais{background:var(--carbon);border:1px solid var(--borde);padding:20px;display:flex;flex-direction:column}
   .pais .fila{display:flex;align-items:center;gap:12px;margin-bottom:10px}
-  .pais .bandera{font-size:2rem;line-height:1}
+  .pais .bandera{line-height:0}
+  img.flag{display:inline-block;object-fit:cover;border:1px solid #2a302d;vertical-align:middle}
+  .quien .banderas{display:flex!important;flex-wrap:wrap;gap:4px}
   .pais h3{font-size:1.1rem;font-weight:800;line-height:1.2}
   .pais .org{font-size:.8rem;color:var(--gris)}
   .pais .dur{display:inline-block;font-family:"IBM Plex Mono";font-size:.75rem;color:var(--negro);background:var(--ambar);padding:3px 8px;margin-bottom:10px;align-self:flex-start}
@@ -328,7 +330,9 @@ const PAISES = [
    nota:'Su bolsa de evacuación incluye casco, guantes de trabajo, mascarillas, batería para el móvil y comida que se come sin cocinar.',
    url:'https://www.city.nagasaki.lg.jp/bousai/210004/210003/p000445.html', fuente:'Bolsa de emergencia · Ayto. de Nagasaki'}
 ];
-const B = Object.fromEntries(PAISES.map(p => [p.c, p.bandera + ' ' + p.nombre]));
+const ISO = {UE:'eu',ES:'es',FR:'fr',DE:'de',SE:'se',FI:'fi',NL:'nl',NO:'no',US:'us',JP:'jp'};
+const flag = (c, w) => `<img class="flag" src="https://flagcdn.com/w80/${ISO[c]}.png" alt="${c}" width="${w}" height="${Math.round(w*0.66)}" loading="lazy">`;
+const B = Object.fromEntries(PAISES.map(p => [p.c, p.nombre]));
 
 const ARTICULOS = [
   {id:'agua', icono:'💧', nombre:'Agua', paises:['UE','ES','FR','DE','SE','FI','NL','NO','US','JP'],
@@ -408,7 +412,7 @@ const CONSEJOS = [];
 /* ---------- países ---------- */
 document.getElementById('lista-paises').innerHTML = PAISES.map(p => `
   <article class="pais">
-    <div class="fila"><span class="bandera">${p.bandera}</span><div><h3>${p.nombre}</h3><div class="org">${p.org}</div></div></div>
+    <div class="fila"><span class="bandera">${flag(p.c,40)}</span><div><h3>${p.nombre}</h3><div class="org">${p.org}</div></div></div>
     <span class="dur">${p.dur}</span>
     <p>${p.nota}</p>
     <a class="fuente" href="${p.url}" target="_blank" rel="noopener">Fuente: ${p.fuente} ↗</a>
@@ -416,7 +420,7 @@ document.getElementById('lista-paises').innerHTML = PAISES.map(p => `
 
 /* ---------- tabla ---------- */
 document.getElementById('tabla').innerHTML =
-  '<thead><tr><th style="font-size:.85rem">Artículo</th>' + PAISES.map(p => `<th title="${p.nombre}">${p.bandera}</th>`).join('') + '<th style="font-size:.85rem">Total</th></tr></thead><tbody>' +
+  '<thead><tr><th style="font-size:.85rem">Artículo</th>' + PAISES.map(p => `<th title="${p.nombre}">${flag(p.c,24)}</th>`).join('') + '<th style="font-size:.85rem">Total</th></tr></thead><tbody>' +
   ARTICULOS.map(a => '<tr><td>' + a.icono + ' ' + a.nombre + '</td>' +
     PAISES.map(p => a.paises.includes(p.c) ? '<td class="si">✔</td>' : '<td class="no">·</td>').join('') +
     `<td class="total">${a.paises.length}</td></tr>`).join('') + '</tbody>';
@@ -447,7 +451,7 @@ function pintar(){
       <h3>${a.nombre}</h3>
       <p>${a.desc}</p>
       ${a.aviso ? `<div class="aviso-rojo">⚠️ ${a.aviso}</div>` : ''}
-      <div class="quien">Lo recomiendan ${a.paises.length} de ${PAISES.length}:<span class="banderas" title="${a.paises.map(c => B[c]).join(', ')}">${a.paises.map(c => PAISES.find(p => p.c === c).bandera).join(' ')}</span></div>
+      <div class="quien">Lo recomiendan ${a.paises.length} de ${PAISES.length}:<span class="banderas" title="${a.paises.map(c => B[c]).join(', ')}">${a.paises.map(c => flag(c,22)).join(' ')}</span></div>
       <div class="espacio"></div>
       <div class="acciones">
         <button class="check" data-id="${a.id}">${tengo[a.id] ? '✔ Ya lo tengo' : '¿Lo tienes?'}</button>
