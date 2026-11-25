@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SIN COBERTURA · Tu mochila de emergencia de 72 horas</title>
+<meta name="description" content="Montamos juntos la mochila de emergencia de 72 horas, artículo a artículo: para qué sirve cada cosa y cuál comprar sin gastar de más.">
+<meta property="og:title" content="SIN COBERTURA · Mochila de emergencia 72 h">
+<meta property="og:description" content="¿Aguantarías 72 horas sin luz ni internet? Montamos la mochila artículo a artículo.">
+<meta name="theme-color" content="#0d0f0e">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230d0f0e'/%3E%3Crect x='5' y='20' width='4' height='7' fill='%23ffb000'/%3E%3Crect x='11' y='15' width='4' height='12' fill='%23ffb000'/%3E%3Crect x='17' y='10' width='4' height='17' fill='%23333'/%3E%3Crect x='23' y='5' width='4' height='22' fill='%23333'/%3E%3Cpath d='M4 4 28 28' stroke='%23ff3b1f' stroke-width='3'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Mono:wght@400;600&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --negro:#0d0f0e; --carbon:#161a18; --borde:#2a302d; --texto:#e8ece9; --gris:#8f9a94;
+    --ambar:#ffb000; --rojo:#ff3b1f; --verde:#3ddc84;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--negro);color:var(--texto);font-family:Inter,system-ui,sans-serif;line-height:1.55;overflow-x:hidden}
+  body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:50;
+    background:repeating-linear-gradient(0deg,rgba(255,255,255,.025) 0 1px,transparent 1px 3px)}
+  a{color:inherit}
+  .mono{font-family:"IBM Plex Mono",monospace}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 20px}
+
+  /* ---------- barra superior ---------- */
+  .top{position:sticky;top:0;z-index:40;background:rgba(13,15,14,.88);backdrop-filter:blur(8px);border-bottom:1px solid var(--borde)}
+  .top .wrap{display:flex;align-items:center;justify-content:space-between;height:56px}
+  .logo{display:flex;align-items:center;gap:10px;font-family:"Archivo Black";letter-spacing:.04em;text-decoration:none}
+  .logo small{font-family:"IBM Plex Mono";color:var(--ambar);font-size:.7rem;letter-spacing:.1em}
+  .top nav{display:flex;gap:18px;font-size:.85rem}
+  .top nav a{text-decoration:none;color:var(--gris)} .top nav a:hover{color:var(--ambar)}
+  @media(max-width:640px){.top nav{display:none}}
+
+  /* ---------- portada ---------- */
+  .hero{position:relative;min-height:88vh;display:flex;align-items:center;border-bottom:1px solid var(--borde);overflow:hidden}
+  .hero .wrap{position:relative;z-index:2;padding-top:40px;padding-bottom:60px}
+  .estado{display:inline-flex;align-items:center;gap:10px;border:1px solid var(--rojo);color:var(--rojo);padding:6px 12px;font-size:.75rem;letter-spacing:.15em}
+  .estado i{width:8px;height:8px;background:var(--rojo);border-radius:50%;animation:parpadeo 1s steps(2) infinite}
+  @keyframes parpadeo{50%{opacity:0}}
+  h1{font-family:"Archivo Black";font-size:clamp(3rem,11vw,8.5rem);line-height:.9;margin:22px 0 18px;letter-spacing:-.01em}
+  h1 .glitch{position:relative;display:inline-block;color:var(--ambar)}
+  h1 .glitch::before,h1 .glitch::after{content:attr(data-t);position:absolute;inset:0;opacity:.7}
+  h1 .glitch::before{color:var(--rojo);animation:g1 3.5s infinite}
+  h1 .glitch::after{color:#3ff;animation:g2 3.5s infinite}
+  @keyframes g1{0%,92%,100%{transform:none;clip-path:inset(0 0 100% 0)}93%{transform:translate(-4px,2px);clip-path:inset(10% 0 55% 0)}96%{transform:translate(3px,-1px);clip-path:inset(60% 0 10% 0)}}
+  @keyframes g2{0%,92%,100%{transform:none;clip-path:inset(0 0 100% 0)}94%{transform:translate(4px,-2px);clip-path:inset(30% 0 40% 0)}97%{transform:translate(-3px,1px);clip-path:inset(75% 0 0 0)}}
+  .hero p.lead{font-size:clamp(1.1rem,2.4vw,1.45rem);max-width:34em;color:#c9d1cc}
+  .hero p.lead b{color:var(--texto)}
+  .botones{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:14px 22px;font-weight:800;text-decoration:none;border:2px solid var(--ambar);transition:.15s}
+  .btn.lleno{background:var(--ambar);color:var(--negro)} .btn.lleno:hover{background:#ffc53d}
+  .btn.vacio{color:var(--ambar)} .btn.vacio:hover{background:rgba(255,176,0,.1)}
+  .contador{position:absolute;right:20px;bottom:24px;z-index:2;text-align:right}
+  .contador .num{font-family:"IBM Plex Mono";font-weight:600;font-size:clamp(2rem,6vw,3.6rem);color:var(--ambar);letter-spacing:.05em}
+  .contador .txt{font-size:.75rem;color:var(--gris);letter-spacing:.15em}
+  @media(max-width:640px){.contador{position:static;text-align:left;margin-top:34px}}
+  .barras{position:absolute;right:-60px;top:50%;transform:translateY(-55%);display:flex;align-items:flex-end;gap:22px;opacity:.13;z-index:1}
+  .barras span{width:70px;background:var(--texto)}
+  .barras span:nth-child(1){height:110px;background:var(--ambar)} .barras span:nth-child(2){height:200px;background:var(--ambar)}
+  .barras span:nth-child(3){height:290px} .barras span:nth-child(4){height:380px}
+  .barras::after{content:"";position:absolute;left:-30px;right:-30px;top:50%;height:18px;background:var(--rojo);transform:rotate(-38deg)}
+
+  /* ---------- secciones ---------- */
+  section{padding:80px 0;border-bottom:1px solid var(--borde)}
+  .etiqueta{font-family:"IBM Plex Mono";color:var(--ambar);font-size:.8rem;letter-spacing:.2em;margin-bottom:10px}
+  h2{font-family:"Archivo Black";font-size:clamp(1.9rem,4.5vw,3rem);line-height:1.05;margin-bottom:18px}
+  .intro{color:#c9d1cc;max-width:42em;font-size:1.08rem}
+
+  .porque{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:34px}
+  .dato{background:var(--carbon);border:1px solid var(--borde);padding:22px;position:relative}
+  .dato .grande{font-family:"Archivo Black";font-size:2.4rem;color:var(--ambar);line-height:1}
+  .dato p{color:#c9d1cc;margin-top:8px;font-size:.96rem}
+  .dato .fuente{display:block;margin-top:10px;font-family:"IBM Plex Mono";font-size:.72rem;color:var(--gris)}
+
+  /* ---------- progreso y filtros ---------- */
+  .panel{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:18px;margin:34px 0 22px;padding:18px 20px;background:var(--carbon);border:1px solid var(--borde)}
+  .progreso{flex:1;min-width:240px}
+  .progreso .linea{display:flex;justify-content:space-between;font-size:.85rem;color:var(--gris);margin-bottom:8px}
+  .progreso .linea b{color:var(--ambar);font-family:"IBM Plex Mono"}
+  .pista{height:10px;background:#0a0b0b;border:1px solid var(--borde)}
+  .pista div{height:100%;width:0;background:repeating-linear-gradient(90deg,var(--ambar) 0 10px,#d99600 10px 12px);transition:width .4s}
+  .filtros{display:flex;gap:8px;flex-wrap:wrap}
+  .filtros button{font:600 .8rem Inter;background:none;color:var(--gris);border:1px solid var(--borde);padding:8px 12px;cursor:pointer}
+  .filtros button.on{border-color:var(--ambar);color:var(--ambar)}
+
+  /* ---------- tarjetas ---------- */
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:16px}
+  .item{background:var(--carbon);border:1px solid var(--borde);padding:20px;display:flex;flex-direction:column;position:relative;transition:.2s}
+  .item:hover{border-color:#3b433f;transform:translateY(-2px)}
+  .item.hecho{border-color:var(--verde)}
+  .item .cab{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+  .dia{font-family:"IBM Plex Mono";font-size:.72rem;letter-spacing:.12em;color:var(--gris)}
+  .sello{font-family:"IBM Plex Mono";font-size:.66rem;letter-spacing:.1em;padding:3px 7px;border:1px solid}
+  .sello.pub{color:var(--verde);border-color:var(--verde)}
+  .sello.prox{color:var(--gris);border-color:var(--borde)}
+  .icono{font-size:2.2rem;line-height:1;margin-bottom:10px}
+  .item h3{font-size:1.15rem;font-weight:800;margin-bottom:6px}
+  .item p{color:#b9c2bd;font-size:.92rem;flex:1}
+  .truco{margin-top:12px;font-size:.84rem;color:var(--texto);background:rgba(255,176,0,.07);border-left:3px solid var(--ambar);padding:8px 10px}
+  .truco b{color:var(--ambar)}
+  .acciones{display:flex;gap:8px;margin-top:16px;flex-wrap:wrap}
+  .acciones a,.acciones button{flex:1;min-width:110px;text-align:center;font:800 .82rem Inter;padding:10px;text-decoration:none;cursor:pointer;border:1px solid var(--ambar)}
+  .acciones a.amz{background:var(--ambar);color:var(--negro)}
+  .acciones a.ver{color:var(--ambar);background:none}
+  .acciones button.check{background:none;color:var(--gris);border-color:var(--borde)}
+  .item.hecho button.check{color:var(--verde);border-color:var(--verde)}
+  .sinlink{flex:1;text-align:center;font-size:.8rem;color:var(--gris);padding:10px;border:1px dashed var(--borde)}
+
+  /* ---------- redes y pie ---------- */
+  .redes{display:flex;flex-wrap:wrap;gap:14px;margin-top:26px}
+  .red{flex:1;min-width:220px;background:var(--carbon);border:1px solid var(--borde);padding:20px;text-decoration:none;transition:.15s}
+  .red:hover{border-color:var(--ambar)}
+  .red .n{font-weight:800;font-size:1.1rem} .red .h{font-family:"IBM Plex Mono";color:var(--ambar);font-size:.85rem}
+  .red .d{color:var(--gris);font-size:.85rem;margin-top:6px}
+  footer{padding:44px 0 60px;color:var(--gris);font-size:.82rem}
+  footer p{max-width:48em;margin-bottom:12px}
+  footer strong{color:var(--texto)}
+  .aviso{border:1px solid var(--borde);padding:14px 16px;margin-top:8px}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="#"><span>SIN COBERTURA</span><small>72H</small></a>
+    <nav>
+      <a href="#por-que">Por qué</a>
+      <a href="#mochila">La mochila</a>
+      <a href="#siguenos">Síguenos</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="hero">
+    <div class="barras" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+    <div class="wrap">
+      <span class="estado mono"><i></i> SIN SERVICIO</span>
+      <h1>¿AGUANTARÍAS<br><span class="glitch" data-t="72 HORAS?">72 HORAS?</span></h1>
+      <p class="lead">Sin luz, sin internet y sin cobertura. Aquí montamos juntos la <b>mochila de emergencia</b>, <b>un artículo cada vez</b>: para qué sirve, cuál comprar sin gastar de más y el truco que nadie te cuenta.</p>
+      <div class="botones">
+        <a class="btn lleno" href="#mochila">🎒 Ver la mochila</a>
+        <a class="btn vacio" href="https://www.instagram.com/sin.cobertura.72/" target="_blank" rel="noopener">Seguir en Instagram</a>
+      </div>
+    </div>
+    <div class="contador">
+      <div class="num" id="reloj">72:00:00</div>
+      <div class="txt mono">AUTONOMÍA RECOMENDADA</div>
+    </div>
+  </div>
+
+  <section id="por-que">
+    <div class="wrap">
+      <div class="etiqueta">// POR QUÉ 72 HORAS</div>
+      <h2>Sin miedo y sin paranoias.<br>Solo estar preparado.</h2>
+      <p class="intro">Las primeras horas de una emergencia son las más difíciles: los servicios de emergencia están desbordados y lo que tengas en casa es lo que hay. Por eso Europa pide a cada hogar poder apañarse solo durante tres días.</p>
+      <div class="porque">
+        <div class="dato">
+          <div class="grande">72 h</div>
+          <p>La Comisión Europea recomienda que cada hogar pueda cubrir sus necesidades básicas durante al menos 72 horas sin ayuda de fuera.</p>
+          <span class="fuente">Estrategia de Preparación de la UE · marzo 2025</span>
+        </div>
+        <div class="dato">
+          <div class="grande">28·IV</div>
+          <p>El 28 de abril de 2025, España y Portugal se quedaron sin luz durante horas: sin datáfonos, sin semáforos y con el móvil sin servicio.</p>
+          <span class="fuente">Apagón ibérico · 2025</span>
+        </div>
+        <div class="dato">
+          <div class="grande">1 kit</div>
+          <p>No existe un kit igual para todos: agua, comida, linterna, radio, botiquín y documentos son la base, y luego cada uno lo adapta a su casa.</p>
+          <span class="fuente">Recomendaciones de la UE · nov 2026</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="mochila">
+    <div class="wrap">
+      <div class="etiqueta">// LA MOCHILA, ARTÍCULO A ARTÍCULO</div>
+      <h2>Lo que va dentro</h2>
+      <p class="intro">Cada vez que publicamos un vídeo, su artículo aparece aquí como <span class="mono" style="color:var(--verde)">PUBLICADO</span>, con el enlace al vídeo. Marca ✔ lo que ya tengas: tu progreso se guarda en este navegador.</p>
+
+      <div class="panel">
+        <div class="progreso">
+          <div class="linea"><span>Tu mochila</span><b id="cuenta">0 / 0</b></div>
+          <div class="pista"><div id="barra"></div></div>
+        </div>
+        <div class="filtros" id="filtros">
+          <button data-f="todos" class="on">Todo</button>
+          <button data-f="publicado">Publicados</button>
+          <button data-f="falta">Me falta</button>
+        </div>
+      </div>
+
+      <div class="grid" id="grid"></div>
+    </div>
+  </section>
+
+  <section id="siguenos">
+    <div class="wrap">
+      <div class="etiqueta">// SÍGUENOS</div>
+      <h2>Un artículo nuevo cada día</h2>
+      <p class="intro">Cada vídeo empieza con una noticia real y termina con un artículo más para tu mochila.</p>
+      <div class="redes">
+        <a class="red" href="https://www.instagram.com/sin.cobertura.72/" target="_blank" rel="noopener">
+          <div class="n">Instagram</div><div class="h">@sin.cobertura.72</div><div class="d">Reels diarios de la mochila</div>
+        </a>
+        <a class="red" href="https://nanohumano.github.io/" target="_blank" rel="noopener">
+          <div class="n">NANOHUMANO LABS</div><div class="h">nanohumano.github.io</div><div class="d">Electrónica DIY: radios LoRa, linternas y más</div>
+        </a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p class="aviso"><strong>Enlaces de afiliado.</strong> Como Afiliado de Amazon, obtengo ingresos por las compras adscritas que cumplen los requisitos aplicables. El precio para ti es el mismo. La compra, el pago y el envío los gestiona directamente Amazon.</p>
+    <p><strong>Importante:</strong> esta web es informativa. En una emergencia real sigue siempre las indicaciones del 112 y de Protección Civil.</p>
+    <p>© <span id="anio"></span> SIN COBERTURA · un proyecto de NANOHUMANO LABS</p>
+  </div>
+</footer>
+
+<script>
+/* ============================================================
+   LISTA DE LA MOCHILA
+   Para publicar un artículo: cambia estado a 'publicado' y pon
+   el enlace del Reel en video. Para cambiar el enlace de compra,
+   cambia el texto de búsqueda en amz('...').
+   ============================================================ */
+const TAG = 'nanohumanolab-21';
+const amz = q => 'https://www.amazon.es/s?k=' + encodeURIComponent(q) + '&tag=' + TAG;
+
+const ARTICULOS = [
+  {id:'mochila', icono:'🎒', nombre:'La mochila', desc:'Resistente, cómoda y con varios bolsillos. 30–40 litros bastan para una persona.', truco:'Mejor de colores vivos: se encuentra antes a oscuras y te ven desde lejos.', compra:amz('mochila emergencia 35 litros impermeable')},
+  {id:'agua', icono:'💧', nombre:'Agua', desc:'La base de todo: unos 3 litros por persona y día entre beber y lo mínimo para asearse.', truco:'Botellas pequeñas mejor que una garrafa: pesan menos y se reparten mejor.', compra:amz('agua emergencia larga duracion')},
+  {id:'potabilizar', icono:'🧪', nombre:'Filtro o pastillas potabilizadoras', desc:'Para convertir agua dudosa en agua bebible cuando se acaba la que llevas.', truco:'Un filtro tipo pajita pesa menos que un vaso y dura miles de litros.', compra:amz('filtro agua portatil pajita')},
+  {id:'comida', icono:'🥫', nombre:'Comida que no caduca', desc:'Barritas energéticas, frutos secos, latas con abrefácil… nada que necesite cocinar.', truco:'Mira la fecha de caducidad y apúntala: revisa la mochila cada 6 meses.', compra:amz('raciones emergencia larga duracion')},
+  {id:'linterna', icono:'🔦', nombre:'Linterna frontal', desc:'Luz sin ocupar las manos. Imprescindible en un apagón.', truco:'Que use pilas normales o USB: no dependas de una batería rara.', compra:amz('linterna frontal led recargable')},
+  {id:'radio', icono:'📻', nombre:'Radio de manivela', desc:'Cuando no hay internet, la radio es la única forma de enterarte de lo que pasa.', truco:'Las de manivela + placa solar también cargan el móvil un poco.', compra:amz('radio emergencia manivela solar')},
+  {id:'pilas', icono:'🔋', nombre:'Pilas de repuesto', desc:'Para la linterna, la radio y lo que haga falta.', truco:'Las de litio aguantan años guardadas sin perder carga.', compra:amz('pilas litio AA larga duracion')},
+  {id:'powerbank', icono:'🔌', nombre:'Batería externa (powerbank)', desc:'Para mantener el móvil vivo varios días.', truco:'Cárgala cada 3 meses: aunque no la uses, se descarga sola.', compra:amz('powerbank 20000mAh')},
+  {id:'solar', icono:'☀️', nombre:'Cargador solar', desc:'Si el apagón se alarga, el sol es tu enchufe.', truco:'Úsalo para recargar la powerbank, no el móvil directamente.', compra:amz('cargador solar portatil plegable')},
+  {id:'botiquin', icono:'🩹', nombre:'Botiquín', desc:'Tiritas, gasas, antiséptico, vendas y tijeras.', truco:'Añade tus medicinas habituales para al menos 3 días.', compra:amz('botiquin primeros auxilios completo')},
+  {id:'manta', icono:'🪙', nombre:'Manta térmica', desc:'Pesa casi nada y conserva el calor del cuerpo.', truco:'Lo dorado hacia fuera si hace frío, lo plateado hacia fuera si hace calor.', compra:amz('manta termica emergencia')},
+  {id:'navaja', icono:'🔪', nombre:'Navaja multiusos', desc:'Cortar, abrir latas, apretar un tornillo… una caja de herramientas en el bolsillo.', truco:'Mejor con abrelatas y tijeras incluidas.', compra:amz('navaja multiusos')},
+  {id:'fuego', icono:'🔥', nombre:'Mechero y cerillas', desc:'Para luz, calor o calentar comida.', truco:'Guarda las cerillas en una bolsa estanca: húmedas no sirven.', compra:amz('cerillas impermeables')},
+  {id:'silbato', icono:'📣', nombre:'Silbato', desc:'Se oye mucho más lejos que tu voz y no te cansa.', truco:'Tres pitidos seguidos es la señal internacional de socorro.', compra:amz('silbato emergencia')},
+  {id:'documentos', icono:'📄', nombre:'Copias de documentos', desc:'DNI, tarjeta sanitaria, seguros y teléfonos importantes en papel.', truco:'Mételos en una funda impermeable con cierre.', compra:amz('funda documentos impermeable')},
+  {id:'efectivo', icono:'💶', nombre:'Dinero en efectivo', desc:'Sin luz no hay datáfonos ni cajeros.', truco:'Billetes pequeños y algunas monedas.', compra:null},
+  {id:'higiene', icono:'🧼', nombre:'Higiene básica', desc:'Toallitas, gel sin agua, papel higiénico y bolsas de basura.', truco:'Las toallitas húmedas sustituyen a una ducha durante días.', compra:amz('kit higiene viaje')},
+  {id:'mascarillas', icono:'😷', nombre:'Mascarillas y guantes', desc:'Para humo, polvo o limpiar después de una inundación.', truco:'Las FFP2 también filtran el humo fino de un incendio.', compra:amz('mascarillas ffp2')},
+  {id:'ropa', icono:'🧥', nombre:'Ropa de abrigo y chubasquero', desc:'Una muda, calcetines y algo para la lluvia.', truco:'Enróllala en lugar de doblarla: ocupa menos.', compra:amz('chubasquero poncho emergencia')},
+  {id:'bolsas', icono:'🛍️', nombre:'Bolsas estancas', desc:'Para que el móvil, los documentos y la ropa no se mojen.', truco:'Sirven también como cubo para llevar agua.', compra:amz('bolsa estanca impermeable')},
+  {id:'cinta', icono:'🩶', nombre:'Cinta americana y cuerda', desc:'Arreglan casi todo: una ventana rota, una mochila descosida, un toldo improvisado.', truco:'Enrolla unos metros de cinta en una botella para no llevar el rollo entero.', compra:amz('cinta americana paracord')},
+  {id:'plan', icono:'🗺️', nombre:'Plan de emergencia familiar', desc:'Dónde os encontráis si no hay cobertura y a quién avisar.', truco:'Escríbelo en papel y que lo lleve cada miembro de la familia.', compra:null}
+].map((a,i)=>Object.assign({estado:'proximo', video:null}, a, {dia:i+1}));
+
+/* Artículos ya publicados: { id: 'enlace del Reel' } */
+const PUBLICADOS = {
+  // ejemplo: agua: 'https://www.instagram.com/reel/XXXX/'
+};
+ARTICULOS.forEach(a => { if (PUBLICADOS[a.id]) { a.estado = 'publicado'; a.video = PUBLICADOS[a.id]; } });
+
+/* ---------- progreso guardado (solo en este navegador) ---------- */
+const CLAVE = 'sincobertura-mochila';
+let tengo = {};
+try { tengo = JSON.parse(localStorage.getItem(CLAVE)) || {}; } catch (e) { tengo = {}; }
+const guardar = () => { try { localStorage.setItem(CLAVE, JSON.stringify(tengo)); } catch (e) {} };
+
+let filtro = 'todos';
+const grid = document.getElementById('grid');
+
+function pintar(){
+  grid.innerHTML = '';
+  ARTICULOS
+    .filter(a => filtro === 'todos' || (filtro === 'publicado' ? a.estado === 'publicado' : !tengo[a.id]))
+    .forEach(a => {
+      const el = document.createElement('article');
+      el.className = 'item' + (tengo[a.id] ? ' hecho' : '');
+      const sello = a.estado === 'publicado'
+        ? '<span class="sello pub">PUBLICADO</span>'
+        : '<span class="sello prox">PRÓXIMAMENTE</span>';
+      const compra = a.compra
+        ? `<a class="amz" href="${a.compra}" target="_blank" rel="sponsored noopener">Ver en Amazon</a>`
+        : '<span class="sinlink">No se compra 😉</span>';
+      const video = a.video ? `<a class="ver" href="${a.video}" target="_blank" rel="noopener">▶ Ver vídeo</a>` : '';
+      el.innerHTML = `
+        <div class="cab"><span class="dia">ARTÍCULO ${String(a.dia).padStart(2,'0')}</span>${sello}</div>
+        <div class="icono">${a.icono}</div>
+        <h3>${a.nombre}</h3>
+        <p>${a.desc}</p>
+        <div class="truco"><b>Truco:</b> ${a.truco}</div>
+        <div class="acciones">${compra}${video}<button class="check" data-id="${a.id}">${tengo[a.id] ? '✔ Lo tengo' : '¿Lo tienes?'}</button></div>`;
+      grid.appendChild(el);
+    });
+  if (!grid.children.length) grid.innerHTML = '<p class="intro">Aún no hay nada aquí. ¡El primer vídeo está a punto de salir!</p>';
+  const n = ARTICULOS.filter(a => tengo[a.id]).length;
+  document.getElementById('cuenta').textContent = n + ' / ' + ARTICULOS.length;
+  document.getElementById('barra').style.width = (n / ARTICULOS.length * 100) + '%';
+}
+
+grid.addEventListener('click', e => {
+  const b = e.target.closest('button.check'); if (!b) return;
+  const id = b.dataset.id; tengo[id] = !tengo[id]; if (!tengo[id]) delete tengo[id];
+  guardar(); pintar();
+});
+document.getElementById('filtros').addEventListener('click', e => {
+  const b = e.target.closest('button'); if (!b) return;
+  filtro = b.dataset.f;
+  document.querySelectorAll('#filtros button').forEach(x => x.classList.toggle('on', x === b));
+  pintar();
+});
+pintar();
+
+/* ---------- cuenta atrás decorativa de 72 h ---------- */
+(function(){
+  const r = document.getElementById('reloj'); let s = 72 * 3600;
+  const f = n => String(n).padStart(2,'0');
+  setInterval(() => { s = s > 0 ? s - 1 : 72 * 3600;
+    r.textContent = f(Math.floor(s/3600)) + ':' + f(Math.floor(s%3600/60)) + ':' + f(s%60); }, 1000);
+})();
+document.getElementById('anio').textContent = new Date().getFullYear();
+</script>
+</body>
+</html>
