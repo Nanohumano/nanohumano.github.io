@@ -5,7 +5,7 @@
    - Si no hay conexión, enseña la última versión guardada.
    - Si cambias este archivo, sube el número de VERSION.
    ============================================================ */
-const VERSION = 'nh-v1';
+const VERSION = 'nh-v2';
 const BASICOS = [
   '/',
   '/index.html',
