@@ -139,6 +139,13 @@
   .compra{margin-top:10px;font-size:.78rem;color:var(--gris)}
   .compra a{color:var(--gris)} .compra a:hover{color:var(--ambar)}
 
+  .compra-modelos{border-top:1px solid var(--borde);padding-top:10px}
+  .compra-modelos strong{font-size:.82rem;color:var(--texto)}
+  .compra-modelos ul{list-style:none;margin:5px 0 7px}
+  .compra-modelos li{display:flex;flex-wrap:wrap;align-items:baseline;gap:3px 8px;padding:3px 0}
+  .compra-modelos a{color:var(--texto);text-underline-offset:3px}
+  .compra-modelos small,.compra-modelos a span{color:var(--gris)}
+  .compra-nivel{color:var(--ambar);font-weight:700}
   /* recomendaciones propias */
   .nuestras{margin-top:28px;border:1px dashed #3b433f;padding:24px}
   .nuestras .marca{display:inline-block;font-family:"IBM Plex Mono";font-size:.7rem;letter-spacing:.12em;color:var(--azul);border:1px solid var(--azul);padding:3px 8px;margin-bottom:12px}
@@ -303,7 +310,7 @@
 <footer>
   <div class="wrap">
     <p><strong>Importante:</strong> esta web es informativa y resume guías públicas; no las sustituye. En una emergencia real sigue siempre las indicaciones del <strong>112</strong> y de Protección Civil de tu comunidad.</p>
-    <p class="aviso"><strong>Enlaces de afiliado.</strong> Algunos artículos llevan un enlace opcional a Amazon. Como Afiliado de Amazon, obtengo ingresos por las compras adscritas que cumplen los requisitos aplicables. El precio para ti es el mismo. Que un artículo esté en la lista nunca depende de que tenga enlace.</p>
+    <p class="aviso"><strong>Enlaces de afiliado.</strong> Si compras desde nuestros enlaces de afiliado de Amazon, pagas el mismo precio y ayudas a mantener el canal. Como Afiliado de Amazon, obtengo ingresos por las compras adscritas que cumplen los requisitos aplicables. Los enlaces de AliExpress indicados como «sin afiliación» aún no generan comisión. Los artículos de la mochila se eligen por lo que recomiendan las guías oficiales.</p>
     <p>© <span id="anio"></span> SIN COBERTURA · un proyecto de NANOHUMANO LABS</p>
   </div>
 </footer>
@@ -423,6 +430,86 @@ ARTICULOS.sort((a,b) => b.paises.length - a.paises.length);
 ARTICULOS.forEach((a,i) => a.n = i + 1);
 
 /* Artículos con vídeo publicado: { id: 'enlace del Reel' } */
+
+// Selección editorial de modelos. Las fichas de AliExpress aún no llevan seguimiento.
+const OPCIONES_COMPRA = {
+  "radio": [
+    [
+      "Económica",
+      "XHDATA D-219",
+      "AliExpress",
+      "https://es.aliexpress.com/item/1005005057114462.html"
+    ],
+    [
+      "Prémium",
+      "Sony ICF-P27",
+      "Amazon",
+      "Sony ICF-P27"
+    ]
+  ],
+  "linterna": [
+    [
+      "Económica",
+      "Petzl Tikkina 300",
+      "Amazon",
+      "B0FBT74D4R"
+    ],
+    [
+      "Prémium",
+      "Petzl Actik Core",
+      "Amazon",
+      "Petzl Actik Core"
+    ]
+  ],
+  "powerbank": [
+    [
+      "Económica",
+      "Baseus 10.000 mAh · 22,5 W",
+      "AliExpress",
+      "https://es.aliexpress.com/item/1005010425880598.html"
+    ],
+    [
+      "Prémium",
+      "INIU 20.000 mAh · 45 W",
+      "Amazon",
+      "B0DCYR5VNR"
+    ]
+  ],
+  "botiquin": [
+    [
+      "Económico",
+      "Mini de 83 piezas",
+      "Amazon",
+      "B0FN4MT5SV"
+    ],
+    [
+      "Prémium para casa",
+      "DEPALMERA Pharma de pared",
+      "Amazon",
+      "DEPALMERA Pharma botiquín de pared 27x10x25"
+    ]
+  ]
+};
+const urlCompra = (tienda, destino) => {
+  if (tienda === 'AliExpress') return destino;
+  return /^[A-Z0-9]{10}$/.test(destino)
+    ? 'https://www.amazon.es/dp/' + destino + '?tag=' + TAG
+    : amz(destino);
+};
+const mostrarOpciones = a => {
+  const opciones = OPCIONES_COMPRA[a.id];
+  if (!opciones) return a.compra ? `<div class="compra">¿No lo tienes? <a href="${amz(a.compra)}" target="_blank" rel="sponsored noopener">Ver opciones en Amazon</a></div>` : '';
+  return `<div class="compra compra-modelos">
+    <strong>Opciones de compra</strong>
+    <ul>${opciones.map(([nivel, modelo, tienda, destino]) => `<li>
+      <span class="compra-nivel">${nivel}</span>
+      <a href="${urlCompra(tienda, destino)}" target="_blank" rel="${tienda === 'Amazon' ? 'sponsored noopener' : 'noopener'}">${modelo} <span>· ${tienda}</span></a>
+      ${tienda === 'Amazon' ? '' : '<small>Enlace sin afiliación</small>'}
+    </li>`).join('')}</ul>
+    <p>Si compras desde un enlace de Amazon de esta web, ayudas al canal sin pagar más.</p>
+  </div>`;
+};
+
 const PUBLICADOS = {
   // ejemplo: agua: 'https://www.instagram.com/reel/XXXX/'
 };
@@ -480,7 +567,7 @@ function pintar(){
         <button class="check" data-id="${a.id}">${tengo[a.id] ? '✔ Ya lo tengo' : '¿Lo tienes?'}</button>
         ${a.video ? `<a class="ver" href="${a.video}" target="_blank" rel="noopener">▶ Ver vídeo</a>` : ''}
       </div>
-      ${a.compra ? `<div class="compra">¿No lo tienes? <a href="${amz(a.compra)}" target="_blank" rel="sponsored noopener">Ver opciones en Amazon</a></div>` : ''}
+      ${mostrarOpciones(a)}
     </article>`).join('') || '<p class="intro">Aquí aún no hay nada. ¡El primer vídeo está a punto de salir!</p>';
   const n = ARTICULOS.filter(a => tengo[a.id]).length;
   document.getElementById('cuenta').textContent = n + ' / ' + ARTICULOS.length;
