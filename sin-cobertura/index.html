@@ -152,6 +152,10 @@
   footer p{max-width:50em;margin-bottom:12px}
   footer strong{color:var(--texto)}
   .aviso{border:1px solid var(--borde);padding:14px 16px;margin-top:8px}
+  .manual-destacado{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:clamp(20px,4vw,48px);align-items:center;padding:clamp(18px,4vw,44px);border:1px solid var(--borde);border-top:3px solid var(--ambar);background:var(--carbon)}
+  .manual-destacado h2{margin:.45em 0}
+  .manual-destacado img{display:block;width:100%;height:auto;border:1px solid var(--borde)}
+  @media(max-width:700px){.manual-destacado{grid-template-columns:1fr}.manual-destacado img{grid-row:1}}
 </style>
 </head>
 <body>
@@ -163,6 +167,7 @@
       <a href="#por-que">Por qué</a>
       <a href="#paises">Qué dice cada país</a>
       <a href="#mochila">La mochila</a>
+      <a href="manual/">Manual</a>
       <a href="#siguenos">Síguenos</a>
     </nav>
   </div>
@@ -177,6 +182,7 @@
       <p class="lead">Sin luz, sin internet y sin cobertura. Aquí no venimos a venderte nada: juntamos <b>lo que recomiendan los gobiernos</b> para sobrevivir los primeros días de una emergencia, y lo repasamos <b>artículo a artículo</b>.</p>
       <div class="botones">
         <a class="btn lleno" href="#mochila">🎒 Ver la mochila</a>
+        <a class="btn vacio" href="manual/">Leer el manual ilustrado</a>
         <a class="btn vacio" href="#paises">🌍 Qué dice cada país</a>
       </div>
     </div>
@@ -185,6 +191,23 @@
       <div class="txt mono">AUTONOMÍA RECOMENDADA</div>
     </div>
   </div>
+
+  <section id="manual-ilustrado">
+    <div class="wrap">
+      <div class="manual-destacado">
+        <div>
+          <div class="etiqueta">MANUAL ILUSTRADO</div>
+          <h2>Las primeras 72 horas</h2>
+          <p class="intro">Ocho capítulos de preparación civil para España, con Mochi y Barritas. Incluye una lista de suministros y una ficha de emergencia para tu hogar.</p>
+          <div class="botones">
+            <a class="btn lleno" href="manual/">Leer el manual</a>
+            <a class="btn vacio" href="manual/manual-sin-cobertura.pdf">Abrir PDF</a>
+          </div>
+        </div>
+        <img src="manual/alertas-y-radio.webp" alt="Barritas pierde la señal y Mochi sintoniza una radio de pilas." width="540" height="358" loading="lazy">
+      </div>
+    </div>
+  </section>
 
   <section id="por-que">
     <div class="wrap">
