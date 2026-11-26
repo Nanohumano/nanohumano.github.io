@@ -214,13 +214,16 @@ body>footer{background:#e6ddc2;border-top:1px solid #827653}
   .compra-foto{flex:none;display:block;width:60px;height:60px;object-fit:contain;background:white;border:1px solid var(--borde);border-radius:5px}
   .compra-foto[hidden]{display:none}
   .tiempo-inicio{width:min(1060px,calc(100% - 40px));padding:0;margin:16px auto 0}
-  .tiempo-panel{background:var(--carbon);border:1px solid var(--borde);border-left:4px solid var(--ambar);border-radius:6px;padding:12px clamp(12px,2.5vw,22px)}
-  .tiempo-cabecera{display:flex;justify-content:space-between;align-items:baseline;gap:4px 18px;flex-wrap:wrap;margin-bottom:8px}
-  .tiempo-cabecera h2{font-size:clamp(1.12rem,2.6vw,1.5rem);margin:0}
-  .tiempo-enlaces{display:flex;gap:6px 16px;flex-wrap:wrap;font-size:.86rem;font-weight:700;color:var(--azul)}
+  .tiempo-panel{display:grid;grid-template-columns:minmax(165px,1fr) minmax(0,3fr);background:var(--carbon);border:2px solid #373a26;border-radius:7px;box-shadow:3px 3px 0 #373a26;overflow:hidden}
+  .tiempo-mochi{display:grid;align-content:center;justify-items:center;gap:8px;text-align:center;background:#e8d7a6;padding:12px;border-right:2px solid #373a26}
+  .tiempo-mochi img{display:block;width:min(100%,138px);height:auto;border:1.5px solid #373a26;border-radius:4px}
+  .tiempo-mochi h2{font-size:clamp(1.3rem,2.4vw,1.8rem);margin:0 0 3px}
+  .tiempo-mochi p{color:var(--gris);font-size:.82rem}
+  .tiempo-datos{padding:8px clamp(8px,2vw,20px) 12px;min-width:0}
   .tiempo-widget{display:block;width:100%;height:285px;border:0;background:white;border-radius:4px}
-  .tiempo-fuente{font-size:.78rem;color:var(--gris);margin-top:6px}
-  @media(max-width:540px){.tiempo-inicio{width:calc(100% - 20px)}.tiempo-widget{height:310px}}
+  .tiempo-enlaces{display:flex;align-items:center;gap:6px 14px;flex-wrap:wrap;font-size:.84rem;font-weight:700;color:var(--azul);padding-top:8px}
+  .tiempo-avisos{background:#eed6a0;color:#3e3017;border:1px solid #8b6b36;border-radius:4px;padding:5px 9px;text-underline-offset:2px}
+  @media(max-width:650px){.tiempo-inicio{width:calc(100% - 20px)}.tiempo-panel{grid-template-columns:minmax(0,1fr)}.tiempo-mochi{grid-template-columns:64px minmax(0,1fr);justify-items:start;text-align:left;text-align:start;align-items:center;gap:12px;border-right:0;border-bottom:2px solid #373a26}.tiempo-widget{height:315px}}
 </style>
 </head>
 <body>
@@ -242,15 +245,20 @@ body>footer{background:#e6ddc2;border-top:1px solid #827653}
 <main>
   <div class="wrap tiempo-inicio" aria-labelledby="titulo-tiempo">
     <div class="tiempo-panel">
-      <div class="tiempo-cabecera">
-        <h2 id="titulo-tiempo">Previsión meteorológica · Palma</h2>
-        <div class="tiempo-enlaces">
-          <a href="https://www.aemet.es/es/eltiempo/prediccion/municipios">Consultar otro municipio</a>
-          <a href="https://www.aemet.es/es/eltiempo/prediccion/avisos">Avisos de AEMET</a>
+      <div class="tiempo-mochi">
+        <img src="parte-mochi.webp" alt="Mochi y Barritas despliegan un mapa del tiempo." width="400" height="400" decoding="async">
+        <div>
+          <h2 id="titulo-tiempo">El parte de Mochi</h2>
+          <p>Previsión oficial para Palma</p>
         </div>
       </div>
-      <iframe class="tiempo-widget" title="Previsión oficial de AEMET para Palma" src="https://www.aemet.es/es/eltiempo/prediccion/municipios/mostrarwidget/palma-id07040?w=g4p011100001ohmffffffx4f86d9t95b6e9r1s8n2" height="285"></iframe>
-      <p class="tiempo-fuente">Fuente: AEMET. <a href="https://www.aemet.es/es/eltiempo/prediccion/municipios/palma-id07040">Abrir la previsión completa de Palma</a>.</p>
+      <div class="tiempo-datos">
+        <iframe class="tiempo-widget" title="Previsión oficial de AEMET para Palma: cielo, temperatura, lluvia, viento y avisos" src="https://www.aemet.es/es/eltiempo/prediccion/municipios/mostrarwidget/palma-id07040?w=g4p011100111ohmffffffx4f86d9t95b6e9r1s8n2" height="285"></iframe>
+        <div class="tiempo-enlaces">
+          <a class="tiempo-avisos" href="https://www.aemet.es/es/eltiempo/prediccion/avisos">Ver avisos oficiales</a>
+          <a href="https://www.aemet.es/es/eltiempo/prediccion/municipios">Consultar otro municipio</a>
+        </div>
+      </div>
     </div>
   </div>
 
