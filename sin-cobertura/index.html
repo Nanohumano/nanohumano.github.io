@@ -114,7 +114,6 @@
   .sello{font-family:"IBM Plex Mono";font-size:.66rem;letter-spacing:.1em;padding:3px 7px;border:1px solid}
   .sello.pub{color:var(--verde);border-color:var(--verde)}
   .sello.prox{color:var(--gris);border-color:var(--borde)}
-  .icono{font-size:2.2rem;line-height:1;margin-bottom:10px}
   .item h3{font-size:1.15rem;font-weight:800;margin-bottom:6px}
   .item p{color:var(--gris);font-size:.92rem}
   .quien{margin:12px 0 0;font-size:.78rem;color:var(--gris)}
@@ -159,6 +158,18 @@
   .lamina-mochila figcaption a{font-weight:800;color:var(--ambar);text-underline-offset:3px}
   .dibujo-articulo{display:block;width:84px;aspect-ratio:177/151;margin-bottom:10px;background-color:#f7e6c5;background-image:url("mochila-72-comic.webp");background-size:578.5311% auto;border-radius:4px}
   @media(max-width:620px){.lamina-mochila{grid-template-columns:1fr}.lamina-mochila > a{max-width:270px}}
+  .tabla-articulo{display:flex;align-items:center;gap:8px}
+  .tabla-articulo .dibujo-articulo{width:30px;flex:0 0 30px;margin:0}
+  .marca-comic{display:inline-grid;place-items:center;width:1.15em;height:1.15em;border:1.4px solid #34271a;border-radius:.17em;background:#f4d291;color:#34271a;box-shadow:1px 1px 0 #34271a;vertical-align:-.14em;flex:none}
+  .marca-comic::before{content:"";display:block}
+  .marca-ok{background:#e2e6c5}
+  .marca-ok::before{width:.57em;height:.31em;border:solid #29482d;border-width:0 0 2px 2px;transform:translateY(-.07em) rotate(-45deg)}
+  .marca-aviso{background:#ecab79}
+  .marca-aviso::before{content:"!";font:900 .82em/1 Inter,sans-serif}
+  .marca-video::before{border-left:.4em solid currentColor;border-top:.27em solid transparent;border-bottom:.27em solid transparent;margin-left:.08em}
+  .marca-ausente{display:inline-block;width:.55em;border-top:1px solid currentColor;vertical-align:middle}
+  .marca-externa{display:inline-block;width:.48em;height:.48em;border-top:1.5px solid currentColor;border-right:1.5px solid currentColor;vertical-align:.28em;margin-left:.12em}
+  .aviso-rojo{display:flex;align-items:baseline;gap:.5rem}
 </style>
 </head>
 <body>
@@ -260,7 +271,7 @@
     <div class="wrap">
       <div class="etiqueta">// LA MOCHILA, ARTÍCULO A ARTÍCULO</div>
       <h2>Lo que va dentro</h2>
-      <p class="intro">Ordenado de lo que recomiendan más países a lo que recomiendan menos. Cuando sale el vídeo de un artículo aparece como <span class="mono" style="color:var(--verde)">CON VÍDEO</span>. Marca ✔ lo que ya tengas: tu progreso se guarda en este navegador.</p>
+      <p class="intro">Ordenado de lo que recomiendan más países a lo que recomiendan menos. Cuando sale el vídeo de un artículo aparece como <span class="mono" style="color:var(--verde)">CON VÍDEO</span>. Marca lo que ya tengas: tu progreso se guarda en este navegador.</p>
 
       <figure class="lamina-mochila">
         <a href="mochila-72-comic.webp" target="_blank" rel="noopener" aria-label="Abrir la lámina de la mochila a tamaño completo">
@@ -371,65 +382,65 @@ const flag = (c, w) => `<img class="flag" src="https://flagcdn.com/w80/${ISO[c]}
 const B = Object.fromEntries(PAISES.map(p => [p.c, p.nombre]));
 
 const ARTICULOS = [
-  {id:'agua', icono:'💧', nombre:'Agua', paises:['UE','ES','FR','DE','SE','FI','NL','NO','US','JP'],
+  {id:'agua', nombre:'Agua', paises:['UE','ES','FR','DE','SE','FI','NL','NO','US','JP'],
    desc:'Entre 3 y 4 litros por persona y día según el país. Para el kit, Francia pide 6 litros por persona; Noruega, unos 20 litros para una semana.'},
-  {id:'comida', icono:'🥫', nombre:'Comida que no necesita nevera', paises:['UE','ES','FR','DE','SE','FI','NL','NO','US','JP'],
+  {id:'comida', nombre:'Comida que no necesita nevera', paises:['UE','ES','FR','DE','SE','FI','NL','NO','US','JP'],
    desc:'Latas, galletas, frutos secos, barritas… mejor si se puede comer sin cocinar. Lo ideal es lo que ya coméis en casa.'},
-  {id:'radio', icono:'📻', nombre:'Radio de pilas o de manivela', paises:['UE','ES','FR','DE','SE','FI','NL','NO','US','JP'],
+  {id:'radio', nombre:'Radio de pilas o de manivela', paises:['UE','ES','FR','DE','SE','FI','NL','NO','US','JP'],
    desc:'Sin luz ni internet, la radio es la forma más fiable de saber qué pasa. Durante el apagón de 2025 mucha gente salió a buscar una.', compra:'radio emergencia manivela'},
-  {id:'efectivo', icono:'💶', nombre:'Dinero en efectivo', paises:['UE','ES','FR','DE','SE','FI','NL','NO','JP'],
+  {id:'efectivo', nombre:'Dinero en efectivo', paises:['UE','ES','FR','DE','SE','FI','NL','NO','JP'],
    desc:'Sin luz no funcionan datáfonos ni cajeros. Países Bajos recomienda unos 70 € por adulto y 30 € por niño, en billetes pequeños y monedas.'},
-  {id:'medicinas', icono:'💊', nombre:'Tus medicamentos', paises:['UE','ES','FR','DE','SE','FI','NO','JP'],
+  {id:'medicinas', nombre:'Tus medicamentos', paises:['UE','ES','FR','DE','SE','FI','NO','JP'],
    desc:'La medicación que tomes a diario, para varios días. Suecia recomienda tener para un mes.'},
-  {id:'linterna', icono:'🔦', nombre:'Linterna', paises:['ES','FR','DE','SE','FI','NL','US','JP'],
+  {id:'linterna', nombre:'Linterna', paises:['ES','FR','DE','SE','FI','NL','US','JP'],
    desc:'De pilas, de dinamo o recargable. Una frontal deja las manos libres.', compra:'linterna frontal led'},
-  {id:'powerbank', icono:'🔌', nombre:'Batería externa y cargador', paises:['UE','ES','FR','SE','FI','NL','US','JP'],
+  {id:'powerbank', nombre:'Batería externa y cargador', paises:['UE','ES','FR','SE','FI','NL','US','JP'],
    desc:'Para mantener el móvil con vida. Tiene que estar cargada: recárgala de vez en cuando aunque no la uses.', compra:'powerbank 20000mAh'},
-  {id:'botiquin', icono:'🩹', nombre:'Botiquín de primeros auxilios', paises:['ES','FR','DE','SE','FI','US','JP'],
+  {id:'botiquin', nombre:'Botiquín de primeros auxilios', paises:['ES','FR','DE','SE','FI','US','JP'],
    desc:'Tiritas, gasas, vendas, desinfectante y tijeras.', compra:'botiquin primeros auxilios'},
-  {id:'pilas', icono:'🔋', nombre:'Pilas de repuesto', paises:['ES','FR','DE','SE','FI','US'],
+  {id:'pilas', nombre:'Pilas de repuesto', paises:['ES','FR','DE','SE','FI','US'],
    desc:'Del tamaño que usen tu linterna y tu radio.', compra:'pilas AA alcalinas pack'},
-  {id:'abrigo', icono:'🧥', nombre:'Ropa de abrigo y manta o saco', paises:['ES','FR','DE','SE','FI','JP'],
+  {id:'abrigo', nombre:'Ropa de abrigo y manta o saco', paises:['ES','FR','DE','SE','FI','JP'],
    desc:'Sin calefacción, una casa se enfría rápido. Alemania añade ropa para la lluvia y algo para la cabeza.'},
-  {id:'documentos', icono:'📄', nombre:'Documentos y copias', paises:['UE','ES','FR','DE','JP'],
+  {id:'documentos', nombre:'Documentos y copias', paises:['UE','ES','FR','DE','JP'],
    desc:'DNI, tarjeta sanitaria y papeles importantes (o sus copias) en una funda impermeable. Madrid sugiere también una copia digital en un pendrive.', compra:'funda documentos impermeable'},
-  {id:'higiene', icono:'🧻', nombre:'Higiene: papel, toallitas y bolsas', paises:['DE','SE','FI','US'],
+  {id:'higiene', nombre:'Higiene: papel, toallitas y bolsas', paises:['DE','SE','FI','US'],
    desc:'Papel higiénico, toallitas húmedas y bolsas de basura resistentes (por si el váter no funciona).'},
-  {id:'velas', icono:'🕯️', nombre:'Velas y cerillas o mechero', paises:['FR','SE','FI','NL'],
+  {id:'velas', nombre:'Velas y cerillas o mechero', paises:['FR','SE','FI','NL'],
    desc:'Luz de reserva cuando se acaban las pilas.', aviso:'Nunca las dejes encendidas sin vigilar ni cerca de cortinas.'},
-  {id:'navaja', icono:'🔪', nombre:'Navaja y abrelatas', paises:['ES','FR','DE','US'],
+  {id:'navaja', nombre:'Navaja y abrelatas', paises:['ES','FR','DE','US'],
    desc:'Para abrir latas y mil apaños más. Mejor si la navaja ya trae abrelatas.', compra:'navaja multiusos abrelatas'},
-  {id:'mascarilla', icono:'😷', nombre:'Mascarilla', paises:['DE','US','JP'],
+  {id:'mascarilla', nombre:'Mascarilla', paises:['DE','US','JP'],
    desc:'Para el polvo, el humo o el aire contaminado. Alemania recomienda FFP2.', compra:'mascarillas ffp2'},
-  {id:'plan', icono:'🗺️', nombre:'Plan familiar y teléfonos en papel', paises:['UE','NO'],
+  {id:'plan', nombre:'Plan familiar y teléfonos en papel', paises:['UE','NO'],
    desc:'Dónde os encontráis si no hay cobertura y una lista en papel con los teléfonos importantes. No cuesta nada.'},
-  {id:'llaves', icono:'🔑', nombre:'Copia de las llaves', paises:['ES','FR'],
+  {id:'llaves', nombre:'Copia de las llaves', paises:['ES','FR'],
    desc:'De casa y del coche.'},
-  {id:'guantes', icono:'🧤', nombre:'Guantes de trabajo', paises:['DE','JP'],
+  {id:'guantes', nombre:'Guantes de trabajo', paises:['DE','JP'],
    desc:'Para mover escombros, cristales o ramas sin cortarte.', compra:'guantes de trabajo'},
-  {id:'hornillo', icono:'🔥', nombre:'Hornillo de camping', paises:['SE','FI'],
+  {id:'hornillo', nombre:'Hornillo de camping', paises:['SE','FI'],
    desc:'Para calentar comida si no hay luz ni gas.', aviso:'Solo al aire libre: dentro de casa puede intoxicarte con monóxido de carbono.'},
-  {id:'cinta', icono:'🩶', nombre:'Plástico y cinta americana', paises:['US','FI'],
+  {id:'cinta', nombre:'Plástico y cinta americana', paises:['US','FI'],
    desc:'Para tapar una ventana rota o sellar una habitación si lo piden las autoridades.', compra:'cinta americana'},
-  {id:'mochila', icono:'🎒', nombre:'Una mochila', paises:['NL','JP'],
+  {id:'mochila', nombre:'Una mochila', paises:['NL','JP'],
    desc:'Para tenerlo todo junto y salir rápido si hay que evacuar. Mejor impermeable y que deje las manos libres.'},
-  {id:'especiales', icono:'👶', nombre:'Bebés, mayores y mascotas', paises:['ES','NO'],
+  {id:'especiales', nombre:'Bebés, mayores y mascotas', paises:['ES','NO'],
    desc:'Pañales, comida especial, medicación o comida para tus animales: lo que necesite cada uno en tu casa.'},
-  {id:'recipiente', icono:'🪣', nombre:'Cubo o garrafa con tapa', paises:['FI'],
+  {id:'recipiente', nombre:'Cubo o garrafa con tapa', paises:['FI'],
    desc:'Limpio y vacío, para ir a buscar agua a los puntos de reparto si deja de salir del grifo.'},
-  {id:'silbato', icono:'📣', nombre:'Silbato', paises:['US'],
+  {id:'silbato', nombre:'Silbato', paises:['US'],
    desc:'Para pedir ayuda: se oye más lejos que la voz y cansa menos.', compra:'silbato emergencia'},
-  {id:'herramienta', icono:'🔧', nombre:'Llave inglesa o alicates', paises:['US'],
+  {id:'herramienta', nombre:'Llave inglesa o alicates', paises:['US'],
    desc:'Para cerrar las llaves del gas y del agua si hace falta.'},
-  {id:'mapa', icono:'🧭', nombre:'Mapa en papel de tu zona', paises:['US'],
+  {id:'mapa', nombre:'Mapa en papel de tu zona', paises:['US'],
    desc:'Sin cobertura, el GPS del móvil puede no servir de mucho.'},
-  {id:'movil', icono:'📱', nombre:'Un móvil de reserva', paises:['ES'],
+  {id:'movil', nombre:'Un móvil de reserva', paises:['ES'],
    desc:'Uno viejo que funcione, cargado y guardado en el kit.'},
-  {id:'gafas', icono:'👓', nombre:'Gafas de repuesto', paises:['FR'],
+  {id:'gafas', nombre:'Gafas de repuesto', paises:['FR'],
    desc:'Si llevas gafas, unas viejas te pueden salvar el día.'},
-  {id:'casco', icono:'⛑️', nombre:'Casco', paises:['JP'],
+  {id:'casco', nombre:'Casco', paises:['JP'],
    desc:'En Japón lo llevan por los terremotos y la caída de objetos.'},
-  {id:'juegos', icono:'🃏', nombre:'Algo para pasar el rato', paises:['FR'],
+  {id:'juegos', nombre:'Algo para pasar el rato', paises:['FR'],
    desc:'Cartas, un libro, un juego: mantener la calma también es supervivencia, sobre todo con niños.'}
 ].map(a => Object.assign({video:null}, a));
 ARTICULOS.sort((a,b) => b.paises.length - a.paises.length);
@@ -531,14 +542,29 @@ document.getElementById('lista-paises').innerHTML = PAISES.map(p => `
     <div class="fila"><span class="bandera">${flag(p.c,40)}</span><div><h3>${p.nombre}</h3><div class="org">${p.org}</div></div></div>
     <span class="dur">${p.dur}</span>
     <p>${p.nota}</p>
-    <a class="fuente" href="${p.url}" target="_blank" rel="noopener">Fuente: ${p.fuente} ↗</a>
+    <a class="fuente" href="${p.url}" target="_blank" rel="noopener">Fuente: ${p.fuente} <span class="marca-externa" aria-hidden="true"></span></a>
   </article>`).join('');
+
+const celdasComic = [
+  'agua','comida','radio','efectivo','medicinas',
+  'linterna','powerbank','botiquin','pilas','abrigo',
+  'documentos','higiene','velas','navaja','mascarilla',
+  'plan','llaves','guantes','hornillo','cinta',
+  'mochila','especiales','recipiente','silbato','herramienta',
+  'mapa','movil','gafas','casco','juegos'
+];
+const posicionesComic = Object.fromEntries(celdasComic.map((id, indice) => {
+  const x = [20,225,426,627,827][indice % 5];
+  const y = [285,500,711,921,1125,1332][Math.floor(indice / 5)];
+  return [id, `position:${x / 847 * 100}% ${y / 1385 * 100}%`];
+}));
+const dibujoArticulo = a => `<span class="dibujo-articulo" aria-hidden="true" style="background-${posicionesComic[a.id]}"></span>`;
 
 /* ---------- tabla ---------- */
 document.getElementById('tabla').innerHTML =
   '<thead><tr><th style="font-size:.85rem">Artículo</th>' + PAISES.map(p => `<th title="${p.nombre}">${flag(p.c,24)}</th>`).join('') + '<th style="font-size:.85rem">Total</th></tr></thead><tbody>' +
-  ARTICULOS.map(a => '<tr><td>' + a.icono + ' ' + a.nombre + '</td>' +
-    PAISES.map(p => a.paises.includes(p.c) ? '<td class="si">✔</td>' : '<td class="no">·</td>').join('') +
+  ARTICULOS.map(a => '<tr><td><span class="tabla-articulo">' + dibujoArticulo(a) + a.nombre + '</span></td>' +
+    PAISES.map(p => a.paises.includes(p.c) ? '<td class="si"><span class="marca-comic marca-ok" role="img" aria-label="Lo recomienda"></span></td>' : '<td class="no"><span class="marca-ausente" role="img" aria-label="Sin recomendación en esta guía"></span></td>').join('') +
     `<td class="total">${a.paises.length}</td></tr>`).join('') + '</tbody>';
 
 /* ---------- consejos propios ---------- */
@@ -556,23 +582,6 @@ let filtro = 'todos';
 const grid = document.getElementById('grid');
 
 
-const celdasComic = [
-  'agua','comida','radio','efectivo','medicinas',
-  'linterna','powerbank','botiquin','pilas','abrigo',
-  'documentos','higiene','velas','navaja','mascarilla',
-  'plan','llaves','guantes','hornillo','cinta',
-  'mochila','especiales','recipiente','silbato','herramienta',
-  'mapa','movil','gafas','casco','juegos'
-];
-const posicionesComic = Object.fromEntries(celdasComic.map((id, indice) => {
-  const x = [20,225,426,627,827][indice % 5];
-  const y = [285,500,711,921,1125,1332][Math.floor(indice / 5)];
-  return [id, `position:${x / 847 * 100}% ${y / 1385 * 100}%`];
-}));
-const dibujoArticulo = a => posicionesComic[a.id]
-  ? `<span class="dibujo-articulo" aria-hidden="true" style="background-${posicionesComic[a.id]}"></span>`
-  : `<span class="icono" aria-hidden="true">${a.icono}</span>`;
-
 function pintar(){
   const lista = ARTICULOS.filter(a =>
     filtro === 'todos' ? true :
@@ -584,12 +593,12 @@ function pintar(){
       ${dibujoArticulo(a)}
       <h3>${a.nombre}</h3>
       <p>${a.desc}</p>
-      ${a.aviso ? `<div class="aviso-rojo">⚠️ ${a.aviso}</div>` : ''}
+      ${a.aviso ? `<div class="aviso-rojo"><span class="marca-comic marca-aviso" aria-hidden="true"></span><span>${a.aviso}</span></div>` : ''}
       <div class="quien">Lo recomiendan ${a.paises.length} de ${PAISES.length}:<span class="banderas" title="${a.paises.map(c => B[c]).join(', ')}">${a.paises.map(c => flag(c,22)).join(' ')}</span></div>
       <div class="espacio"></div>
       <div class="acciones">
-        <button class="check" data-id="${a.id}">${tengo[a.id] ? '✔ Ya lo tengo' : '¿Lo tienes?'}</button>
-        ${a.video ? `<a class="ver" href="${a.video}" target="_blank" rel="noopener">▶ Ver vídeo</a>` : ''}
+        <button class="check" data-id="${a.id}">${tengo[a.id] ? '<span class="marca-comic marca-ok" aria-hidden="true"></span> Ya lo tengo' : '¿Lo tienes?'}</button>
+        ${a.video ? `<a class="ver" href="${a.video}" target="_blank" rel="noopener"><span class="marca-comic marca-video" aria-hidden="true"></span> Ver vídeo</a>` : ''}
       </div>
       ${mostrarOpciones(a)}
     </article>`).join('') || '<p class="intro">Aquí aún no hay nada. ¡El primer vídeo está a punto de salir!</p>';
