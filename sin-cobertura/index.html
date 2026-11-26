@@ -257,7 +257,7 @@ body>footer{background:#e6ddc2;border-top:1px solid #827653}
     <details class="tiempo-panel" id="parte-mochi">
       <summary class="tiempo-resumen">
         <img src="parte-mochi.webp" alt="" width="48" height="48">
-        <span class="tiempo-titulo"><strong id="titulo-tiempo">El parte de Mochi</strong><span id="tiempo-zona">Palma · AEMET</span></span>
+        <span class="tiempo-titulo"><strong id="titulo-tiempo">El parte de Mochi</strong><span id="tiempo-zona">AEMET</span></span>
         <span class="tiempo-toggle"><span class="tiempo-abrir">Ver previsión</span><span class="tiempo-cerrar">Cerrar previsión</span></span>
       </summary>
       <div class="tiempo-datos">
@@ -268,10 +268,10 @@ body>footer{background:#e6ddc2;border-top:1px solid #827653}
         </div>
         <p class="tiempo-privacidad">Si activas la ubicación, CartoCiudad identifica tu municipio. Este navegador solo guarda el nombre y el código municipal.</p>
         <p id="tiempo-estado" role="status"></p>
-        <div class="tiempo-marco">
-          <iframe class="tiempo-widget" title="Previsión oficial de AEMET para Palma" src="https://www.aemet.es/es/eltiempo/prediccion/municipios/mostrarwidget/palma-id07040?w=g4p011100111ohmffffffx4f86d9t95b6e9r1s8n2" loading="lazy" height="360"></iframe>
+        <div class="tiempo-marco" hidden>
+          <iframe class="tiempo-widget" title="Previsión oficial de AEMET" loading="lazy" height="360"></iframe>
         </div>
-        <a id="tiempo-directo" href="https://www.aemet.es/es/eltiempo/prediccion/municipios/palma-id07040">Abrir la previsión en AEMET</a>
+        <a id="tiempo-directo" href="https://www.aemet.es/es/eltiempo/prediccion/municipios" hidden>Abrir la previsión en AEMET</a>
       </div>
     </details>
   </div>
@@ -1023,6 +1023,8 @@ pintar();
     widget.title = 'Previsión oficial de AEMET para ' + nombre;
     directo.href = raiz + municipio;
     zona.textContent = nombre + ' · AEMET';
+    widget.closest('.tiempo-marco').hidden = false;
+    directo.hidden = false;
     return true;
   };
   try {
