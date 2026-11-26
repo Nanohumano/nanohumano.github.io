@@ -213,17 +213,24 @@ body>footer{background:#e6ddc2;border-top:1px solid #827653}
   .oferta>div{min-width:0;display:grid;gap:1px}
   .compra-foto{flex:none;display:block;width:60px;height:60px;object-fit:contain;background:white;border:1px solid var(--borde);border-radius:5px}
   .compra-foto[hidden]{display:none}
-  .tiempo-inicio{width:min(1060px,calc(100% - 40px));padding:0;margin:16px auto 0}
-  .tiempo-panel{display:grid;grid-template-columns:minmax(165px,1fr) minmax(0,3fr);background:var(--carbon);border:2px solid #373a26;border-radius:7px;box-shadow:3px 3px 0 #373a26;overflow:hidden}
-  .tiempo-mochi{display:grid;align-content:center;justify-items:center;gap:8px;text-align:center;background:#e8d7a6;padding:12px;border-right:2px solid #373a26}
-  .tiempo-mochi img{display:block;width:min(100%,138px);height:auto;border:1.5px solid #373a26;border-radius:4px}
-  .tiempo-mochi h2{font-size:clamp(1.3rem,2.4vw,1.8rem);margin:0 0 3px}
-  .tiempo-mochi p{color:var(--gris);font-size:.82rem}
-  .tiempo-datos{padding:8px clamp(8px,2vw,20px) 12px;min-width:0}
-  .tiempo-widget{display:block;width:100%;height:285px;border:0;background:white;border-radius:4px}
-  .tiempo-enlaces{display:flex;align-items:center;gap:6px 14px;flex-wrap:wrap;font-size:.84rem;font-weight:700;color:var(--azul);padding-top:8px}
-  .tiempo-avisos{background:#eed6a0;color:#3e3017;border:1px solid #8b6b36;border-radius:4px;padding:5px 9px;text-underline-offset:2px}
-  @media(max-width:650px){.tiempo-inicio{width:calc(100% - 20px)}.tiempo-panel{grid-template-columns:minmax(0,1fr)}.tiempo-mochi{grid-template-columns:64px minmax(0,1fr);justify-items:start;text-align:left;text-align:start;align-items:center;gap:12px;border-right:0;border-bottom:2px solid #373a26}.tiempo-widget{height:315px}}
+  .tiempo-inicio{position:relative;width:min(1060px,calc(100% - 40px));padding:0;margin:14px auto 0}
+  .tiempo-panel{background:var(--carbon);border:2px solid #373a26;border-radius:7px;box-shadow:3px 3px 0 #373a26;overflow:hidden}
+  .tiempo-resumen{position:relative;display:flex;align-items:center;gap:10px;min-height:112px;padding:10px 14px;cursor:pointer;background:#e8d7a6;list-style:none}
+  .tiempo-resumen::-webkit-details-marker{display:none}
+  .tiempo-resumen img{display:block;width:52px;height:52px;border:1px solid #373a26;border-radius:4px}
+  .tiempo-titulo strong{display:block;font-size:clamp(1.1rem,2vw,1.4rem);margin:0 0 2px}
+  .tiempo-titulo>span{color:var(--gris);font-size:.8rem}
+  .tiempo-toggle{margin-left:auto;display:inline-flex;align-items:center;gap:7px;padding:6px 9px;border:1px solid #8b6b36;border-radius:4px;background:var(--carbon);font-weight:800;font-size:.82rem}
+  .tiempo-toggle::after{content:"";width:6px;height:6px;border-right:2px solid;border-bottom:2px solid;transform:rotate(45deg);margin-top:-3px}
+  .tiempo-cerrar,.tiempo-panel[open] .tiempo-abrir{display:none}
+  .tiempo-panel[open] .tiempo-cerrar{display:inline}
+  .tiempo-panel[open] .tiempo-toggle::after{transform:rotate(225deg);margin-top:3px}
+  .tiempo-panel[open]+.tiempo-hoy{display:none}
+  .tiempo-hoy{position:absolute;top:6px;left:46%;transform:translateX(-10%);width:min(22%,190px);height:105px;border:0;border-radius:4px;background:white}
+  .tiempo-datos{padding:8px 12px 12px}
+  .tiempo-widget{display:block;width:100%;height:260px;border:0;background:white;border-radius:4px}
+  .tiempo-enlaces{display:flex;gap:6px 14px;flex-wrap:wrap;font-size:.84rem;font-weight:700;color:var(--azul);padding-top:8px}
+  @media(max-width:700px){.tiempo-inicio{width:calc(100% - 20px)}.tiempo-resumen{min-height:0;flex-wrap:wrap;padding:8px 10px}.tiempo-resumen img{width:40px;height:40px}.tiempo-toggle{font-size:.75rem}.tiempo-hoy{position:static;transform:none;width:100%;height:105px;display:block;margin-top:4px;border:1px solid var(--borde)}}
 </style>
 </head>
 <body>
@@ -244,22 +251,21 @@ body>footer{background:#e6ddc2;border-top:1px solid #827653}
 
 <main>
   <div class="wrap tiempo-inicio" aria-labelledby="titulo-tiempo">
-    <div class="tiempo-panel">
-      <div class="tiempo-mochi">
-        <img src="parte-mochi.webp" alt="Mochi y Barritas despliegan un mapa del tiempo." width="400" height="400" decoding="async">
-        <div>
-          <h2 id="titulo-tiempo">El parte de Mochi</h2>
-          <p>Previsión oficial para Palma</p>
-        </div>
-      </div>
+    <details class="tiempo-panel">
+      <summary class="tiempo-resumen">
+        <img src="parte-mochi.webp" alt="" width="52" height="52">
+        <span class="tiempo-titulo"><strong id="titulo-tiempo">El parte de Mochi</strong><span>Palma · Hoy</span></span>
+        <span class="tiempo-toggle"><span class="tiempo-abrir">Ver previsión completa</span><span class="tiempo-cerrar">Cerrar previsión</span></span>
+      </summary>
       <div class="tiempo-datos">
-        <iframe class="tiempo-widget" title="Previsión oficial de AEMET para Palma: cielo, temperatura, lluvia, viento y avisos" src="https://www.aemet.es/es/eltiempo/prediccion/municipios/mostrarwidget/palma-id07040?w=g4p011100111ohmffffffx4f86d9t95b6e9r1s8n2" height="285"></iframe>
+        <iframe class="tiempo-widget" title="Previsión oficial de AEMET para Palma: cielo, temperatura, lluvia, viento y avisos" src="https://www.aemet.es/es/eltiempo/prediccion/municipios/mostrarwidget/palma-id07040?w=g4p011100111ohmffffffx4f86d9t95b6e9r1s8n2" height="285" loading="lazy"></iframe>
         <div class="tiempo-enlaces">
-          <a class="tiempo-avisos" href="https://www.aemet.es/es/eltiempo/prediccion/avisos">Ver avisos oficiales</a>
+          <a href="https://www.aemet.es/es/eltiempo/prediccion/avisos">Ver avisos oficiales</a>
           <a href="https://www.aemet.es/es/eltiempo/prediccion/municipios">Consultar otro municipio</a>
         </div>
       </div>
-    </div>
+    </details>
+    <iframe class="tiempo-hoy" title="Previsión de hoy para Palma, AEMET" src="https://www.aemet.es/es/eltiempo/prediccion/municipios/mostrarwidget/palma-id07040?w=g1p011100000ohmffffffx4f86d9t95b6e9r0s8n2" height="105"></iframe>
   </div>
 
   <div class="hero">
