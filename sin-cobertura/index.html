@@ -200,6 +200,15 @@ main section>.wrap{padding-inline:clamp(14px,3vw,30px)}
 .btn.vacio{border-color:#96885e}
 body>footer{background:#e6ddc2;border-top:1px solid #827653}
 @media(max-width:540px){.hero .wrap,main section{width:calc(100% - 20px)}.hero .wrap{padding:18px;box-shadow:3px 3px 0 #373a26}.progreso{min-width:0}}
+  .comunicados{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:26px}
+  .comunicado{background:var(--carbon);border:1px solid var(--borde);border-left:4px solid var(--ambar);border-radius:5px;padding:clamp(16px,3vw,23px);display:flex;flex-direction:column;align-items:flex-start}
+  .comunicado h3{font-size:1.16rem;line-height:1.2;margin:8px 0 4px}
+  .comunicado p{color:var(--gris)}
+  .comunicado .comunicado-meta{display:flex;gap:6px 12px;flex-wrap:wrap;align-items:baseline;font-size:.83rem;font-weight:700}
+  .comunicado time{color:var(--ambar)}
+  .comunicado-organismo{font-size:.85rem;margin-bottom:8px}
+  .comunicado a{padding-top:12px;margin-top:auto;color:var(--azul);font-weight:700;text-underline-offset:3px}
+  @media(max-width:650px){.comunicados{grid-template-columns:1fr}#actualizaciones{scroll-margin-top:125px}}
 </style>
 </head>
 <body>
@@ -210,6 +219,7 @@ body>footer{background:#e6ddc2;border-top:1px solid #827653}
     <nav>
       <a href="#por-que">Por qué</a>
       <a href="#paises">Qué dice cada país</a>
+      <a href="#actualizaciones">Actualizaciones</a>
       <a href="#mochila">La mochila</a>
       <a href="manual/">Manual</a>
       <a href="#siguenos">Síguenos</a>
@@ -332,6 +342,43 @@ body>footer{background:#e6ddc2;border-top:1px solid #827653}
         <span class="marca">CONSEJOS DE SIN COBERTURA · NO SALEN DE LAS LISTAS OFICIALES</span>
         <h3 style="font-size:1.3rem;font-weight:800;margin-bottom:8px">Nuestras recomendaciones</h3>
         <div id="consejos"></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="actualizaciones" aria-labelledby="titulo-actualizaciones">
+    <div class="wrap">
+      <h2 id="titulo-actualizaciones">Actualizaciones oficiales</h2>
+      <p class="intro">Comunicados y guías de organismos públicos de cualquier país sobre la preparación en casa y la mochila de 72 horas. Cada ficha indica su fecha y el ámbito al que se refiere.</p>
+      <div class="comunicados">
+        <article class="comunicado">
+          <p class="comunicado-meta"><time datetime="2026-11-10">10 nov 2026</time> <span>Guatemala</span></p>
+          <h3>La mochila de 72 horas es una medida permanente</h3>
+          <p class="comunicado-organismo">SE-CONRED</p>
+          <p>CONRED aclara que su recomendación forma parte de la preparación habitual. Pide verificar los avisos en canales oficiales antes de compartirlos.</p>
+          <a href="https://conred.gob.gt/preparacion-ante-emergencias-es-una-recomendacion-continua-de-la-se-conred/">Leer el original de SE-CONRED</a>
+        </article>
+        <article class="comunicado">
+          <p class="comunicado-meta"><time datetime="2026-10-30">30 oct 2026</time> <span>Unión Europea</span></p>
+          <h3>Orientaciones para preparar a la población</h3>
+          <p class="comunicado-organismo">Comisión Europea</p>
+          <p>La Comisión publica directrices no vinculantes para los Estados, incluida la preparación de los hogares para cubrir sus necesidades básicas durante al menos 72 horas.</p>
+          <a href="https://civil-protection-humanitarian-aid.ec.europa.eu/document/download/2782dadb-cb62-40d9-9999-4b891c35e5e6_en?filename=guidelines_population_preparedness_en.pdf">Leer el original de Comisión Europea</a>
+        </article>
+        <article class="comunicado">
+          <p class="comunicado-meta"><time datetime="2026-09-17">17 sep 2026</time> <span>España · Comunidad de Madrid</span></p>
+          <h3>Preparación ante las tormentas de otoño</h3>
+          <p class="comunicado-organismo">ASEM112</p>
+          <p>La Comunidad recuerda a los municipios que revisen sus planes de inundación y aconseja tener a mano documentación, medicación, linterna, agua, comida y radio a pilas si toca evacuar.</p>
+          <a href="https://www.comunidad.madrid/noticias/2026/09/17/comunidad-madrid-recuerda-ayuntamientos-necesidad-adoptar-medidas-preventivas-riesgo-tormentas-otono">Leer el original de ASEM112</a>
+        </article>
+        <article class="comunicado">
+          <p class="comunicado-meta"><time datetime="2025-11-20">20 nov 2025</time> <span>Francia</span></p>
+          <h3>Publicación de la guía «Tous responsables»</h3>
+          <p class="comunicado-organismo">Gobierno de Francia</p>
+          <p>La guía reúne pautas ante distintos riesgos, explica los canales de alerta e incluye una lista para preparar un kit de 72 horas. La página oficial se actualizó el 14 de agosto de 2026.</p>
+          <a href="https://www.info.gouv.fr/actualite/tous-responsables-un-guide-pour-mieux-faire-face-aux-risques">Leer el original de Gobierno de Francia</a>
+        </article>
       </div>
     </div>
   </section>
