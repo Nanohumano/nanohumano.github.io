@@ -7,80 +7,69 @@
 <meta name="description" content="La mochila de emergencia según las guías oficiales de 10 gobiernos: qué recomienda cada país y qué cosas repiten todos.">
 <meta property="og:title" content="SIN COBERTURA · Mochila de emergencia 72 h">
 <meta property="og:description" content="¿Aguantarías 72 horas sin luz ni internet? Lo que recomiendan los gobiernos, artículo a artículo.">
-<meta name="theme-color" content="#0d0f0e">
+<meta name="theme-color" content="#f8f6ef">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230d0f0e'/%3E%3Crect x='5' y='20' width='4' height='7' fill='%23ffb000'/%3E%3Crect x='11' y='15' width='4' height='12' fill='%23ffb000'/%3E%3Crect x='17' y='10' width='4' height='17' fill='%23333'/%3E%3Crect x='23' y='5' width='4' height='22' fill='%23333'/%3E%3Cpath d='M4 4 28 28' stroke='%23ff3b1f' stroke-width='3'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=IBM+Plex+Mono:wght@400;600&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 <style>
   :root{
-    --negro:#0d0f0e; --carbon:#161a18; --borde:#2a302d; --texto:#e8ece9; --gris:#8f9a94;
-    --ambar:#ffb000; --rojo:#ff3b1f; --verde:#3ddc84; --azul:#5fb4ff;
+    --negro:#f8f6ef; --carbon:#fffdf8; --borde:#cec9bb; --texto:#242721; --gris:#51584b;
+    --ambar:#80500c; --rojo:#a33225; --verde:#236342; --azul:#2b5661;
   }
   *{box-sizing:border-box;margin:0;padding:0}
   html{scroll-behavior:smooth}
   body{background:var(--negro);color:var(--texto);font-family:Inter,system-ui,sans-serif;line-height:1.55;overflow-x:hidden}
-  body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:50;
-    background:repeating-linear-gradient(0deg,rgba(255,255,255,.025) 0 1px,transparent 1px 3px)}
   a{color:inherit}
   .mono{font-family:"IBM Plex Mono",monospace}
   .wrap{max-width:1100px;margin:0 auto;padding:0 20px}
 
-  .top{position:sticky;top:0;z-index:40;background:rgba(13,15,14,.88);backdrop-filter:blur(8px);border-bottom:1px solid var(--borde)}
+  .top{position:sticky;top:0;z-index:40;background:rgba(248,246,239,.96);backdrop-filter:blur(8px);border-bottom:1px solid var(--borde)}
   .top .wrap{display:flex;align-items:center;justify-content:space-between;height:56px}
   .logo{display:flex;align-items:center;gap:10px;font-family:"Archivo Black";letter-spacing:.04em;text-decoration:none}
   .logo small{font-family:"IBM Plex Mono";color:var(--ambar);font-size:.7rem;letter-spacing:.1em}
   .top nav{display:flex;gap:18px;font-size:.85rem}
   .top nav a{text-decoration:none;color:var(--gris)} .top nav a:hover{color:var(--ambar)}
-  @media(max-width:700px){.top nav{display:none}}
+  @media(max-width:700px){.top .wrap{height:auto;min-height:56px;flex-wrap:wrap;padding-top:9px;padding-bottom:9px;gap:6px}.top nav{gap:12px;flex-wrap:wrap;font-size:.78rem}}
 
-  .hero{position:relative;min-height:88vh;display:flex;align-items:center;border-bottom:1px solid var(--borde);overflow:hidden}
-  .hero .wrap{position:relative;z-index:2;padding-top:40px;padding-bottom:60px}
-  .estado{display:inline-flex;align-items:center;gap:10px;border:1px solid var(--rojo);color:var(--rojo);padding:6px 12px;font-size:.75rem;letter-spacing:.15em}
-  .estado i{width:8px;height:8px;background:var(--rojo);border-radius:50%;animation:parpadeo 1s steps(2) infinite}
-  @keyframes parpadeo{50%{opacity:0}}
-  h1{font-family:"Archivo Black";font-size:clamp(2.4rem,9vw,7rem);line-height:.9;margin:22px 0 18px;letter-spacing:-.01em}
-  h1 .glitch{position:relative;display:inline-block;color:var(--ambar)}
-  h1 .glitch::before,h1 .glitch::after{content:attr(data-t);position:absolute;inset:0;opacity:.7}
-  h1 .glitch::before{color:var(--rojo);animation:g1 3.5s infinite}
-  h1 .glitch::after{color:#3ff;animation:g2 3.5s infinite}
-  @keyframes g1{0%,92%,100%{transform:none;clip-path:inset(0 0 100% 0)}93%{transform:translate(-4px,2px);clip-path:inset(10% 0 55% 0)}96%{transform:translate(3px,-1px);clip-path:inset(60% 0 10% 0)}}
-  @keyframes g2{0%,92%,100%{transform:none;clip-path:inset(0 0 100% 0)}94%{transform:translate(4px,-2px);clip-path:inset(30% 0 40% 0)}97%{transform:translate(-3px,1px);clip-path:inset(75% 0 0 0)}}
-  .hero p.lead{font-size:clamp(1.1rem,2.4vw,1.45rem);max-width:34em;color:#c9d1cc}
-  .hero p.lead b{color:var(--texto)}
-  .botones{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
-  .btn{display:inline-flex;align-items:center;gap:8px;padding:14px 22px;font-weight:800;text-decoration:none;border:2px solid var(--ambar);transition:.15s}
-  .btn.lleno{background:var(--ambar);color:var(--negro)} .btn.lleno:hover{background:#ffc53d}
-  .btn.vacio{color:var(--ambar)} .btn.vacio:hover{background:rgba(255,176,0,.1)}
-  .contador{position:absolute;right:20px;bottom:24px;z-index:2;text-align:right}
-  .contador .num{font-family:"IBM Plex Mono";font-weight:600;font-size:clamp(2rem,6vw,3.6rem);color:var(--ambar);letter-spacing:.05em}
-  .contador .txt{font-size:.75rem;color:var(--gris);letter-spacing:.15em}
-  @media(max-width:640px){.contador{position:static;text-align:left;margin-top:34px}}
-  .barras{position:absolute;right:-60px;top:50%;transform:translateY(-55%);display:flex;align-items:flex-end;gap:22px;opacity:.13;z-index:1}
-  .barras span{width:70px;background:var(--texto)}
-  .barras span:nth-child(1){height:110px;background:var(--ambar)} .barras span:nth-child(2){height:200px;background:var(--ambar)}
-  .barras span:nth-child(3){height:290px} .barras span:nth-child(4){height:380px}
-  .barras::after{content:"";position:absolute;left:-30px;right:-30px;top:50%;height:18px;background:var(--rojo);transform:rotate(-38deg)}
+  .hero{border-bottom:1px solid var(--borde);background:#ece9df}
+  .hero .wrap{display:grid;grid-template-columns:minmax(0, .94fr) minmax(0, 1.06fr);gap:clamp(24px,5vw,62px);align-items:center;padding-top:clamp(32px,6vw,76px);padding-bottom:clamp(30px,5vw,58px)}
+  h1{font-family:Inter,system-ui,sans-serif;font-weight:800;font-size:clamp(2.3rem,5.5vw,4.1rem);line-height:1.01;letter-spacing:-.055em;margin:0 0 20px}
+  h1 span{display:block;color:var(--ambar)}
+  .hero .lead{font-size:clamp(1.02rem,1.8vw,1.22rem);max-width:34ch;color:var(--gris)}
+  .hero-foto img{display:block;width:100%;height:auto;aspect-ratio:960/638;object-fit:cover;border-radius:8px;background:#e2dfd4}
+  .hero-foto figcaption{font-size:.75rem;color:var(--gris);margin-top:8px}
+  .hero-foto figcaption a{text-decoration:none}
+  .hero-foto figcaption a:hover{text-decoration:underline}
+  .botones{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+  .btn{display:inline-flex;align-items:center;padding:11px 16px;font-weight:800;text-decoration:none;border:1px solid var(--borde);border-radius:5px}
+  .btn.lleno{background:#efae39;color:#20170a;border-color:#ad7718}
+  .btn.lleno:hover{background:#f9c269}
+  .btn.vacio{color:var(--texto);background:var(--carbon)}
+  .btn.vacio:hover{border-color:var(--ambar)}
+  @media(max-width:720px){.hero .wrap{grid-template-columns:1fr;gap:22px}.hero-foto img{max-height:345px}}
+  :focus-visible{outline:2px solid var(--azul);outline-offset:3px}
+  [id]{scroll-margin-top:88px}
 
-  section{padding:80px 0;border-bottom:1px solid var(--borde)}
+  section{padding:clamp(42px,7vw,72px) 0;border-bottom:1px solid var(--borde)}
   .etiqueta{font-family:"IBM Plex Mono";color:var(--ambar);font-size:.8rem;letter-spacing:.2em;margin-bottom:10px}
-  h2{font-family:"Archivo Black";font-size:clamp(1.9rem,4.5vw,3rem);line-height:1.05;margin-bottom:18px}
-  .intro{color:#c9d1cc;max-width:44em;font-size:1.08rem}
+  h2{font-family:Inter,system-ui,sans-serif;font-weight:800;letter-spacing:-.035em;font-size:clamp(1.85rem,4.5vw,2.85rem);line-height:1.05;margin-bottom:18px}
+  .intro{color:var(--gris);max-width:44em;font-size:1.08rem}
   .intro b{color:var(--texto)}
 
   /* manifiesto */
   .reglas{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin-top:30px}
   .regla{border-left:3px solid var(--ambar);padding:6px 0 6px 16px}
   .regla b{display:block;font-size:1.05rem;margin-bottom:4px}
-  .regla span{color:#b9c2bd;font-size:.94rem}
+  .regla span{color:var(--gris);font-size:.94rem}
 
   .porque{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:34px}
   .dato{background:var(--carbon);border:1px solid var(--borde);padding:22px}
   .dato .grande{font-family:"Archivo Black";font-size:2.4rem;color:var(--ambar);line-height:1}
-  .dato p{color:#c9d1cc;margin-top:8px;font-size:.96rem}
+  .dato p{color:var(--gris);margin-top:8px;font-size:.96rem}
   .dato .fuente{display:block;margin-top:10px;font-family:"IBM Plex Mono";font-size:.72rem;color:var(--gris)}
 
   /* países */
-  .paises{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;margin-top:34px}
+  .paises{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:16px;margin-top:34px}
   .pais{background:var(--carbon);border:1px solid var(--borde);padding:20px;display:flex;flex-direction:column}
   .pais .fila{display:flex;align-items:center;gap:12px;margin-bottom:10px}
   .pais .bandera{line-height:0}
@@ -88,8 +77,8 @@
   .quien .banderas{display:flex!important;flex-wrap:wrap;gap:4px}
   .pais h3{font-size:1.1rem;font-weight:800;line-height:1.2}
   .pais .org{font-size:.8rem;color:var(--gris)}
-  .pais .dur{display:inline-block;font-family:"IBM Plex Mono";font-size:.75rem;color:var(--negro);background:var(--ambar);padding:3px 8px;margin-bottom:10px;align-self:flex-start}
-  .pais p{color:#c9d1cc;font-size:.92rem;flex:1}
+  .pais .dur{display:inline-block;font-family:"IBM Plex Mono";font-size:.75rem;color:#4b3108;background:#f5dfb5;padding:3px 8px;margin-bottom:10px;align-self:flex-start}
+  .pais p{color:var(--gris);font-size:.92rem;flex:1}
   .pais a.fuente{margin-top:12px;font-family:"IBM Plex Mono";font-size:.75rem;color:var(--azul);text-decoration:none}
   .pais a.fuente:hover{text-decoration:underline}
 
@@ -98,10 +87,10 @@
   table{border-collapse:collapse;width:100%;min-width:720px;font-size:.85rem}
   th,td{padding:8px 10px;border-bottom:1px solid var(--borde);text-align:center}
   th:first-child,td:first-child{text-align:left;position:sticky;left:0;background:var(--carbon)}
-  thead th{background:#101312;font-size:1.2rem}
-  tbody tr:hover td{background:#1b201e}
+  thead th{background:#eae5d9;font-size:1.2rem}
+  tbody tr:hover td{background:#efebe0}
   td.si{color:var(--verde);font-weight:800}
-  td.no{color:#3b433f}
+  td.no{color:#787d70}
   td.total{font-family:"IBM Plex Mono";color:var(--ambar)}
 
   /* progreso y filtros */
@@ -109,16 +98,16 @@
   .progreso{flex:1;min-width:240px}
   .progreso .linea{display:flex;justify-content:space-between;font-size:.85rem;color:var(--gris);margin-bottom:8px}
   .progreso .linea b{color:var(--ambar);font-family:"IBM Plex Mono"}
-  .pista{height:10px;background:#0a0b0b;border:1px solid var(--borde)}
+  .pista{height:10px;background:#e7e2d6;border:1px solid var(--borde)}
   .pista div{height:100%;width:0;background:repeating-linear-gradient(90deg,var(--ambar) 0 10px,#d99600 10px 12px);transition:width .4s}
   .filtros{display:flex;gap:8px;flex-wrap:wrap}
   .filtros button{font:600 .8rem Inter;background:none;color:var(--gris);border:1px solid var(--borde);padding:8px 12px;cursor:pointer}
   .filtros button.on{border-color:var(--ambar);color:var(--ambar)}
 
   /* tarjetas */
-  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:16px}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,270px),1fr));gap:16px}
   .item{background:var(--carbon);border:1px solid var(--borde);padding:20px;display:flex;flex-direction:column;transition:.2s}
-  .item:hover{border-color:#3b433f}
+  .item:hover{border-color:#787d70}
   .item.hecho{border-color:var(--verde)}
   .item .cab{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
   .dia{font-family:"IBM Plex Mono";font-size:.72rem;letter-spacing:.12em;color:var(--gris)}
@@ -127,10 +116,10 @@
   .sello.prox{color:var(--gris);border-color:var(--borde)}
   .icono{font-size:2.2rem;line-height:1;margin-bottom:10px}
   .item h3{font-size:1.15rem;font-weight:800;margin-bottom:6px}
-  .item p{color:#b9c2bd;font-size:.92rem}
+  .item p{color:var(--gris);font-size:.92rem}
   .quien{margin:12px 0 0;font-size:.78rem;color:var(--gris)}
   .quien .banderas{font-size:1.1rem;letter-spacing:2px;display:block;margin-top:2px}
-  .aviso-rojo{margin-top:10px;font-size:.82rem;color:#ffd2c9;background:rgba(255,59,31,.1);border-left:3px solid var(--rojo);padding:7px 10px}
+  .aviso-rojo{margin-top:10px;font-size:.82rem;color:#792719;background:rgba(255,59,31,.1);border-left:3px solid var(--rojo);padding:7px 10px}
   .espacio{flex:1}
   .acciones{display:flex;gap:8px;margin-top:16px;flex-wrap:wrap;align-items:center}
   .acciones button.check{flex:1;font:800 .82rem Inter;padding:10px;cursor:pointer;background:none;color:var(--texto);border:1px solid var(--borde)}
@@ -147,7 +136,7 @@
   .compra-modelos small,.compra-modelos a span{color:var(--gris)}
   .compra-nivel{color:var(--ambar);font-weight:700}
   /* recomendaciones propias */
-  .nuestras{margin-top:28px;border:1px dashed #3b433f;padding:24px}
+  .nuestras{margin-top:28px;border:1px dashed #787d70;padding:24px}
   .nuestras .marca{display:inline-block;font-family:"IBM Plex Mono";font-size:.7rem;letter-spacing:.12em;color:var(--azul);border:1px solid var(--azul);padding:3px 8px;margin-bottom:12px}
 
   .redes{display:flex;flex-wrap:wrap;gap:14px;margin-top:26px}
@@ -182,20 +171,19 @@
 
 <main>
   <div class="hero">
-    <div class="barras" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
     <div class="wrap">
-      <span class="estado mono"><i></i> SIN SERVICIO</span>
-      <h1>¿AGUANTARÍAS<br><span class="glitch" data-t="72 HORAS?">72 HORAS?</span></h1>
-      <p class="lead">Sin luz, sin internet y sin cobertura. Aquí no venimos a venderte nada: juntamos <b>lo que recomiendan los gobiernos</b> para sobrevivir los primeros días de una emergencia, y lo repasamos <b>artículo a artículo</b>.</p>
-      <div class="botones">
-        <a class="btn lleno" href="#mochila">🎒 Ver la mochila</a>
-        <a class="btn vacio" href="manual/">Leer el manual ilustrado</a>
-        <a class="btn vacio" href="#paises">🌍 Qué dice cada país</a>
+      <div class="hero-copy">
+        <h1>Tu mochila<br>de emergencia <span>para 72 horas</span></h1>
+        <p class="lead">Qué conviene tener a mano y por qué. Recorre la lista artículo a artículo y comprueba qué recomiendan las guías oficiales.</p>
+        <div class="botones">
+          <a class="btn lleno" href="#mochila">Ver la mochila</a>
+          <a class="btn vacio" href="manual/">Leer el manual</a>
+        </div>
       </div>
-    </div>
-    <div class="contador">
-      <div class="num" id="reloj">72:00:00</div>
-      <div class="txt mono">AUTONOMÍA RECOMENDADA</div>
+      <figure class="hero-foto">
+        <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a0/FEMA_-_37174_-_Emergency_Preparedness_%22ready_to_go%22_kit..jpg/960px-FEMA_-_37174_-_Emergency_Preparedness_%22ready_to_go%22_kit..jpg" alt="Bolsa roja de emergencia junto a botellas de agua, una radio y una linterna." width="960" height="638" fetchpriority="high">
+        <figcaption><a href="https://commons.wikimedia.org/wiki/File:FEMA_-_37174_-_Emergency_Preparedness_%22ready_to_go%22_kit..jpg">Mochila de emergencia · Cruz Roja / archivo FEMA</a></figcaption>
+      </figure>
     </div>
   </div>
 
@@ -587,13 +575,6 @@ document.getElementById('filtros').addEventListener('click', e => {
 });
 pintar();
 
-/* ---------- cuenta atrás decorativa ---------- */
-(function(){
-  const r = document.getElementById('reloj'); let s = 72 * 3600;
-  const f = n => String(n).padStart(2,'0');
-  setInterval(() => { s = s > 0 ? s - 1 : 72 * 3600;
-    r.textContent = f(Math.floor(s/3600)) + ':' + f(Math.floor(s%3600/60)) + ':' + f(s%60); }, 1000);
-})();
 document.getElementById('anio').textContent = new Date().getFullYear();
 </script>
 </body>
