@@ -152,6 +152,13 @@
   .manual-destacado h2{margin:.45em 0}
   .manual-destacado img{display:block;width:100%;height:auto;border:1px solid var(--borde)}
   @media(max-width:700px){.manual-destacado{grid-template-columns:1fr}.manual-destacado img{grid-row:1}}
+  .lamina-mochila{display:grid;grid-template-columns:minmax(0,280px) minmax(0,1fr);align-items:center;gap:clamp(20px,5vw,52px);margin:28px 0;padding:clamp(16px,3vw,30px);background:#efe9d9;border:1px solid var(--borde);border-radius:8px}
+  .lamina-mochila img{display:block;width:100%;height:auto;border:1px solid var(--borde);border-radius:4px}
+  .lamina-mochila h3{font-size:clamp(1.3rem,3vw,2rem);line-height:1.1;margin-bottom:10px}
+  .lamina-mochila p{max-width:45ch;margin-bottom:14px;color:var(--gris)}
+  .lamina-mochila figcaption a{font-weight:800;color:var(--ambar);text-underline-offset:3px}
+  .dibujo-articulo{display:block;width:84px;aspect-ratio:177/151;margin-bottom:10px;background-color:#f7e6c5;background-image:url("mochila-72-comic.webp");background-size:578.5311% auto;border-radius:4px}
+  @media(max-width:620px){.lamina-mochila{grid-template-columns:1fr}.lamina-mochila > a{max-width:270px}}
 </style>
 </head>
 <body>
@@ -181,8 +188,8 @@
         </div>
       </div>
       <figure class="hero-foto">
-        <img src="mochila-72-horas.webp" alt="Mochila verde junto a agua, conservas, una radio a pilas, una linterna y otros suministros de emergencia." width="1200" height="800" fetchpriority="high">
-        <figcaption>Ejemplo de mochila de emergencia · Imagen ilustrativa de Sin Cobertura</figcaption>
+        <img src="mochila-portada-comic.webp" alt="Mochila de emergencia grande con agua, conservas, radio, linterna y otros suministros delante, dibujada en estilo cómic." width="1200" height="800" fetchpriority="high">
+        <figcaption>Ejemplo ilustrado de una mochila de emergencia</figcaption>
       </figure>
     </div>
   </div>
@@ -254,6 +261,17 @@
       <div class="etiqueta">// LA MOCHILA, ARTÍCULO A ARTÍCULO</div>
       <h2>Lo que va dentro</h2>
       <p class="intro">Ordenado de lo que recomiendan más países a lo que recomiendan menos. Cuando sale el vídeo de un artículo aparece como <span class="mono" style="color:var(--verde)">CON VÍDEO</span>. Marca ✔ lo que ya tengas: tu progreso se guarda en este navegador.</p>
+
+      <figure class="lamina-mochila">
+        <a href="mochila-72-comic.webp" target="_blank" rel="noopener" aria-label="Abrir la lámina de la mochila a tamaño completo">
+          <img src="mochila-72-comic.webp" alt="Lámina tipo cómic con Mochi, Barritas y los 30 artículos de la mochila, cada uno en una viñeta rotulada." width="1024" height="1536" loading="lazy">
+        </a>
+        <figcaption>
+          <h3>La mochila de 72 horas, en cómic</h3>
+          <p>Los 30 artículos de la lista en una lámina de Mochi y Barritas. Consulta las fichas de abajo para saber qué recomiendan las guías y cómo usar cada artículo.</p>
+          <a href="mochila-72-comic.webp" target="_blank" rel="noopener">Ver la lámina a tamaño completo</a>
+        </figcaption>
+      </figure>
 
       <div class="panel">
         <div class="progreso">
@@ -537,6 +555,24 @@ const guardar = () => { try { localStorage.setItem(CLAVE, JSON.stringify(tengo))
 let filtro = 'todos';
 const grid = document.getElementById('grid');
 
+
+const celdasComic = [
+  'agua','comida','radio','efectivo','medicinas',
+  'linterna','powerbank','botiquin','pilas','abrigo',
+  'documentos','higiene','velas','navaja','mascarilla',
+  'plan','llaves','guantes','hornillo','cinta',
+  'mochila','especiales','recipiente','silbato','herramienta',
+  'mapa','movil','gafas','casco','juegos'
+];
+const posicionesComic = Object.fromEntries(celdasComic.map((id, indice) => {
+  const x = [20,225,426,627,827][indice % 5];
+  const y = [285,500,711,921,1125,1332][Math.floor(indice / 5)];
+  return [id, `position:${x / 847 * 100}% ${y / 1385 * 100}%`];
+}));
+const dibujoArticulo = a => posicionesComic[a.id]
+  ? `<span class="dibujo-articulo" aria-hidden="true" style="background-${posicionesComic[a.id]}"></span>`
+  : `<span class="icono" aria-hidden="true">${a.icono}</span>`;
+
 function pintar(){
   const lista = ARTICULOS.filter(a =>
     filtro === 'todos' ? true :
@@ -545,7 +581,7 @@ function pintar(){
   grid.innerHTML = lista.map(a => `
     <article class="item${tengo[a.id] ? ' hecho' : ''}">
       <div class="cab"><span class="dia">ARTÍCULO ${String(a.n).padStart(2,'0')}</span>${a.video ? '<span class="sello pub">CON VÍDEO</span>' : '<span class="sello prox">VÍDEO PRÓXIMAMENTE</span>'}</div>
-      <div class="icono">${a.icono}</div>
+      ${dibujoArticulo(a)}
       <h3>${a.nombre}</h3>
       <p>${a.desc}</p>
       ${a.aviso ? `<div class="aviso-rojo">⚠️ ${a.aviso}</div>` : ''}
