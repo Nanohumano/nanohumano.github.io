@@ -213,6 +213,14 @@ body>footer{background:#e6ddc2;border-top:1px solid #827653}
   .oferta>div{min-width:0;display:grid;gap:1px}
   .compra-foto{flex:none;display:block;width:60px;height:60px;object-fit:contain;background:white;border:1px solid var(--borde);border-radius:5px}
   .compra-foto[hidden]{display:none}
+  .tiempo-inicio{width:min(1060px,calc(100% - 40px));padding:0;margin:16px auto 0}
+  .tiempo-panel{background:var(--carbon);border:1px solid var(--borde);border-left:4px solid var(--ambar);border-radius:6px;padding:12px clamp(12px,2.5vw,22px)}
+  .tiempo-cabecera{display:flex;justify-content:space-between;align-items:baseline;gap:4px 18px;flex-wrap:wrap;margin-bottom:8px}
+  .tiempo-cabecera h2{font-size:clamp(1.12rem,2.6vw,1.5rem);margin:0}
+  .tiempo-enlaces{display:flex;gap:6px 16px;flex-wrap:wrap;font-size:.86rem;font-weight:700;color:var(--azul)}
+  .tiempo-widget{display:block;width:100%;height:285px;border:0;background:white;border-radius:4px}
+  .tiempo-fuente{font-size:.78rem;color:var(--gris);margin-top:6px}
+  @media(max-width:540px){.tiempo-inicio{width:calc(100% - 20px)}.tiempo-widget{height:310px}}
 </style>
 </head>
 <body>
@@ -232,6 +240,20 @@ body>footer{background:#e6ddc2;border-top:1px solid #827653}
 </header>
 
 <main>
+  <div class="wrap tiempo-inicio" aria-labelledby="titulo-tiempo">
+    <div class="tiempo-panel">
+      <div class="tiempo-cabecera">
+        <h2 id="titulo-tiempo">Previsión meteorológica · Palma</h2>
+        <div class="tiempo-enlaces">
+          <a href="https://www.aemet.es/es/eltiempo/prediccion/municipios">Consultar otro municipio</a>
+          <a href="https://www.aemet.es/es/eltiempo/prediccion/avisos">Avisos de AEMET</a>
+        </div>
+      </div>
+      <iframe class="tiempo-widget" title="Previsión oficial de AEMET para Palma" src="https://www.aemet.es/es/eltiempo/prediccion/municipios/mostrarwidget/palma-id07040?w=g4p011100001ohmffffffx4f86d9t95b6e9r1s8n2" height="285"></iframe>
+      <p class="tiempo-fuente">Fuente: AEMET. <a href="https://www.aemet.es/es/eltiempo/prediccion/municipios/palma-id07040">Abrir la previsión completa de Palma</a>.</p>
+    </div>
+  </div>
+
   <div class="hero">
     <div class="wrap">
       <div class="hero-copy">
