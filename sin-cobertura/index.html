@@ -213,24 +213,27 @@ body>footer{background:#e6ddc2;border-top:1px solid #827653}
   .oferta>div{min-width:0;display:grid;gap:1px}
   .compra-foto{flex:none;display:block;width:60px;height:60px;object-fit:contain;background:white;border:1px solid var(--borde);border-radius:5px}
   .compra-foto[hidden]{display:none}
-  .tiempo-inicio{position:relative;width:min(1060px,calc(100% - 40px));padding:0;margin:14px auto 0}
+  .tiempo-inicio{width:min(1060px,calc(100% - 40px));padding:0;margin:14px auto 0}
   .tiempo-panel{background:var(--carbon);border:2px solid #373a26;border-radius:7px;box-shadow:3px 3px 0 #373a26;overflow:hidden}
-  .tiempo-resumen{position:relative;display:flex;align-items:center;gap:10px;min-height:112px;padding:10px 14px;cursor:pointer;background:#e8d7a6;list-style:none}
+  .tiempo-resumen{display:flex;align-items:center;gap:10px;padding:8px 12px;cursor:pointer;background:#e8d7a6;list-style:none}
   .tiempo-resumen::-webkit-details-marker{display:none}
-  .tiempo-resumen img{display:block;width:52px;height:52px;border:1px solid #373a26;border-radius:4px}
-  .tiempo-titulo strong{display:block;font-size:clamp(1.1rem,2vw,1.4rem);margin:0 0 2px}
-  .tiempo-titulo>span{color:var(--gris);font-size:.8rem}
-  .tiempo-toggle{margin-left:auto;display:inline-flex;align-items:center;gap:7px;padding:6px 9px;border:1px solid #8b6b36;border-radius:4px;background:var(--carbon);font-weight:800;font-size:.82rem}
-  .tiempo-toggle::after{content:"";width:6px;height:6px;border-right:2px solid;border-bottom:2px solid;transform:rotate(45deg);margin-top:-3px}
+  .tiempo-resumen img{display:block;width:48px;height:48px;flex:none;border:1px solid #373a26;border-radius:4px}
+  .tiempo-titulo strong{display:block;font-size:clamp(1rem,2vw,1.35rem);line-height:1.15}
+  .tiempo-titulo>span{display:block;color:var(--gris);font-size:.82rem}
+  .tiempo-toggle,#tiempo-localizar{padding:6px 9px;border:1px solid #8b6b36;border-radius:4px;background:var(--carbon);color:var(--texto);font:inherit;font-size:.82rem;font-weight:800}
+  .tiempo-toggle{margin-left:auto;text-align:center}
+  #tiempo-localizar{background:#e8d7a6;cursor:pointer}
+  #tiempo-localizar:disabled{opacity:.7;cursor:wait}
   .tiempo-cerrar,.tiempo-panel[open] .tiempo-abrir{display:none}
   .tiempo-panel[open] .tiempo-cerrar{display:inline}
-  .tiempo-panel[open] .tiempo-toggle::after{transform:rotate(225deg);margin-top:3px}
-  .tiempo-panel[open]+.tiempo-hoy{display:none}
-  .tiempo-hoy{position:absolute;top:6px;left:46%;transform:translateX(-10%);width:min(22%,190px);height:105px;border:0;border-radius:4px;background:white}
-  .tiempo-datos{padding:8px 12px 12px}
-  .tiempo-widget{display:block;width:100%;height:260px;border:0;background:white;border-radius:4px}
-  .tiempo-enlaces{display:flex;gap:6px 14px;flex-wrap:wrap;font-size:.84rem;font-weight:700;color:var(--azul);padding-top:8px}
-  @media(max-width:700px){.tiempo-inicio{width:calc(100% - 20px)}.tiempo-resumen{min-height:0;flex-wrap:wrap;padding:8px 10px}.tiempo-resumen img{width:40px;height:40px}.tiempo-toggle{font-size:.75rem}.tiempo-hoy{position:static;transform:none;width:100%;height:105px;display:block;margin-top:4px;border:1px solid var(--borde)}}
+  .tiempo-datos{padding:10px 12px 12px}
+  .tiempo-enlaces{display:flex;align-items:center;gap:7px 14px;flex-wrap:wrap;font-size:.84rem;font-weight:700;color:var(--azul)}
+  .tiempo-privacidad,#tiempo-estado{font-size:.8rem;color:var(--gris);margin:6px 0}
+  #tiempo-estado:empty{display:none}
+  .tiempo-marco{overflow-x:auto;margin:8px 0;background:white;border:1px solid var(--borde);border-radius:4px}
+  .tiempo-widget{display:block;width:100%;min-width:305px;height:350px;border:0}
+  #tiempo-directo{font-size:.84rem;color:var(--azul);font-weight:700}
+  @media(max-width:650px){.tiempo-inicio{width:calc(100% - 20px)}.tiempo-resumen img{width:40px;height:40px}.tiempo-widget{height:360px}}
 </style>
 </head>
 <body>
@@ -251,21 +254,26 @@ body>footer{background:#e6ddc2;border-top:1px solid #827653}
 
 <main>
   <div class="wrap tiempo-inicio" aria-labelledby="titulo-tiempo">
-    <details class="tiempo-panel">
+    <details class="tiempo-panel" id="parte-mochi">
       <summary class="tiempo-resumen">
-        <img src="parte-mochi.webp" alt="" width="52" height="52">
-        <span class="tiempo-titulo"><strong id="titulo-tiempo">El parte de Mochi</strong><span>Palma · Hoy</span></span>
-        <span class="tiempo-toggle"><span class="tiempo-abrir">Ver previsión completa</span><span class="tiempo-cerrar">Cerrar previsión</span></span>
+        <img src="parte-mochi.webp" alt="" width="48" height="48">
+        <span class="tiempo-titulo"><strong id="titulo-tiempo">El parte de Mochi</strong><span id="tiempo-zona">Palma · AEMET</span></span>
+        <span class="tiempo-toggle"><span class="tiempo-abrir">Ver previsión</span><span class="tiempo-cerrar">Cerrar previsión</span></span>
       </summary>
       <div class="tiempo-datos">
-        <iframe class="tiempo-widget" title="Previsión oficial de AEMET para Palma: cielo, temperatura, lluvia, viento y avisos" src="https://www.aemet.es/es/eltiempo/prediccion/municipios/mostrarwidget/palma-id07040?w=g4p011100111ohmffffffx4f86d9t95b6e9r1s8n2" height="285" loading="lazy"></iframe>
         <div class="tiempo-enlaces">
-          <a href="https://www.aemet.es/es/eltiempo/prediccion/avisos">Ver avisos oficiales</a>
-          <a href="https://www.aemet.es/es/eltiempo/prediccion/municipios">Consultar otro municipio</a>
+          <button type="button" id="tiempo-localizar">Usar mi ubicación</button>
+          <a href="https://www.aemet.es/es/eltiempo/prediccion/municipios">Elegir otro municipio en AEMET</a>
+          <a href="https://www.aemet.es/es/eltiempo/prediccion/avisos">Avisos oficiales</a>
         </div>
+        <p class="tiempo-privacidad">Si activas la ubicación, CartoCiudad identifica tu municipio. Este navegador solo guarda el nombre y el código municipal.</p>
+        <p id="tiempo-estado" role="status"></p>
+        <div class="tiempo-marco">
+          <iframe class="tiempo-widget" title="Previsión oficial de AEMET para Palma" src="https://www.aemet.es/es/eltiempo/prediccion/municipios/mostrarwidget/palma-id07040?w=g4p011100111ohmffffffx4f86d9t95b6e9r1s8n2" loading="lazy" height="360"></iframe>
+        </div>
+        <a id="tiempo-directo" href="https://www.aemet.es/es/eltiempo/prediccion/municipios/palma-id07040">Abrir la previsión en AEMET</a>
       </div>
     </details>
-    <iframe class="tiempo-hoy" title="Previsión de hoy para Palma, AEMET" src="https://www.aemet.es/es/eltiempo/prediccion/municipios/mostrarwidget/palma-id07040?w=g1p011100000ohmffffffx4f86d9t95b6e9r0s8n2" height="105"></iframe>
   </div>
 
   <div class="hero">
@@ -993,6 +1001,63 @@ document.getElementById('filtros').addEventListener('click', e => {
   pintar();
 });
 pintar();
+
+
+/* ---------- municipio del parte meteorológico ---------- */
+(() => {
+  const boton = document.getElementById('tiempo-localizar');
+  const estado = document.getElementById('tiempo-estado');
+  const zona = document.getElementById('tiempo-zona');
+  const widget = document.querySelector('.tiempo-widget');
+  const directo = document.getElementById('tiempo-directo');
+  const clave = 'sincobertura-municipio';
+  const raiz = 'https://www.aemet.es/es/eltiempo/prediccion/municipios/';
+  const aplicar = ({ nombre, codigo }) => {
+    if (typeof nombre !== 'string' || !nombre.trim() || !/^\d{5}$/.test(codigo)) return false;
+    const slug = nombre.replace(/^(.+),\s*(El|La|Los|Las|L')$/i, '$2 $1')
+      .normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+    if (!slug) return false;
+    const municipio = slug + '-id' + codigo;
+    widget.src = raiz + 'mostrarwidget/' + municipio + '?w=g4p011100111ohmffffffx4f86d9t95b6e9r1s8n2';
+    widget.title = 'Previsión oficial de AEMET para ' + nombre;
+    directo.href = raiz + municipio;
+    zona.textContent = nombre + ' · AEMET';
+    return true;
+  };
+  try {
+    const guardado = localStorage.getItem(clave);
+    if (guardado) aplicar(JSON.parse(guardado));
+  } catch {}
+  boton.addEventListener('click', () => {
+    if (!navigator.geolocation) {
+      estado.textContent = 'Este navegador no facilita la ubicación. Puedes elegir tu municipio en AEMET.';
+      return;
+    }
+    boton.disabled = true;
+    estado.textContent = 'Buscando tu municipio…';
+    navigator.geolocation.getCurrentPosition(async ({ coords }) => {
+      try {
+        const url = new URL('https://www.cartociudad.es/geocoder/api/geocoder/reverseGeocode');
+        url.search = new URLSearchParams({ lat: coords.latitude.toFixed(3), lon: coords.longitude.toFixed(3) });
+        const respuesta = await fetch(url, { signal: AbortSignal.timeout(9000) });
+        if (!respuesta.ok) throw new Error('Municipio no disponible');
+        const datos = await respuesta.json();
+        const municipio = { nombre: datos.muni, codigo: String(datos.muniCode || '') };
+        if (!aplicar(municipio)) throw new Error('Municipio no reconocido');
+        try { localStorage.setItem(clave, JSON.stringify(municipio)); } catch {}
+        estado.textContent = 'Municipio seleccionado: ' + municipio.nombre + '.';
+      } catch {
+        estado.textContent = 'No se ha podido identificar el municipio. Puedes elegirlo en AEMET.';
+      } finally {
+        boton.disabled = false;
+      }
+    }, () => {
+      estado.textContent = 'No podemos acceder a tu ubicación. Puedes elegir tu municipio en AEMET.';
+      boton.disabled = false;
+    }, { timeout: 10000, maximumAge: 300000 });
+  });
+})();
 
 document.getElementById('anio').textContent = new Date().getFullYear();
 </script>
