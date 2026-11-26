@@ -407,7 +407,7 @@ body>footer{background:#e6ddc2;border-top:1px solid #827653}
 <footer>
   <div class="wrap">
     <p><strong>Importante:</strong> esta web es informativa y resume guías públicas; no las sustituye. En una emergencia real sigue siempre las indicaciones del <strong>112</strong> y de Protección Civil de tu comunidad.</p>
-    <p class="aviso"><strong>Enlaces de afiliado.</strong> Si compras desde nuestros enlaces de afiliado de Amazon, pagas el mismo precio y ayudas a mantener el canal. Como Afiliado de Amazon, obtengo ingresos por las compras adscritas que cumplen los requisitos aplicables. Los enlaces de AliExpress indicados como «sin afiliación» aún no generan comisión. Los artículos de la mochila se eligen por lo que recomiendan las guías oficiales.</p>
+    <p class="aviso"><strong>Enlaces de afiliado.</strong> Si compras desde nuestros enlaces de afiliado de Amazon, pagas el mismo precio y ayudas a mantener el canal. Como Afiliado de Amazon, obtengo ingresos por las compras adscritas que cumplen los requisitos aplicables. Los artículos de la mochila se eligen por lo que recomiendan las guías oficiales.</p>
     <p>© <span id="anio"></span> SIN COBERTURA · un proyecto de NANOHUMANO LABS</p>
   </div>
 </footer>
@@ -528,14 +528,14 @@ ARTICULOS.forEach((a,i) => a.n = i + 1);
 
 /* Artículos con vídeo publicado: { id: 'enlace del Reel' } */
 
-// Selección editorial de modelos. Las fichas de AliExpress aún no llevan seguimiento.
+// Selección editorial de modelos.
 const OPCIONES_COMPRA = {
   "radio": [
     [
       "Económica",
       "XHDATA D-219",
-      "AliExpress",
-      "https://es.aliexpress.com/item/1005005057114462.html"
+      "Amazon",
+      "XHDATA D-219 radio"
     ],
     [
       "Prémium",
@@ -561,9 +561,9 @@ const OPCIONES_COMPRA = {
   "powerbank": [
     [
       "Económica",
-      "Baseus 10.000 mAh · 22,5 W",
-      "AliExpress",
-      "https://es.aliexpress.com/item/1005010425880598.html"
+      "INIU 10.000 mAh · 45 W",
+      "Amazon",
+      "B0DCJT1TPG"
     ],
     [
       "Prémium",
@@ -618,8 +618,8 @@ const OPCIONES_COMPRA = {
     [
       "Económico",
       "BRS-3000T",
-      "AliExpress",
-      "https://es.aliexpress.com/item/4000296091837.html"
+      "Amazon",
+      "BRS-3000T hornillo"
     ],
     [
       "Prémium",
@@ -690,7 +690,6 @@ const FOTOS_COMPRA = {
   "Sony ICF-P27": "https://www.sony.pt/image/24ae229ab489c2c14a98049708c371ef?fmt=png-alpha&hei=400&wid=676",
   "Petzl Tikkina 300": "https://m.media-amazon.com/images/I/71t15HpYaML._AC_SL1500_.jpg",
   "Petzl Actik Core": "https://m.media-amazon.com/images/I/31vJYAfp6sL._SL500_.jpg",
-  "Baseus 10.000 mAh · 22,5 W": "https://ae-pic-a1.aliexpress-media.com/kf/S93dd085b5adc406fa3a69ea59e208297y.jpg_800x800.jpg",
   "INIU 20.000 mAh · 45 W": "https://m.media-amazon.com/images/I/41qWc178oqL._SL500_.jpg",
   "Mini de 83 piezas": "https://m.media-amazon.com/images/I/81xWzs6QCbL.jpg",
   "DEPALMERA Pharma de pared": "https://m.media-amazon.com/images/I/51-ldVCVOzL._SL500_.jpg",
@@ -710,7 +709,6 @@ const FOTOS_COMPRA = {
   "Scepter · garrafa de agua de 10 L": "https://cdn.shoplightspeed.com/shops/629485/files/20057967/scepter-scepter-water-jug-10-liter.jpg"
 };
 const urlCompra = (tienda, destino) => {
-  if (tienda === 'AliExpress') return destino;
   return /^[A-Z0-9]{10}$/.test(destino)
     ? 'https://www.amazon.es/dp/' + destino + '?tag=' + TAG
     : amz(destino);
@@ -725,7 +723,7 @@ const mostrarOpciones = a => {
       <div>
         <span class="compra-nivel">${nivel}</span>
         <a href="${urlCompra(tienda, destino)}" target="_blank" rel="${tienda === 'Amazon' ? 'sponsored noopener' : 'noopener'}">${modelo} <span>· ${tienda}</span></a>
-        <small>${tienda === 'Amazon' ? 'Suele llegar antes' : 'Suele tardar más · Sin afiliación'}</small>
+        <small>${/^[A-Z0-9]{10}$/.test(destino) ? 'Ficha de producto' : 'Buscar este modelo'}</small>
       </div>
     </li>`).join('')}</ul>
     <p>Consulta la fecha de entrega en la tienda. Depende del vendedor y de tu dirección.</p>
